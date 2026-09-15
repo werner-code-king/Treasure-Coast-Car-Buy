@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SUV Value Finder &mdash; Port St. Lucie, FL</title>
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <h1>SUV Value Finder</h1>
+      <p class="subtitle">Compare real-world SUV pricing, reliability, resale value, maintenance cost, cargo space, and powertrain specs (engine, towing, ground clearance, seating) &mdash; plus dealerships near <strong>Port St. Lucie, FL</strong>.</p>
+      <p class="data-note">Data compiled September 2026 from KBB, Edmunds, TrueCar, CarEdge, J.D. Power, and Cars.com. <button class="link-btn" id="open-methodology">How is Value Score calculated?</button></p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="controls" aria-label="Filter and sort">
+      <div class="control-group">
+        <label for="sort-select">Sort by</label>
+        <select id="sort-select">
+          <option value="value" selected>Value Score (best first)</option>
+          <option value="priceAsc">Starting Price (low to high)</option>
+          <option value="reliability">Reliability</option>
+          <option value="resale">Resale Value</option>
+          <option value="maintenance">Lowest Maintenance Cost</option>
+          <option value="cargo">Cargo Space</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label for="class-select">Class</label>
+        <select id="class-select">
+          <option value="all" selected>All classes</option>
+          <option value="Compact SUV">Compact SUV</option>
+          <option value="Midsize SUV (3-Row)">Midsize SUV (3-Row)</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label for="max-price">Max starting price</label>
+        <input type="range" id="max-price" min="28000" max="55000" step="500" value="55000" />
+        <output id="max-price-out">$55,000+</output>
+      </div>
+      <div class="control-group checkbox-group">
+        <label><input type="checkbox" id="min-reliability" /> Reliability 85+ only</label>
+      </div>
+      <div class="control-group checkbox-group">
+        <label><input type="checkbox" id="third-row-only" /> 3rd row available only</label>
+      </div>
+    </section>
+
+    <section id="cards" class="cards" aria-label="SUV comparison cards"></section>
+
+    <section class="table-section">
+      <h2>Full Comparison Table</h2>
+      <div class="table-scroll">
+        <table id="compare-table">
+          <thead>
+            <tr>
+              <th>SUV</th>
+              <th>Class</th>
+              <th>Starting Price</th>
+              <th>Value Score</th>
+              <th>Reliability</th>
+              <th>5-Yr Resale</th>
+              <th>Est. Annual Maintenance</th>
+              <th>Drivetrain</th>
+              <th>Engine</th>
+              <th>HP</th>
+              <th>Torque</th>
+              <th>Seats</th>
+              <th>3rd Row</th>
+              <th>Cargo (2nd row)</th>
+              <th>Max Cargo</th>
+              <th>MPG Combined</th>
+              <th>Towing</th>
+              <th>Ground Clearance</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div id="detail-modal" class="modal" hidden>
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <div id="methodology-modal" class="modal" hidden>
+    <div class="modal-backdrop" id="methodology-backdrop"></div>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="methodology-title">
+      <button class="modal-close" id="methodology-close" aria-label="Close">&times;</button>
+      <div class="methodology-content">
+        <h2 id="methodology-title">Data &amp; Methodology</h2>
+        <p>The <strong>Value Score</strong> (0&ndash;100) blends five factors, each normalized against every SUV in this comparison so the best performer in a category scores highest. The formula and weights are unchanged from the original compact-SUV comparison; midsize 3-row SUVs are scored the same way, so a larger, pricier SUV will naturally score lower on price and cargo-behind-2nd-row even if it's the right vehicle for a 3-row need &mdash; use the Class filter to compare like-for-like.</p>
+        <ul>
+          <li><strong>Reliability &mdash; 25%</strong>: J.D. Power / Consumer Reports / Edmunds ratings, converted to a 0&ndash;100 scale.</li>
+          <li><strong>5-year resale value &mdash; 20%</strong>: percentage of MSRP retained after 5 years.</li>
+          <li><strong>Maintenance cost &mdash; 20%</strong>: estimated annual maintenance/repair cost (lower is better).</li>
+          <li><strong>Cargo space &mdash; 15%</strong>: cubic feet behind the 2nd row.</li>
+          <li><strong>Starting price &mdash; 20%</strong>: lower MSRP scores higher (affordability).</li>
+        </ul>
+        <p>Fields marked <span class="est-badge">est.</span> are analyst estimates derived from qualitative source language (e.g. "strong resale value") because no single directly comparable figure was published across every vehicle. All other figures are stated verbatim by the cited source. Prices, incentives, and dealer inventory change frequently &mdash; always confirm current pricing and availability with the dealership before purchase.</p>
+        <p>This tool is for research purposes only and is not affiliated with any manufacturer or dealership listed.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Built as a research tool. Verify all prices and specs with the dealership &mdash; figures change and dealer markups/discounts vary. Not affiliated with any manufacturer or dealer listed.</p>
+    </div>
+  </footer>
+
+  <script src="data/suv-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
