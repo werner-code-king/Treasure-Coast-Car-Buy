@@ -9,6 +9,23 @@
     price: 0.20,
   };
 
+  // Static — hoisted so it isn't rebuilt (new object + 6 closures) on every filter/sort.
+  const SORTERS = {
+    value: (a, b) => b._valueScore - a._valueScore,
+    priceAsc: (a, b) => a.price.low - b.price.low,
+    reliability: (a, b) => b.reliability.value - a.reliability.value,
+    resale: (a, b) => b.resale.value - a.resale.value,
+    maintenance: (a, b) => a.maintenance.annual - b.maintenance.annual,
+    cargo: (a, b) => b.cargo.behind2nd - a.cargo.behind2nd,
+  };
+
+  // Populated once in init() for O(1) id -> vehicle lookup (avoids Array#find per click).
+  let vehicleById = new Map();
+
+  // Cached element references, filled in init(). Avoids repeated getElementById
+  // calls in applyFiltersAndSort(), which runs on every filter/sort interaction.
+  const dom = {};
+
   function normalize(value, min, max, invert) {
     if (max === min) return 50;
     let n = ((value - min) / (max - min)) * 100;
@@ -76,9 +93,17 @@
     return `Typical price: ${range}${p.typicalEstimated ? " (est.)" : ""}`;
   }
 
+  // Small builders to cut the repetition in renderCards()/openDetail() down to one line per spec.
+  function statCell(label, valueHtml) {
+    return `<div><div class="stat-label">${label}</div><div class="stat-value">${valueHtml}</div></div>`;
+  }
+
+  function specRow(label, valueHtml) {
+    return `<div><span class="spec-label">${label}</span><span class="spec-value">${valueHtml}</span></div>`;
+  }
+
   function renderCards(vehicles) {
-    const container = document.getElementById("cards");
-    container.innerHTML = vehicles
+    dom.cards.innerHTML = vehicles
       .map(
         (v) => `
       <article class="card" data-id="${v.id}" tabindex="0" role="button" aria-label="View details for ${v.make} ${v.model}">
@@ -97,30 +122,22 @@
           ${typicalPriceText(v) ? `<div class="avg">${typicalPriceText(v)}</div>` : ""}
         </div>
         <div class="stat-grid">
-          <div><div class="stat-label">Reliability</div><div class="stat-value">${v.reliability.display}${estBadge(v.reliability.estimated)}</div></div>
-          <div><div class="stat-label">5-Yr Resale</div><div class="stat-value">${v.resale.display}${estBadge(v.resale.estimated)}</div></div>
-          <div><div class="stat-label">Maintenance/yr</div><div class="stat-value">${fmtMoney(v.maintenance.annual)}${estBadge(v.maintenance.estimated)}</div></div>
-          <div><div class="stat-label">Cargo (2nd row)</div><div class="stat-value">${fmtCargo(v.cargo.behind2nd)}</div></div>
-          <div><div class="stat-label">Seats</div><div class="stat-value">${v.seats}${v.thirdRow !== "No" ? " (3rd row " + v.thirdRow.toLowerCase() + ")" : ""}</div></div>
-          <div><div class="stat-label">Towing</div><div class="stat-value">${v.towing}</div></div>
+          ${statCell("Reliability", v.reliability.display + estBadge(v.reliability.estimated))}
+          ${statCell("5-Yr Resale", v.resale.display + estBadge(v.resale.estimated))}
+          ${statCell("Maintenance/yr", fmtMoney(v.maintenance.annual) + estBadge(v.maintenance.estimated))}
+          ${statCell("Cargo (2nd row)", fmtCargo(v.cargo.behind2nd))}
+          ${statCell("Seats", v.seats + (v.thirdRow !== "No" ? " (3rd row " + v.thirdRow.toLowerCase() + ")" : ""))}
+          ${statCell("Towing", v.towing)}
         </div>
         <div class="card-cta">View details &amp; local dealers &rarr;</div>
       </article>
     `
       )
       .join("");
-
-    container.querySelectorAll(".card").forEach((el) => {
-      el.addEventListener("click", () => openDetail(el.dataset.id));
-      el.addEventListener("keypress", (e) => {
-        if (e.key === "Enter" || e.key === " ") openDetail(el.dataset.id);
-      });
-    });
   }
 
   function renderTable(vehicles) {
-    const tbody = document.querySelector("#compare-table tbody");
-    tbody.innerHTML = vehicles
+    dom.tableBody.innerHTML = vehicles
       .map(
         (v) => `
       <tr data-id="${v.id}">
@@ -146,33 +163,26 @@
     `
       )
       .join("");
-
-    tbody.querySelectorAll("tr").forEach((tr) => {
-      tr.addEventListener("click", () => openDetail(tr.dataset.id));
-    });
   }
 
   function openDetail(id) {
-    const v = SUV_DATA.find((x) => x.id === id);
+    const v = vehicleById.get(id);
     if (!v) return;
     const dealers = DEALERS[v.dealerBrand] || [];
 
-    const modal = document.getElementById("detail-modal");
-    const content = document.getElementById("modal-content");
-
-    content.innerHTML = `
-      <h2 id="modal-title">${v.make} ${v.model} <span style="font-weight:400; color:var(--text-dim); font-size:0.9rem;">(${v.trimNote})</span></h2>
-      <p style="margin-top:-8px; color:var(--text-dim); font-size:0.85rem;">${v.className}</p>
+    dom.modalContent.innerHTML = `
+      <h2 id="modal-title">${v.make} ${v.model} <span class="modal-meta">(${v.trimNote})</span></h2>
+      <p class="modal-subtitle">${v.className}</p>
       <div class="detail-price">${fmtMoney(v.price.low)}${v.price.high ? " – " + fmtMoney(v.price.high) : ""}
-        <span style="font-size:0.8rem; font-weight:400; color:var(--text-dim);">
+        <span class="modal-meta">
           ${v.price.avgPaid ? " &middot; Avg. paid " + fmtMoney(v.price.avgPaid) : ""}${v.price.note ? " &middot; " + v.price.note : ""}
         </span>
-        ${typicalPriceText(v) ? `<div style="font-size:0.8rem; font-weight:400; color:var(--text-dim);">${typicalPriceText(v)}</div>` : ""}
+        ${typicalPriceText(v) ? `<div class="modal-meta">${typicalPriceText(v)}</div>` : ""}
       </div>
 
       <div class="detail-section">
         <h3>Value Score: ${v._valueScore} / 100 (${valueLabel(v._valueScore)})</h3>
-        <p>Weighted blend of price, reliability, resale value, maintenance cost, and cargo space relative to every SUV in this comparison. <button class="link-btn" style="color:var(--accent);" id="modal-methodology-link">See methodology</button></p>
+        <p>Weighted blend of price, reliability, resale value, maintenance cost, and cargo space relative to every SUV in this comparison. <button class="link-btn accent" id="modal-methodology-link">See methodology</button></p>
       </div>
 
       <div class="detail-section">
@@ -191,17 +201,17 @@
       <div class="detail-section">
         <h3>Powertrain &amp; Capability</h3>
         <div class="spec-grid">
-          <div><span class="spec-label">Drivetrain</span><span class="spec-value">${v.drivetrain}</span></div>
-          <div><span class="spec-label">Engine</span><span class="spec-value">${v.engine}</span></div>
-          <div><span class="spec-label">Horsepower</span><span class="spec-value">${v.hp}</span></div>
-          <div><span class="spec-label">Torque</span><span class="spec-value">${v.torque}</span></div>
-          <div><span class="spec-label">Seats</span><span class="spec-value">${v.seats}</span></div>
-          <div><span class="spec-label">3rd Row</span><span class="spec-value">${v.thirdRow}</span></div>
-          <div><span class="spec-label">Cargo (behind 2nd row)</span><span class="spec-value">${fmtCargo(v.cargo.behind2nd)}</span></div>
-          <div><span class="spec-label">Max Cargo (seats folded)</span><span class="spec-value">${fmtCargo(v.cargo.maxCargo)}</span></div>
-          <div><span class="spec-label">MPG Combined</span><span class="spec-value">${v.mpgCombined}</span></div>
-          <div><span class="spec-label">Towing</span><span class="spec-value">${v.towing}</span></div>
-          <div><span class="spec-label">Ground Clearance</span><span class="spec-value">${v.groundClearance}</span></div>
+          ${specRow("Drivetrain", v.drivetrain)}
+          ${specRow("Engine", v.engine)}
+          ${specRow("Horsepower", v.hp)}
+          ${specRow("Torque", v.torque)}
+          ${specRow("Seats", v.seats)}
+          ${specRow("3rd Row", v.thirdRow)}
+          ${specRow("Cargo (behind 2nd row)", fmtCargo(v.cargo.behind2nd))}
+          ${specRow("Max Cargo (seats folded)", fmtCargo(v.cargo.maxCargo))}
+          ${specRow("MPG Combined", v.mpgCombined)}
+          ${specRow("Towing", v.towing)}
+          ${specRow("Ground Clearance", v.groundClearance)}
         </div>
         ${v.cargo.note ? `<p>${v.cargo.note}</p>` : ""}
       </div>
@@ -232,80 +242,124 @@
       </div>
     `;
 
-    modal.hidden = false;
-    document.getElementById("modal-methodology-link").addEventListener("click", () => {
-      modal.hidden = true;
-      document.getElementById("methodology-modal").hidden = false;
+    openModal(dom.detailModal);
+    dom.modalContent.querySelector("#modal-methodology-link").addEventListener("click", () => {
+      closeModal(dom.detailModal);
+      openModal(dom.methodologyModal);
     });
   }
 
+  function openModal(modal) {
+    modal.hidden = false;
+  }
+
+  function closeModal(modal) {
+    modal.hidden = true;
+  }
+
   function applyFiltersAndSort() {
-    const maxPrice = parseInt(document.getElementById("max-price").value, 10);
-    const minReliabilityOnly = document.getElementById("min-reliability").checked;
-    const thirdRowOnly = document.getElementById("third-row-only").checked;
-    const classFilter = document.getElementById("class-select").value;
-    const sortBy = document.getElementById("sort-select").value;
+    const maxPrice = parseInt(dom.maxPrice.value, 10);
+    const minReliabilityOnly = dom.minReliability.checked;
+    const thirdRowOnly = dom.thirdRowOnly.checked;
+    const classFilter = dom.classSelect.value;
+    const sortBy = dom.sortSelect.value;
 
     let list = SUV_DATA.filter((v) => v.price.low <= maxPrice);
     if (minReliabilityOnly) list = list.filter((v) => v.reliability.value >= 85);
     if (thirdRowOnly) list = list.filter((v) => v.thirdRow !== "No");
     if (classFilter !== "all") list = list.filter((v) => v.className === classFilter);
 
-    const sorters = {
-      value: (a, b) => b._valueScore - a._valueScore,
-      priceAsc: (a, b) => a.price.low - b.price.low,
-      reliability: (a, b) => b.reliability.value - a.reliability.value,
-      resale: (a, b) => b.resale.value - a.resale.value,
-      maintenance: (a, b) => a.maintenance.annual - b.maintenance.annual,
-      cargo: (a, b) => b.cargo.behind2nd - a.cargo.behind2nd,
-    };
-    list.sort(sorters[sortBy] || sorters.value);
+    list.sort(SORTERS[sortBy] || SORTERS.value);
 
     renderCards(list);
     renderTable(list);
   }
 
+  // requestAnimationFrame throttle: the price slider fires many `input` events
+  // while dragging — coalesce them to at most one re-render per frame.
+  function rafThrottle(fn) {
+    let scheduled = false;
+    return (...args) => {
+      if (scheduled) return;
+      scheduled = true;
+      requestAnimationFrame(() => {
+        scheduled = false;
+        fn(...args);
+      });
+    };
+  }
+
+  function updateMaxPriceLabel() {
+    const cap = parseInt(dom.maxPrice.max, 10);
+    const val = parseInt(dom.maxPrice.value, 10);
+    dom.maxPriceOut.textContent = val >= cap ? fmtMoney(val) + "+" : fmtMoney(val);
+  }
+
   function init() {
     computeValueScores(SUV_DATA);
+    vehicleById = new Map(SUV_DATA.map((v) => [v.id, v]));
 
-    document.getElementById("sort-select").addEventListener("change", applyFiltersAndSort);
-    document.getElementById("min-reliability").addEventListener("change", applyFiltersAndSort);
-    document.getElementById("third-row-only").addEventListener("change", applyFiltersAndSort);
-    document.getElementById("class-select").addEventListener("change", applyFiltersAndSort);
+    Object.assign(dom, {
+      cards: document.getElementById("cards"),
+      tableBody: document.querySelector("#compare-table tbody"),
+      sortSelect: document.getElementById("sort-select"),
+      classSelect: document.getElementById("class-select"),
+      maxPrice: document.getElementById("max-price"),
+      maxPriceOut: document.getElementById("max-price-out"),
+      minReliability: document.getElementById("min-reliability"),
+      thirdRowOnly: document.getElementById("third-row-only"),
+      detailModal: document.getElementById("detail-modal"),
+      modalContent: document.getElementById("modal-content"),
+      modalClose: document.getElementById("modal-close"),
+      modalBackdrop: document.getElementById("modal-backdrop"),
+      methodologyModal: document.getElementById("methodology-modal"),
+      openMethodology: document.getElementById("open-methodology"),
+      methodologyClose: document.getElementById("methodology-close"),
+      methodologyBackdrop: document.getElementById("methodology-backdrop"),
+    });
 
-    const maxPriceInput = document.getElementById("max-price");
-    const maxPriceOut = document.getElementById("max-price-out");
-    const maxPriceCap = parseInt(maxPriceInput.max, 10);
-    maxPriceInput.addEventListener("input", () => {
-      const val = parseInt(maxPriceInput.value, 10);
-      maxPriceOut.textContent = val >= maxPriceCap ? fmtMoney(val) + "+" : fmtMoney(val);
+    // Event delegation: one listener per container instead of re-binding a
+    // click/keydown handler on every card/row after each re-render.
+    dom.cards.addEventListener("click", (e) => {
+      const card = e.target.closest(".card");
+      if (card) openDetail(card.dataset.id);
+    });
+    dom.cards.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      const card = e.target.closest(".card");
+      if (!card) return;
+      e.preventDefault();
+      openDetail(card.dataset.id);
+    });
+    dom.tableBody.addEventListener("click", (e) => {
+      const row = e.target.closest("tr");
+      if (row) openDetail(row.dataset.id);
+    });
+
+    dom.sortSelect.addEventListener("change", applyFiltersAndSort);
+    dom.minReliability.addEventListener("change", applyFiltersAndSort);
+    dom.thirdRowOnly.addEventListener("change", applyFiltersAndSort);
+    dom.classSelect.addEventListener("change", applyFiltersAndSort);
+
+    const onPriceInput = rafThrottle(() => {
+      updateMaxPriceLabel();
       applyFiltersAndSort();
     });
+    dom.maxPrice.addEventListener("input", onPriceInput);
 
-    document.getElementById("modal-close").addEventListener("click", () => {
-      document.getElementById("detail-modal").hidden = true;
-    });
-    document.getElementById("modal-backdrop").addEventListener("click", () => {
-      document.getElementById("detail-modal").hidden = true;
-    });
-
-    document.getElementById("open-methodology").addEventListener("click", () => {
-      document.getElementById("methodology-modal").hidden = false;
-    });
-    document.getElementById("methodology-close").addEventListener("click", () => {
-      document.getElementById("methodology-modal").hidden = true;
-    });
-    document.getElementById("methodology-backdrop").addEventListener("click", () => {
-      document.getElementById("methodology-modal").hidden = true;
-    });
+    dom.modalClose.addEventListener("click", () => closeModal(dom.detailModal));
+    dom.modalBackdrop.addEventListener("click", () => closeModal(dom.detailModal));
+    dom.openMethodology.addEventListener("click", () => openModal(dom.methodologyModal));
+    dom.methodologyClose.addEventListener("click", () => closeModal(dom.methodologyModal));
+    dom.methodologyBackdrop.addEventListener("click", () => closeModal(dom.methodologyModal));
 
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        document.getElementById("detail-modal").hidden = true;
-        document.getElementById("methodology-modal").hidden = true;
-      }
+      if (e.key !== "Escape") return;
+      closeModal(dom.detailModal);
+      closeModal(dom.methodologyModal);
     });
 
+    updateMaxPriceLabel();
     applyFiltersAndSort();
   }
 

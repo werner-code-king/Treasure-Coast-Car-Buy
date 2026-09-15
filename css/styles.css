@@ -238,7 +238,6 @@ th {
   background: var(--surface-2);
   color: var(--text-dim);
   font-weight: 600;
-  cursor: pointer;
 }
 
 tbody tr:hover { background: var(--surface-2); }
@@ -287,6 +286,9 @@ tbody tr { cursor: pointer; }
 }
 
 .modal h2 { margin-top: 0; }
+.modal-subtitle { margin-top: -8px; color: var(--text-dim); font-size: 0.85rem; }
+.modal-meta { font-size: 0.8rem; font-weight: 400; color: var(--text-dim); }
+.link-btn.accent { color: var(--accent); }
 
 .detail-price {
   font-size: 1.4rem;
@@ -309,10 +311,6 @@ tbody tr { cursor: pointer; }
 .spec-grid > div { display: flex; justify-content: space-between; gap: 8px; border-bottom: 1px dashed var(--border); padding-bottom: 4px; }
 .spec-label { color: var(--text-dim); }
 .spec-value { font-weight: 600; text-align: right; }
-
-@media (max-width: 480px) {
-  .spec-grid { grid-template-columns: 1fr; }
-}
 
 .dealer-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
 .dealer-item {
@@ -344,4 +342,5 @@ tbody tr { cursor: pointer; }
   .controls { flex-direction: column; align-items: stretch; }
   select { min-width: 0; width: 100%; }
   th, td { white-space: normal; }
+  .spec-grid { grid-template-columns: 1fr; }
 }
