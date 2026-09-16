@@ -1,27 +1,32 @@
 /*
  * SUV data across 30 car-buying and performance metrics, broken out by
- * individual trim level (3-5 trims per model/powertrain, 55 rows total) so
- * price and value comparisons reflect what a specific trim actually costs
- * rather than a nameplate-wide range. Pricing (starting MSRP, resale,
- * maintenance, insurance), safety (NHTSA, IIHS, warranty), and performance
- * (engine, 0-60, transmission, MPG, towing, dimensions) compiled September
- * 2026 from KBB, Edmunds, TrueCar, CarEdge, J.D. Power, RepairPal, Auto
- * Reliability Index, iSeeCars, Cars.com, NHTSA, IIHS, manufacturer trim/
- * pricing pages, and dealership sites. See each vehicle's `sources` array
- * and the "Data & Methodology" panel in the app for details.
+ * individual trim level (3-5 trims per model/powertrain) across 20 SUV
+ * models/powertrains (83 rows total) so price and value comparisons
+ * reflect what a specific trim actually costs rather than a nameplate-wide
+ * range. Pricing (starting MSRP, resale, maintenance, insurance), safety
+ * (NHTSA, IIHS, warranty), and performance (engine, 0-60, transmission,
+ * MPG, towing, dimensions) compiled September 2026 from KBB, Edmunds,
+ * TrueCar, CarEdge, J.D. Power, RepairPal, Auto Reliability Index,
+ * iSeeCars, Cars.com, NHTSA, IIHS, manufacturer trim/pricing pages, and
+ * dealership sites. See each vehicle's `sources` array and the "Data &
+ * Methodology" panel in the app for details.
  *
  * Fields marked `estimated: true` (including `price.estimated`) are analyst
  * estimates — a trim price interpolated between two published price points,
- * qualitative source language, shared-platform inference (e.g. a hybrid
- * variant assumed to carry over a gas sibling's unconfirmed spec), or a lack
- * of trim-specific data — rather than a figure stated directly by a source.
- * Everything else is stated verbatim by a cited source.
+ * a spec figure not published this cycle and carried over from a closely
+ * related model/generation, qualitative source language, shared-platform
+ * inference, or a lack of trim-specific data — rather than a figure stated
+ * directly by a source. Everything else is stated verbatim by a cited
+ * source. A few figures (noted in their `detail` text) that appeared to be
+ * scraping/unit errors in a source (e.g. an implausible insurance quote)
+ * were disregarded in favor of a segment-consistent estimate.
  *
  * Reliability, resale, maintenance, insurance, safety, and powertrain specs
  * are researched at the nameplate/powertrain level (not per trim, since
  * these generally don't vary by trim) and are shared across every trim row
  * within the same model/powertrain family; only price (and occasionally
- * drivetrain availability, noted in the `drivetrain` field) is trim-specific.
+ * drivetrain/engine availability, noted in the relevant field) is
+ * trim-specific.
  *
  * The Value Score methodology is unchanged: reliability 25% / resale 20% /
  * maintenance 20% / cargo 15% / starting price 20%, normalized across every
@@ -33,6 +38,8 @@
  * Note: Toyota made the RAV4 Hybrid standard across its whole 2026 lineup
  * (no separate gas-only RAV4 is sold this year), so the RAV4 Gas family from
  * earlier versions of this dataset has been merged into RAV4 Hybrid below.
+ *
+ * Classes: "Compact SUV", "Midsize SUV" (2-row), and "Midsize SUV (3-Row)".
  */
 
 const SUV_DATA = [
@@ -4780,13 +4787,2412 @@ const SUV_DATA = [
         url: "https://autoreliabilityindex.com/toyota/4runner"
       }
     ]
+  },
+  {
+    id: "escape-active",
+    make: "Ford",
+    model: "Escape",
+    trimNote: "Active",
+    className: "Compact SUV",
+    drivetrain: "FWD standard / AWD avail. (AWD standard on 2.0L trims)",
+    price: {
+      low: 30350,
+      estimated: false
+    },
+    engine: "1.5L Turbo I3 (ST-Line Select/Elite/Platinum: 2.0L Turbo I4)",
+    hp: "180 hp (2.0L trims: 250 hp)",
+    torque: "199 lb-ft (2.0L trims: 280 lb-ft)",
+    zeroToSixty: "~9–10 sec (1.5L); ~7.5 sec (2.0L)",
+    transmission: "8-speed automatic",
+    thirdRow: "No",
+    seats: "5",
+    mpgCity: "23–27 (by trim)",
+    mpgHighway: "31–34 (by trim)",
+    mpgCombined: "~26–30 (by trim)",
+    fuelTank: "~15.7 gal (est.)",
+    curbWeight: "~3,450–3,750 lb (est.)",
+    wheelbase: "106.7\" (est.)",
+    towing: "up to 3,500 lb (2.0L only)",
+    groundClearance: "7.5\"",
+    reliability: {
+      value: 77,
+      display: "Good (77/100)",
+      detail: "Auto Reliability Index rates this generation 77/100; a separate methodology scores it 86/100 (“Great”).",
+      estimated: false
+    },
+    resale: {
+      value: 60,
+      display: "Good",
+      detail: "Estimated to retain about 59.5% of its original value after 5 years.",
+      estimated: false
+    },
+    maintenance: {
+      annual: 600,
+      display: "Average",
+      detail: "Estimated annual repair cost of $600, about $79 above the compact SUV class average of $521.",
+      estimated: false
+    },
+    insurance: {
+      annual: 1950,
+      display: "$1,950/yr",
+      detail: "No clean isolated insurance figure was published; estimated in line with the compact SUV segment.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall (4-star rollover)",
+      estimated: false
+    },
+    iihs: {
+      rank: 1,
+      display: "Mixed: Good (2 tests) / Marginal (side); no overall award",
+      estimated: false
+    },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
+    cargo: {
+      behind2nd: 37.5,
+      maxCargo: 65.4
+    },
+    features: [
+      "Base Active/ST-Line trims use a smaller 1.5L 3-cylinder; ST-Line Select and up step to the 2.0L 4-cylinder",
+      "Hybrid and Plug-in Hybrid also available (not shown)",
+      "3,500 lb towing requires the 2.0L engine"
+    ],
+    dealerBrand: "ford",
+    sources: [
+      {
+        label: "Ford Authority – 2026 Escape Powertrains",
+        url: "https://fordauthority.com/2025/11/2026-ford-escape-all-available-powertrains/"
+      },
+      {
+        label: "Edmunds – 2026 Escape Trims",
+        url: "https://www.edmunds.com/ford/escape/2026/trims/"
+      },
+      {
+        label: "Auto Reliability Index – Escape",
+        url: "https://autoreliabilityindex.com/ford/escape/2026"
+      }
+    ]
+  },
+  {
+    id: "escape-st-line-select",
+    make: "Ford",
+    model: "Escape",
+    trimNote: "ST-Line Select",
+    className: "Compact SUV",
+    drivetrain: "FWD standard / AWD avail. (AWD standard on 2.0L trims)",
+    price: {
+      low: 33890,
+      estimated: false
+    },
+    engine: "1.5L Turbo I3 (ST-Line Select/Elite/Platinum: 2.0L Turbo I4)",
+    hp: "180 hp (2.0L trims: 250 hp)",
+    torque: "199 lb-ft (2.0L trims: 280 lb-ft)",
+    zeroToSixty: "~9–10 sec (1.5L); ~7.5 sec (2.0L)",
+    transmission: "8-speed automatic",
+    thirdRow: "No",
+    seats: "5",
+    mpgCity: "23–27 (by trim)",
+    mpgHighway: "31–34 (by trim)",
+    mpgCombined: "~26–30 (by trim)",
+    fuelTank: "~15.7 gal (est.)",
+    curbWeight: "~3,450–3,750 lb (est.)",
+    wheelbase: "106.7\" (est.)",
+    towing: "up to 3,500 lb (2.0L only)",
+    groundClearance: "7.5\"",
+    reliability: {
+      value: 77,
+      display: "Good (77/100)",
+      detail: "Auto Reliability Index rates this generation 77/100; a separate methodology scores it 86/100 (“Great”).",
+      estimated: false
+    },
+    resale: {
+      value: 60,
+      display: "Good",
+      detail: "Estimated to retain about 59.5% of its original value after 5 years.",
+      estimated: false
+    },
+    maintenance: {
+      annual: 600,
+      display: "Average",
+      detail: "Estimated annual repair cost of $600, about $79 above the compact SUV class average of $521.",
+      estimated: false
+    },
+    insurance: {
+      annual: 1950,
+      display: "$1,950/yr",
+      detail: "No clean isolated insurance figure was published; estimated in line with the compact SUV segment.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall (4-star rollover)",
+      estimated: false
+    },
+    iihs: {
+      rank: 1,
+      display: "Mixed: Good (2 tests) / Marginal (side); no overall award",
+      estimated: false
+    },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
+    cargo: {
+      behind2nd: 37.5,
+      maxCargo: 65.4
+    },
+    features: [
+      "Base Active/ST-Line trims use a smaller 1.5L 3-cylinder; ST-Line Select and up step to the 2.0L 4-cylinder",
+      "Hybrid and Plug-in Hybrid also available (not shown)",
+      "3,500 lb towing requires the 2.0L engine"
+    ],
+    dealerBrand: "ford",
+    sources: [
+      {
+        label: "Ford Authority – 2026 Escape Powertrains",
+        url: "https://fordauthority.com/2025/11/2026-ford-escape-all-available-powertrains/"
+      },
+      {
+        label: "Edmunds – 2026 Escape Trims",
+        url: "https://www.edmunds.com/ford/escape/2026/trims/"
+      },
+      {
+        label: "Auto Reliability Index – Escape",
+        url: "https://autoreliabilityindex.com/ford/escape/2026"
+      }
+    ]
+  },
+  {
+    id: "escape-platinum",
+    make: "Ford",
+    model: "Escape",
+    trimNote: "Platinum",
+    className: "Compact SUV",
+    drivetrain: "FWD standard / AWD avail. (AWD standard on 2.0L trims)",
+    price: {
+      low: 36215,
+      estimated: false
+    },
+    engine: "1.5L Turbo I3 (ST-Line Select/Elite/Platinum: 2.0L Turbo I4)",
+    hp: "180 hp (2.0L trims: 250 hp)",
+    torque: "199 lb-ft (2.0L trims: 280 lb-ft)",
+    zeroToSixty: "~9–10 sec (1.5L); ~7.5 sec (2.0L)",
+    transmission: "8-speed automatic",
+    thirdRow: "No",
+    seats: "5",
+    mpgCity: "23–27 (by trim)",
+    mpgHighway: "31–34 (by trim)",
+    mpgCombined: "~26–30 (by trim)",
+    fuelTank: "~15.7 gal (est.)",
+    curbWeight: "~3,450–3,750 lb (est.)",
+    wheelbase: "106.7\" (est.)",
+    towing: "up to 3,500 lb (2.0L only)",
+    groundClearance: "7.5\"",
+    reliability: {
+      value: 77,
+      display: "Good (77/100)",
+      detail: "Auto Reliability Index rates this generation 77/100; a separate methodology scores it 86/100 (“Great”).",
+      estimated: false
+    },
+    resale: {
+      value: 60,
+      display: "Good",
+      detail: "Estimated to retain about 59.5% of its original value after 5 years.",
+      estimated: false
+    },
+    maintenance: {
+      annual: 600,
+      display: "Average",
+      detail: "Estimated annual repair cost of $600, about $79 above the compact SUV class average of $521.",
+      estimated: false
+    },
+    insurance: {
+      annual: 1950,
+      display: "$1,950/yr",
+      detail: "No clean isolated insurance figure was published; estimated in line with the compact SUV segment.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall (4-star rollover)",
+      estimated: false
+    },
+    iihs: {
+      rank: 1,
+      display: "Mixed: Good (2 tests) / Marginal (side); no overall award",
+      estimated: false
+    },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
+    cargo: {
+      behind2nd: 37.5,
+      maxCargo: 65.4
+    },
+    features: [
+      "Base Active/ST-Line trims use a smaller 1.5L 3-cylinder; ST-Line Select and up step to the 2.0L 4-cylinder",
+      "Hybrid and Plug-in Hybrid also available (not shown)",
+      "3,500 lb towing requires the 2.0L engine"
+    ],
+    dealerBrand: "ford",
+    sources: [
+      {
+        label: "Ford Authority – 2026 Escape Powertrains",
+        url: "https://fordauthority.com/2025/11/2026-ford-escape-all-available-powertrains/"
+      },
+      {
+        label: "Edmunds – 2026 Escape Trims",
+        url: "https://www.edmunds.com/ford/escape/2026/trims/"
+      },
+      {
+        label: "Auto Reliability Index – Escape",
+        url: "https://autoreliabilityindex.com/ford/escape/2026"
+      }
+    ]
+  },
+  {
+    id: "escape-st-line-elite",
+    make: "Ford",
+    model: "Escape",
+    trimNote: "ST-Line Elite",
+    className: "Compact SUV",
+    drivetrain: "FWD standard / AWD avail. (AWD standard on 2.0L trims)",
+    price: {
+      low: 37210,
+      estimated: false
+    },
+    engine: "1.5L Turbo I3 (ST-Line Select/Elite/Platinum: 2.0L Turbo I4)",
+    hp: "180 hp (2.0L trims: 250 hp)",
+    torque: "199 lb-ft (2.0L trims: 280 lb-ft)",
+    zeroToSixty: "~9–10 sec (1.5L); ~7.5 sec (2.0L)",
+    transmission: "8-speed automatic",
+    thirdRow: "No",
+    seats: "5",
+    mpgCity: "23–27 (by trim)",
+    mpgHighway: "31–34 (by trim)",
+    mpgCombined: "~26–30 (by trim)",
+    fuelTank: "~15.7 gal (est.)",
+    curbWeight: "~3,450–3,750 lb (est.)",
+    wheelbase: "106.7\" (est.)",
+    towing: "up to 3,500 lb (2.0L only)",
+    groundClearance: "7.5\"",
+    reliability: {
+      value: 77,
+      display: "Good (77/100)",
+      detail: "Auto Reliability Index rates this generation 77/100; a separate methodology scores it 86/100 (“Great”).",
+      estimated: false
+    },
+    resale: {
+      value: 60,
+      display: "Good",
+      detail: "Estimated to retain about 59.5% of its original value after 5 years.",
+      estimated: false
+    },
+    maintenance: {
+      annual: 600,
+      display: "Average",
+      detail: "Estimated annual repair cost of $600, about $79 above the compact SUV class average of $521.",
+      estimated: false
+    },
+    insurance: {
+      annual: 1950,
+      display: "$1,950/yr",
+      detail: "No clean isolated insurance figure was published; estimated in line with the compact SUV segment.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall (4-star rollover)",
+      estimated: false
+    },
+    iihs: {
+      rank: 1,
+      display: "Mixed: Good (2 tests) / Marginal (side); no overall award",
+      estimated: false
+    },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
+    cargo: {
+      behind2nd: 37.5,
+      maxCargo: 65.4
+    },
+    features: [
+      "Base Active/ST-Line trims use a smaller 1.5L 3-cylinder; ST-Line Select and up step to the 2.0L 4-cylinder",
+      "Hybrid and Plug-in Hybrid also available (not shown)",
+      "3,500 lb towing requires the 2.0L engine"
+    ],
+    dealerBrand: "ford",
+    sources: [
+      {
+        label: "Ford Authority – 2026 Escape Powertrains",
+        url: "https://fordauthority.com/2025/11/2026-ford-escape-all-available-powertrains/"
+      },
+      {
+        label: "Edmunds – 2026 Escape Trims",
+        url: "https://www.edmunds.com/ford/escape/2026/trims/"
+      },
+      {
+        label: "Auto Reliability Index – Escape",
+        url: "https://autoreliabilityindex.com/ford/escape/2026"
+      }
+    ]
+  },
+  {
+    id: "cx50-25-s-select",
+    make: "Mazda",
+    model: "CX-50",
+    trimNote: "2.5 S Select",
+    className: "Compact SUV",
+    drivetrain: "AWD standard",
+    price: {
+      low: 29900,
+      estimated: false
+    },
+    engine: "2.5L NA I4 (2.5 S); 2.5L Turbo I4 (Turbo trims); 2.5L I4 + 3 electric motors (Hybrid trims)",
+    hp: "187 hp (2.5 S); 227–256 hp (Turbo, by fuel grade); 219 hp (Hybrid)",
+    torque: "186 lb-ft (2.5 S); 310–320 lb-ft (Turbo); 221 lb-ft (Hybrid)",
+    zeroToSixty: "6.1 sec (Turbo); 7.6 sec (Hybrid); ~8.5 sec (2.5 S, est.)",
+    transmission: "6-speed automatic (gas/Turbo); CVT (Hybrid)",
+    thirdRow: "No",
+    seats: "5",
+    mpgCity: "24 (2.5 S)",
+    mpgHighway: "30 (2.5 S)",
+    mpgCombined: "~26 (2.5 S); ~38 (Hybrid)",
+    fuelTank: "~15.9 gal (est.)",
+    curbWeight: "~3,900–4,200 lb (est.)",
+    wheelbase: "106.6\" (est.)",
+    towing: "1,500–3,500 lb (by trim/powertrain)",
+    groundClearance: "8.3–8.6\"",
+    reliability: {
+      value: 80,
+      display: "Good (4.0/5 consumer)",
+      detail: "Edmunds consumer rating averages 4.0 / 5.0; Edmunds' own expert road test scored it 6.8/10.",
+      estimated: false
+    },
+    resale: {
+      value: 66,
+      display: "Strong",
+      detail: "No exact 2026 figure was published; estimated in line with the related CX-5's strong resale performance.",
+      estimated: true
+    },
+    maintenance: {
+      annual: 550,
+      display: "Low",
+      detail: "No exact 2026 figure was published; estimated in line with the related CX-5.",
+      estimated: true
+    },
+    insurance: {
+      annual: 1950,
+      display: "$1,950/yr",
+      detail: "No published nameplate-specific figure found; estimated in line with the compact SUV segment.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall",
+      estimated: false
+    },
+    iihs: {
+      rank: 3,
+      display: "TOP SAFETY PICK+ (2025 rating)",
+      estimated: false
+    },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
+    cargo: {
+      behind2nd: 31.4,
+      maxCargo: 56.3
+    },
+    features: [
+      "Off-road-oriented styling and standard AWD across the line",
+      "Turbo trims add a twin-scroll turbo (256 hp on premium fuel)",
+      "Hybrid trims share Toyota-sourced hybrid hardware"
+    ],
+    dealerBrand: "mazda",
+    sources: [
+      {
+        label: "Mazda USA News – 2026 CX-50 Pricing",
+        url: "https://news.mazdausa.com/2025-09-16-2026-Mazda-CX-50-Pricing-and-Packaging"
+      },
+      {
+        label: "Edmunds – 2026 CX-50",
+        url: "https://www.edmunds.com/mazda/cx-50/"
+      },
+      {
+        label: "IIHS – 2026 CX-50",
+        url: "https://www.iihs.org/ratings/vehicle/mazda/cx-50-4-door-suv/2026"
+      }
+    ]
+  },
+  {
+    id: "cx50-hybrid-preferred",
+    make: "Mazda",
+    model: "CX-50",
+    trimNote: "Hybrid Preferred",
+    className: "Compact SUV",
+    drivetrain: "AWD standard",
+    price: {
+      low: 34750,
+      estimated: false
+    },
+    engine: "2.5L NA I4 (2.5 S); 2.5L Turbo I4 (Turbo trims); 2.5L I4 + 3 electric motors (Hybrid trims)",
+    hp: "187 hp (2.5 S); 227–256 hp (Turbo, by fuel grade); 219 hp (Hybrid)",
+    torque: "186 lb-ft (2.5 S); 310–320 lb-ft (Turbo); 221 lb-ft (Hybrid)",
+    zeroToSixty: "6.1 sec (Turbo); 7.6 sec (Hybrid); ~8.5 sec (2.5 S, est.)",
+    transmission: "6-speed automatic (gas/Turbo); CVT (Hybrid)",
+    thirdRow: "No",
+    seats: "5",
+    mpgCity: "24 (2.5 S)",
+    mpgHighway: "30 (2.5 S)",
+    mpgCombined: "~26 (2.5 S); ~38 (Hybrid)",
+    fuelTank: "~15.9 gal (est.)",
+    curbWeight: "~3,900–4,200 lb (est.)",
+    wheelbase: "106.6\" (est.)",
+    towing: "1,500–3,500 lb (by trim/powertrain)",
+    groundClearance: "8.3–8.6\"",
+    reliability: {
+      value: 80,
+      display: "Good (4.0/5 consumer)",
+      detail: "Edmunds consumer rating averages 4.0 / 5.0; Edmunds' own expert road test scored it 6.8/10.",
+      estimated: false
+    },
+    resale: {
+      value: 66,
+      display: "Strong",
+      detail: "No exact 2026 figure was published; estimated in line with the related CX-5's strong resale performance.",
+      estimated: true
+    },
+    maintenance: {
+      annual: 550,
+      display: "Low",
+      detail: "No exact 2026 figure was published; estimated in line with the related CX-5.",
+      estimated: true
+    },
+    insurance: {
+      annual: 1950,
+      display: "$1,950/yr",
+      detail: "No published nameplate-specific figure found; estimated in line with the compact SUV segment.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall",
+      estimated: false
+    },
+    iihs: {
+      rank: 3,
+      display: "TOP SAFETY PICK+ (2025 rating)",
+      estimated: false
+    },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
+    cargo: {
+      behind2nd: 31.4,
+      maxCargo: 56.3
+    },
+    features: [
+      "Off-road-oriented styling and standard AWD across the line",
+      "Turbo trims add a twin-scroll turbo (256 hp on premium fuel)",
+      "Hybrid trims share Toyota-sourced hybrid hardware"
+    ],
+    dealerBrand: "mazda",
+    sources: [
+      {
+        label: "Mazda USA News – 2026 CX-50 Pricing",
+        url: "https://news.mazdausa.com/2025-09-16-2026-Mazda-CX-50-Pricing-and-Packaging"
+      },
+      {
+        label: "Edmunds – 2026 CX-50",
+        url: "https://www.edmunds.com/mazda/cx-50/"
+      },
+      {
+        label: "IIHS – 2026 CX-50",
+        url: "https://www.iihs.org/ratings/vehicle/mazda/cx-50-4-door-suv/2026"
+      }
+    ]
+  },
+  {
+    id: "cx50-hybrid-premium-plus",
+    make: "Mazda",
+    model: "CX-50",
+    trimNote: "Hybrid Premium Plus",
+    className: "Compact SUV",
+    drivetrain: "AWD standard",
+    price: {
+      low: 40450,
+      estimated: false
+    },
+    engine: "2.5L NA I4 (2.5 S); 2.5L Turbo I4 (Turbo trims); 2.5L I4 + 3 electric motors (Hybrid trims)",
+    hp: "187 hp (2.5 S); 227–256 hp (Turbo, by fuel grade); 219 hp (Hybrid)",
+    torque: "186 lb-ft (2.5 S); 310–320 lb-ft (Turbo); 221 lb-ft (Hybrid)",
+    zeroToSixty: "6.1 sec (Turbo); 7.6 sec (Hybrid); ~8.5 sec (2.5 S, est.)",
+    transmission: "6-speed automatic (gas/Turbo); CVT (Hybrid)",
+    thirdRow: "No",
+    seats: "5",
+    mpgCity: "24 (2.5 S)",
+    mpgHighway: "30 (2.5 S)",
+    mpgCombined: "~26 (2.5 S); ~38 (Hybrid)",
+    fuelTank: "~15.9 gal (est.)",
+    curbWeight: "~3,900–4,200 lb (est.)",
+    wheelbase: "106.6\" (est.)",
+    towing: "1,500–3,500 lb (by trim/powertrain)",
+    groundClearance: "8.3–8.6\"",
+    reliability: {
+      value: 80,
+      display: "Good (4.0/5 consumer)",
+      detail: "Edmunds consumer rating averages 4.0 / 5.0; Edmunds' own expert road test scored it 6.8/10.",
+      estimated: false
+    },
+    resale: {
+      value: 66,
+      display: "Strong",
+      detail: "No exact 2026 figure was published; estimated in line with the related CX-5's strong resale performance.",
+      estimated: true
+    },
+    maintenance: {
+      annual: 550,
+      display: "Low",
+      detail: "No exact 2026 figure was published; estimated in line with the related CX-5.",
+      estimated: true
+    },
+    insurance: {
+      annual: 1950,
+      display: "$1,950/yr",
+      detail: "No published nameplate-specific figure found; estimated in line with the compact SUV segment.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall",
+      estimated: false
+    },
+    iihs: {
+      rank: 3,
+      display: "TOP SAFETY PICK+ (2025 rating)",
+      estimated: false
+    },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
+    cargo: {
+      behind2nd: 31.4,
+      maxCargo: 56.3
+    },
+    features: [
+      "Off-road-oriented styling and standard AWD across the line",
+      "Turbo trims add a twin-scroll turbo (256 hp on premium fuel)",
+      "Hybrid trims share Toyota-sourced hybrid hardware"
+    ],
+    dealerBrand: "mazda",
+    sources: [
+      {
+        label: "Mazda USA News – 2026 CX-50 Pricing",
+        url: "https://news.mazdausa.com/2025-09-16-2026-Mazda-CX-50-Pricing-and-Packaging"
+      },
+      {
+        label: "Edmunds – 2026 CX-50",
+        url: "https://www.edmunds.com/mazda/cx-50/"
+      },
+      {
+        label: "IIHS – 2026 CX-50",
+        url: "https://www.iihs.org/ratings/vehicle/mazda/cx-50-4-door-suv/2026"
+      }
+    ]
+  },
+  {
+    id: "cx50-25-turbo-premium-plus",
+    make: "Mazda",
+    model: "CX-50",
+    trimNote: "2.5 Turbo Premium Plus",
+    className: "Compact SUV",
+    drivetrain: "AWD standard",
+    price: {
+      low: 42900,
+      estimated: false
+    },
+    engine: "2.5L NA I4 (2.5 S); 2.5L Turbo I4 (Turbo trims); 2.5L I4 + 3 electric motors (Hybrid trims)",
+    hp: "187 hp (2.5 S); 227–256 hp (Turbo, by fuel grade); 219 hp (Hybrid)",
+    torque: "186 lb-ft (2.5 S); 310–320 lb-ft (Turbo); 221 lb-ft (Hybrid)",
+    zeroToSixty: "6.1 sec (Turbo); 7.6 sec (Hybrid); ~8.5 sec (2.5 S, est.)",
+    transmission: "6-speed automatic (gas/Turbo); CVT (Hybrid)",
+    thirdRow: "No",
+    seats: "5",
+    mpgCity: "24 (2.5 S)",
+    mpgHighway: "30 (2.5 S)",
+    mpgCombined: "~26 (2.5 S); ~38 (Hybrid)",
+    fuelTank: "~15.9 gal (est.)",
+    curbWeight: "~3,900–4,200 lb (est.)",
+    wheelbase: "106.6\" (est.)",
+    towing: "1,500–3,500 lb (by trim/powertrain)",
+    groundClearance: "8.3–8.6\"",
+    reliability: {
+      value: 80,
+      display: "Good (4.0/5 consumer)",
+      detail: "Edmunds consumer rating averages 4.0 / 5.0; Edmunds' own expert road test scored it 6.8/10.",
+      estimated: false
+    },
+    resale: {
+      value: 66,
+      display: "Strong",
+      detail: "No exact 2026 figure was published; estimated in line with the related CX-5's strong resale performance.",
+      estimated: true
+    },
+    maintenance: {
+      annual: 550,
+      display: "Low",
+      detail: "No exact 2026 figure was published; estimated in line with the related CX-5.",
+      estimated: true
+    },
+    insurance: {
+      annual: 1950,
+      display: "$1,950/yr",
+      detail: "No published nameplate-specific figure found; estimated in line with the compact SUV segment.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall",
+      estimated: false
+    },
+    iihs: {
+      rank: 3,
+      display: "TOP SAFETY PICK+ (2025 rating)",
+      estimated: false
+    },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
+    cargo: {
+      behind2nd: 31.4,
+      maxCargo: 56.3
+    },
+    features: [
+      "Off-road-oriented styling and standard AWD across the line",
+      "Turbo trims add a twin-scroll turbo (256 hp on premium fuel)",
+      "Hybrid trims share Toyota-sourced hybrid hardware"
+    ],
+    dealerBrand: "mazda",
+    sources: [
+      {
+        label: "Mazda USA News – 2026 CX-50 Pricing",
+        url: "https://news.mazdausa.com/2025-09-16-2026-Mazda-CX-50-Pricing-and-Packaging"
+      },
+      {
+        label: "Edmunds – 2026 CX-50",
+        url: "https://www.edmunds.com/mazda/cx-50/"
+      },
+      {
+        label: "IIHS – 2026 CX-50",
+        url: "https://www.iihs.org/ratings/vehicle/mazda/cx-50-4-door-suv/2026"
+      }
+    ]
+  },
+  {
+    id: "grand-cherokee-laredo",
+    make: "Jeep",
+    model: "Grand Cherokee",
+    trimNote: "Laredo",
+    className: "Midsize SUV",
+    drivetrain: "RWD standard / 4WD avail. (4WD standard on Limited Reserve/Summit)",
+    price: {
+      low: 39990,
+      estimated: false
+    },
+    engine: "3.6L Pentastar V6 (Laredo/Altitude); 2.0L Hurricane Turbo I4 (Limited and up)",
+    hp: "293 hp (V6); 324 hp (Turbo I4)",
+    torque: "260 lb-ft (V6, est.); 332 lb-ft (Turbo I4)",
+    zeroToSixty: "~7.5 sec (V6); ~6.5 sec (Turbo I4, est.)",
+    transmission: "8-speed automatic",
+    thirdRow: "No",
+    seats: "5",
+    mpgCity: "21 (Turbo I4)",
+    mpgHighway: "27 (Turbo I4)",
+    mpgCombined: "~23 (Turbo I4)",
+    fuelTank: "~24.6 gal (est.)",
+    curbWeight: "~4,500–4,800 lb (est.)",
+    wheelbase: "116.7\" (est.)",
+    towing: "up to 6,200 lb",
+    groundClearance: "~8.6\" (est., air suspension trims)",
+    reliability: {
+      value: 70,
+      display: "Good (70/100)",
+      detail: "Auto Reliability Index rates this generation 70/100 with 2 recalls and 0 owner complaints; J.D. Power's own methodology scores it higher at 81/100.",
+      estimated: false
+    },
+    resale: {
+      value: 55,
+      display: "Below average",
+      detail: "Estimated to retain about 54.7% of its original value after 5 years.",
+      estimated: false
+    },
+    maintenance: {
+      annual: 1472,
+      display: "Higher",
+      detail: "Averages about $1,472/yr, roughly $7,364 over 5 years — among the higher costs in this comparison.",
+      estimated: false
+    },
+    insurance: {
+      annual: 2100,
+      display: "$2,100/yr",
+      detail: "A widely-scraped figure claiming ~$15,500/yr appears to be a data error and was disregarded; estimated instead at a premium over the midsize SUV average given the Grand Cherokee's higher MSRP and repair costs.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall",
+      estimated: false
+    },
+    iihs: {
+      rank: 1,
+      display: "Good (small overlap front, side); no overall award reported",
+      estimated: false
+    },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
+    cargo: {
+      behind2nd: 37.7,
+      maxCargo: 70.8
+    },
+    features: [
+      "Strongest towing capacity in this comparison among 2-row SUVs — 6,200 lb",
+      "3-row Grand Cherokee L also available (not shown)",
+      "4xe plug-in hybrid variant also available (not shown)"
+    ],
+    dealerBrand: "jeep",
+    sources: [
+      {
+        label: "Cars.com – How Much Is the 2026 Grand Cherokee?",
+        url: "https://www.cars.com/articles/how-much-is-the-2026-jeep-grand-cherokee-521161/"
+      },
+      {
+        label: "Auto Reliability Index – Grand Cherokee",
+        url: "https://autoreliabilityindex.com/jeep/grand-cherokee/2026"
+      },
+      {
+        label: "J.D. Power – 2026 Grand Cherokee",
+        url: "https://www.jdpower.com/cars/2026/jeep/grand-cherokee"
+      }
+    ]
+  },
+  {
+    id: "grand-cherokee-limited",
+    make: "Jeep",
+    model: "Grand Cherokee",
+    trimNote: "Limited",
+    className: "Midsize SUV",
+    drivetrain: "RWD standard / 4WD avail. (4WD standard on Limited Reserve/Summit)",
+    price: {
+      low: 46190,
+      estimated: true
+    },
+    engine: "3.6L Pentastar V6 (Laredo/Altitude); 2.0L Hurricane Turbo I4 (Limited and up)",
+    hp: "293 hp (V6); 324 hp (Turbo I4)",
+    torque: "260 lb-ft (V6, est.); 332 lb-ft (Turbo I4)",
+    zeroToSixty: "~7.5 sec (V6); ~6.5 sec (Turbo I4, est.)",
+    transmission: "8-speed automatic",
+    thirdRow: "No",
+    seats: "5",
+    mpgCity: "21 (Turbo I4)",
+    mpgHighway: "27 (Turbo I4)",
+    mpgCombined: "~23 (Turbo I4)",
+    fuelTank: "~24.6 gal (est.)",
+    curbWeight: "~4,500–4,800 lb (est.)",
+    wheelbase: "116.7\" (est.)",
+    towing: "up to 6,200 lb",
+    groundClearance: "~8.6\" (est., air suspension trims)",
+    reliability: {
+      value: 70,
+      display: "Good (70/100)",
+      detail: "Auto Reliability Index rates this generation 70/100 with 2 recalls and 0 owner complaints; J.D. Power's own methodology scores it higher at 81/100.",
+      estimated: false
+    },
+    resale: {
+      value: 55,
+      display: "Below average",
+      detail: "Estimated to retain about 54.7% of its original value after 5 years.",
+      estimated: false
+    },
+    maintenance: {
+      annual: 1472,
+      display: "Higher",
+      detail: "Averages about $1,472/yr, roughly $7,364 over 5 years — among the higher costs in this comparison.",
+      estimated: false
+    },
+    insurance: {
+      annual: 2100,
+      display: "$2,100/yr",
+      detail: "A widely-scraped figure claiming ~$15,500/yr appears to be a data error and was disregarded; estimated instead at a premium over the midsize SUV average given the Grand Cherokee's higher MSRP and repair costs.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall",
+      estimated: false
+    },
+    iihs: {
+      rank: 1,
+      display: "Good (small overlap front, side); no overall award reported",
+      estimated: false
+    },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
+    cargo: {
+      behind2nd: 37.7,
+      maxCargo: 70.8
+    },
+    features: [
+      "Strongest towing capacity in this comparison among 2-row SUVs — 6,200 lb",
+      "3-row Grand Cherokee L also available (not shown)",
+      "4xe plug-in hybrid variant also available (not shown)"
+    ],
+    dealerBrand: "jeep",
+    sources: [
+      {
+        label: "Cars.com – How Much Is the 2026 Grand Cherokee?",
+        url: "https://www.cars.com/articles/how-much-is-the-2026-jeep-grand-cherokee-521161/"
+      },
+      {
+        label: "Auto Reliability Index – Grand Cherokee",
+        url: "https://autoreliabilityindex.com/jeep/grand-cherokee/2026"
+      },
+      {
+        label: "J.D. Power – 2026 Grand Cherokee",
+        url: "https://www.jdpower.com/cars/2026/jeep/grand-cherokee"
+      }
+    ]
+  },
+  {
+    id: "grand-cherokee-overland",
+    make: "Jeep",
+    model: "Grand Cherokee",
+    trimNote: "Overland",
+    className: "Midsize SUV",
+    drivetrain: "RWD standard / 4WD avail. (4WD standard on Limited Reserve/Summit)",
+    price: {
+      low: 52590,
+      estimated: true
+    },
+    engine: "3.6L Pentastar V6 (Laredo/Altitude); 2.0L Hurricane Turbo I4 (Limited and up)",
+    hp: "293 hp (V6); 324 hp (Turbo I4)",
+    torque: "260 lb-ft (V6, est.); 332 lb-ft (Turbo I4)",
+    zeroToSixty: "~7.5 sec (V6); ~6.5 sec (Turbo I4, est.)",
+    transmission: "8-speed automatic",
+    thirdRow: "No",
+    seats: "5",
+    mpgCity: "21 (Turbo I4)",
+    mpgHighway: "27 (Turbo I4)",
+    mpgCombined: "~23 (Turbo I4)",
+    fuelTank: "~24.6 gal (est.)",
+    curbWeight: "~4,500–4,800 lb (est.)",
+    wheelbase: "116.7\" (est.)",
+    towing: "up to 6,200 lb",
+    groundClearance: "~8.6\" (est., air suspension trims)",
+    reliability: {
+      value: 70,
+      display: "Good (70/100)",
+      detail: "Auto Reliability Index rates this generation 70/100 with 2 recalls and 0 owner complaints; J.D. Power's own methodology scores it higher at 81/100.",
+      estimated: false
+    },
+    resale: {
+      value: 55,
+      display: "Below average",
+      detail: "Estimated to retain about 54.7% of its original value after 5 years.",
+      estimated: false
+    },
+    maintenance: {
+      annual: 1472,
+      display: "Higher",
+      detail: "Averages about $1,472/yr, roughly $7,364 over 5 years — among the higher costs in this comparison.",
+      estimated: false
+    },
+    insurance: {
+      annual: 2100,
+      display: "$2,100/yr",
+      detail: "A widely-scraped figure claiming ~$15,500/yr appears to be a data error and was disregarded; estimated instead at a premium over the midsize SUV average given the Grand Cherokee's higher MSRP and repair costs.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall",
+      estimated: false
+    },
+    iihs: {
+      rank: 1,
+      display: "Good (small overlap front, side); no overall award reported",
+      estimated: false
+    },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
+    cargo: {
+      behind2nd: 37.7,
+      maxCargo: 70.8
+    },
+    features: [
+      "Strongest towing capacity in this comparison among 2-row SUVs — 6,200 lb",
+      "3-row Grand Cherokee L also available (not shown)",
+      "4xe plug-in hybrid variant also available (not shown)"
+    ],
+    dealerBrand: "jeep",
+    sources: [
+      {
+        label: "Cars.com – How Much Is the 2026 Grand Cherokee?",
+        url: "https://www.cars.com/articles/how-much-is-the-2026-jeep-grand-cherokee-521161/"
+      },
+      {
+        label: "Auto Reliability Index – Grand Cherokee",
+        url: "https://autoreliabilityindex.com/jeep/grand-cherokee/2026"
+      },
+      {
+        label: "J.D. Power – 2026 Grand Cherokee",
+        url: "https://www.jdpower.com/cars/2026/jeep/grand-cherokee"
+      }
+    ]
+  },
+  {
+    id: "grand-cherokee-summit-reserve",
+    make: "Jeep",
+    model: "Grand Cherokee",
+    trimNote: "Summit Reserve",
+    className: "Midsize SUV",
+    drivetrain: "RWD standard / 4WD avail. (4WD standard on Limited Reserve/Summit)",
+    price: {
+      low: 58990,
+      estimated: true
+    },
+    engine: "3.6L Pentastar V6 (Laredo/Altitude); 2.0L Hurricane Turbo I4 (Limited and up)",
+    hp: "293 hp (V6); 324 hp (Turbo I4)",
+    torque: "260 lb-ft (V6, est.); 332 lb-ft (Turbo I4)",
+    zeroToSixty: "~7.5 sec (V6); ~6.5 sec (Turbo I4, est.)",
+    transmission: "8-speed automatic",
+    thirdRow: "No",
+    seats: "5",
+    mpgCity: "21 (Turbo I4)",
+    mpgHighway: "27 (Turbo I4)",
+    mpgCombined: "~23 (Turbo I4)",
+    fuelTank: "~24.6 gal (est.)",
+    curbWeight: "~4,500–4,800 lb (est.)",
+    wheelbase: "116.7\" (est.)",
+    towing: "up to 6,200 lb",
+    groundClearance: "~8.6\" (est., air suspension trims)",
+    reliability: {
+      value: 70,
+      display: "Good (70/100)",
+      detail: "Auto Reliability Index rates this generation 70/100 with 2 recalls and 0 owner complaints; J.D. Power's own methodology scores it higher at 81/100.",
+      estimated: false
+    },
+    resale: {
+      value: 55,
+      display: "Below average",
+      detail: "Estimated to retain about 54.7% of its original value after 5 years.",
+      estimated: false
+    },
+    maintenance: {
+      annual: 1472,
+      display: "Higher",
+      detail: "Averages about $1,472/yr, roughly $7,364 over 5 years — among the higher costs in this comparison.",
+      estimated: false
+    },
+    insurance: {
+      annual: 2100,
+      display: "$2,100/yr",
+      detail: "A widely-scraped figure claiming ~$15,500/yr appears to be a data error and was disregarded; estimated instead at a premium over the midsize SUV average given the Grand Cherokee's higher MSRP and repair costs.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall",
+      estimated: false
+    },
+    iihs: {
+      rank: 1,
+      display: "Good (small overlap front, side); no overall award reported",
+      estimated: false
+    },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
+    cargo: {
+      behind2nd: 37.7,
+      maxCargo: 70.8
+    },
+    features: [
+      "Strongest towing capacity in this comparison among 2-row SUVs — 6,200 lb",
+      "3-row Grand Cherokee L also available (not shown)",
+      "4xe plug-in hybrid variant also available (not shown)"
+    ],
+    dealerBrand: "jeep",
+    sources: [
+      {
+        label: "Cars.com – How Much Is the 2026 Grand Cherokee?",
+        url: "https://www.cars.com/articles/how-much-is-the-2026-jeep-grand-cherokee-521161/"
+      },
+      {
+        label: "Auto Reliability Index – Grand Cherokee",
+        url: "https://autoreliabilityindex.com/jeep/grand-cherokee/2026"
+      },
+      {
+        label: "J.D. Power – 2026 Grand Cherokee",
+        url: "https://www.jdpower.com/cars/2026/jeep/grand-cherokee"
+      }
+    ]
+  },
+  {
+    id: "santa-fe-se",
+    make: "Hyundai",
+    model: "Santa Fe",
+    trimNote: "SE",
+    className: "Midsize SUV",
+    drivetrain: "FWD standard / AWD avail. (+$1,800)",
+    price: {
+      low: 36295,
+      estimated: false
+    },
+    engine: "2.5L Turbo I4",
+    hp: "277 hp",
+    torque: "311 lb-ft",
+    zeroToSixty: "6.3–7.2 sec (by trim)",
+    transmission: "8-speed automatic",
+    thirdRow: "No",
+    seats: "5",
+    mpgCity: "20 (FWD)",
+    mpgHighway: "29 (FWD)",
+    mpgCombined: "~23 (FWD); XRT ~21",
+    fuelTank: "~17.7 gal (est.)",
+    curbWeight: "~3,900–4,200 lb (est.)",
+    wheelbase: "110.2\" (est.)",
+    towing: "3,500 lb (XRT: up to 4,500 lb w/ trailer brakes)",
+    groundClearance: "~7.5–8.6\" (est., XRT highest)",
+    reliability: {
+      value: 75,
+      display: "Good (75/100)",
+      detail: "Auto Reliability Index rates this generation 75/100 with 5 recalls and 5 owner complaints; J.D. Power's own methodology scores it higher at 81/100.",
+      estimated: false
+    },
+    resale: {
+      value: 57,
+      display: "Good",
+      detail: "Estimated to retain about 57.1% of its original value after 5 years.",
+      estimated: false
+    },
+    maintenance: {
+      annual: 515,
+      display: "Below average",
+      detail: "Estimated annual repair cost of $515, about $58 below the midsize SUV class average of $573.",
+      estimated: false
+    },
+    insurance: {
+      annual: 3195,
+      display: "$3,195/yr",
+      detail: "Derived from KBB's stated 5-year insurance cost of $15,975 for the SEL trim.",
+      estimated: false
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall (carried from prior generation)",
+      estimated: true
+    },
+    iihs: {
+      rank: 3,
+      display: "TOP SAFETY PICK+",
+      estimated: false
+    },
+    warrantyBasic: "5 yr / 60,000 mi",
+    warrantyPowertrain: "10 yr / 100,000 mi",
+    cargo: {
+      behind2nd: 40.5,
+      maxCargo: 79.6
+    },
+    features: [
+      "XRT trim adds off-road styling and the highest tow rating in the lineup",
+      "Hybrid also available (not shown)",
+      "10-yr/100,000-mi powertrain warranty"
+    ],
+    dealerBrand: "hyundai",
+    sources: [
+      {
+        label: "Automotive Addicts – 2026 Santa Fe Pricing",
+        url: "https://www.automotiveaddicts.com/116997/2026-hyundai-santa-fe-invoice-pricing-what-dealers-pay-gas-hybrid-trims"
+      },
+      {
+        label: "Auto Reliability Index – Santa Fe",
+        url: "https://autoreliabilityindex.com/hyundai/santa-fe/2026"
+      }
+    ]
+  },
+  {
+    id: "santa-fe-sel",
+    make: "Hyundai",
+    model: "Santa Fe",
+    trimNote: "SEL",
+    className: "Midsize SUV",
+    drivetrain: "FWD standard / AWD avail. (+$1,800)",
+    price: {
+      low: 38835,
+      estimated: false
+    },
+    engine: "2.5L Turbo I4",
+    hp: "277 hp",
+    torque: "311 lb-ft",
+    zeroToSixty: "6.3–7.2 sec (by trim)",
+    transmission: "8-speed automatic",
+    thirdRow: "No",
+    seats: "5",
+    mpgCity: "20 (FWD)",
+    mpgHighway: "29 (FWD)",
+    mpgCombined: "~23 (FWD); XRT ~21",
+    fuelTank: "~17.7 gal (est.)",
+    curbWeight: "~3,900–4,200 lb (est.)",
+    wheelbase: "110.2\" (est.)",
+    towing: "3,500 lb (XRT: up to 4,500 lb w/ trailer brakes)",
+    groundClearance: "~7.5–8.6\" (est., XRT highest)",
+    reliability: {
+      value: 75,
+      display: "Good (75/100)",
+      detail: "Auto Reliability Index rates this generation 75/100 with 5 recalls and 5 owner complaints; J.D. Power's own methodology scores it higher at 81/100.",
+      estimated: false
+    },
+    resale: {
+      value: 57,
+      display: "Good",
+      detail: "Estimated to retain about 57.1% of its original value after 5 years.",
+      estimated: false
+    },
+    maintenance: {
+      annual: 515,
+      display: "Below average",
+      detail: "Estimated annual repair cost of $515, about $58 below the midsize SUV class average of $573.",
+      estimated: false
+    },
+    insurance: {
+      annual: 3195,
+      display: "$3,195/yr",
+      detail: "Derived from KBB's stated 5-year insurance cost of $15,975 for the SEL trim.",
+      estimated: false
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall (carried from prior generation)",
+      estimated: true
+    },
+    iihs: {
+      rank: 3,
+      display: "TOP SAFETY PICK+",
+      estimated: false
+    },
+    warrantyBasic: "5 yr / 60,000 mi",
+    warrantyPowertrain: "10 yr / 100,000 mi",
+    cargo: {
+      behind2nd: 40.5,
+      maxCargo: 79.6
+    },
+    features: [
+      "XRT trim adds off-road styling and the highest tow rating in the lineup",
+      "Hybrid also available (not shown)",
+      "10-yr/100,000-mi powertrain warranty"
+    ],
+    dealerBrand: "hyundai",
+    sources: [
+      {
+        label: "Automotive Addicts – 2026 Santa Fe Pricing",
+        url: "https://www.automotiveaddicts.com/116997/2026-hyundai-santa-fe-invoice-pricing-what-dealers-pay-gas-hybrid-trims"
+      },
+      {
+        label: "Auto Reliability Index – Santa Fe",
+        url: "https://autoreliabilityindex.com/hyundai/santa-fe/2026"
+      }
+    ]
+  },
+  {
+    id: "santa-fe-xrt",
+    make: "Hyundai",
+    model: "Santa Fe",
+    trimNote: "XRT",
+    className: "Midsize SUV",
+    drivetrain: "FWD standard / AWD avail. (+$1,800)",
+    price: {
+      low: 41790,
+      estimated: false
+    },
+    engine: "2.5L Turbo I4",
+    hp: "277 hp",
+    torque: "311 lb-ft",
+    zeroToSixty: "6.3–7.2 sec (by trim)",
+    transmission: "8-speed automatic",
+    thirdRow: "No",
+    seats: "5",
+    mpgCity: "20 (FWD)",
+    mpgHighway: "29 (FWD)",
+    mpgCombined: "~23 (FWD); XRT ~21",
+    fuelTank: "~17.7 gal (est.)",
+    curbWeight: "~3,900–4,200 lb (est.)",
+    wheelbase: "110.2\" (est.)",
+    towing: "3,500 lb (XRT: up to 4,500 lb w/ trailer brakes)",
+    groundClearance: "~7.5–8.6\" (est., XRT highest)",
+    reliability: {
+      value: 75,
+      display: "Good (75/100)",
+      detail: "Auto Reliability Index rates this generation 75/100 with 5 recalls and 5 owner complaints; J.D. Power's own methodology scores it higher at 81/100.",
+      estimated: false
+    },
+    resale: {
+      value: 57,
+      display: "Good",
+      detail: "Estimated to retain about 57.1% of its original value after 5 years.",
+      estimated: false
+    },
+    maintenance: {
+      annual: 515,
+      display: "Below average",
+      detail: "Estimated annual repair cost of $515, about $58 below the midsize SUV class average of $573.",
+      estimated: false
+    },
+    insurance: {
+      annual: 3195,
+      display: "$3,195/yr",
+      detail: "Derived from KBB's stated 5-year insurance cost of $15,975 for the SEL trim.",
+      estimated: false
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall (carried from prior generation)",
+      estimated: true
+    },
+    iihs: {
+      rank: 3,
+      display: "TOP SAFETY PICK+",
+      estimated: false
+    },
+    warrantyBasic: "5 yr / 60,000 mi",
+    warrantyPowertrain: "10 yr / 100,000 mi",
+    cargo: {
+      behind2nd: 40.5,
+      maxCargo: 79.6
+    },
+    features: [
+      "XRT trim adds off-road styling and the highest tow rating in the lineup",
+      "Hybrid also available (not shown)",
+      "10-yr/100,000-mi powertrain warranty"
+    ],
+    dealerBrand: "hyundai",
+    sources: [
+      {
+        label: "Automotive Addicts – 2026 Santa Fe Pricing",
+        url: "https://www.automotiveaddicts.com/116997/2026-hyundai-santa-fe-invoice-pricing-what-dealers-pay-gas-hybrid-trims"
+      },
+      {
+        label: "Auto Reliability Index – Santa Fe",
+        url: "https://autoreliabilityindex.com/hyundai/santa-fe/2026"
+      }
+    ]
+  },
+  {
+    id: "santa-fe-calligraphy",
+    make: "Hyundai",
+    model: "Santa Fe",
+    trimNote: "Calligraphy",
+    className: "Midsize SUV",
+    drivetrain: "FWD standard / AWD avail. (+$1,800)",
+    price: {
+      low: 48845,
+      estimated: false
+    },
+    engine: "2.5L Turbo I4",
+    hp: "277 hp",
+    torque: "311 lb-ft",
+    zeroToSixty: "6.3–7.2 sec (by trim)",
+    transmission: "8-speed automatic",
+    thirdRow: "No",
+    seats: "5",
+    mpgCity: "20 (FWD)",
+    mpgHighway: "29 (FWD)",
+    mpgCombined: "~23 (FWD); XRT ~21",
+    fuelTank: "~17.7 gal (est.)",
+    curbWeight: "~3,900–4,200 lb (est.)",
+    wheelbase: "110.2\" (est.)",
+    towing: "3,500 lb (XRT: up to 4,500 lb w/ trailer brakes)",
+    groundClearance: "~7.5–8.6\" (est., XRT highest)",
+    reliability: {
+      value: 75,
+      display: "Good (75/100)",
+      detail: "Auto Reliability Index rates this generation 75/100 with 5 recalls and 5 owner complaints; J.D. Power's own methodology scores it higher at 81/100.",
+      estimated: false
+    },
+    resale: {
+      value: 57,
+      display: "Good",
+      detail: "Estimated to retain about 57.1% of its original value after 5 years.",
+      estimated: false
+    },
+    maintenance: {
+      annual: 515,
+      display: "Below average",
+      detail: "Estimated annual repair cost of $515, about $58 below the midsize SUV class average of $573.",
+      estimated: false
+    },
+    insurance: {
+      annual: 3195,
+      display: "$3,195/yr",
+      detail: "Derived from KBB's stated 5-year insurance cost of $15,975 for the SEL trim.",
+      estimated: false
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall (carried from prior generation)",
+      estimated: true
+    },
+    iihs: {
+      rank: 3,
+      display: "TOP SAFETY PICK+",
+      estimated: false
+    },
+    warrantyBasic: "5 yr / 60,000 mi",
+    warrantyPowertrain: "10 yr / 100,000 mi",
+    cargo: {
+      behind2nd: 40.5,
+      maxCargo: 79.6
+    },
+    features: [
+      "XRT trim adds off-road styling and the highest tow rating in the lineup",
+      "Hybrid also available (not shown)",
+      "10-yr/100,000-mi powertrain warranty"
+    ],
+    dealerBrand: "hyundai",
+    sources: [
+      {
+        label: "Automotive Addicts – 2026 Santa Fe Pricing",
+        url: "https://www.automotiveaddicts.com/116997/2026-hyundai-santa-fe-invoice-pricing-what-dealers-pay-gas-hybrid-trims"
+      },
+      {
+        label: "Auto Reliability Index – Santa Fe",
+        url: "https://autoreliabilityindex.com/hyundai/santa-fe/2026"
+      }
+    ]
+  },
+  {
+    id: "passport-rtl",
+    make: "Honda",
+    model: "Passport",
+    trimNote: "RTL",
+    className: "Midsize SUV",
+    drivetrain: "AWD standard",
+    price: {
+      low: 44950,
+      estimated: false
+    },
+    engine: "3.5L V6",
+    hp: "285 hp",
+    torque: "262 lb-ft",
+    zeroToSixty: "6.2 sec",
+    transmission: "10-speed automatic",
+    thirdRow: "No",
+    seats: "5",
+    mpgCity: "19 (RTL trims)",
+    mpgHighway: "25 (RTL trims)",
+    mpgCombined: "~20–22 (by trim)",
+    fuelTank: "~19.5 gal (est.)",
+    curbWeight: "~4,300–4,600 lb (est.)",
+    wheelbase: "110.9\" (est.)",
+    towing: "up to 5,000 lb",
+    groundClearance: "8.3\"",
+    reliability: {
+      value: 84,
+      display: "Excellent (84/100)",
+      detail: "Reliability score of 84/100 with 0 recalls and 0 owner complaints on file.",
+      estimated: false
+    },
+    resale: {
+      value: 65,
+      display: "Good",
+      detail: "No exact 2026 figure was published; estimated in line with Honda's generally strong resale performance.",
+      estimated: true
+    },
+    maintenance: {
+      annual: 521,
+      display: "Below average",
+      detail: "Estimated annual repair cost of $521.",
+      estimated: false
+    },
+    insurance: {
+      annual: 2000,
+      display: "$2,000/yr",
+      detail: "No published nameplate-specific figure found; estimated in line with the midsize SUV segment.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall",
+      estimated: false
+    },
+    iihs: {
+      rank: 3,
+      display: "TOP SAFETY PICK+",
+      estimated: false
+    },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
+    cargo: {
+      behind2nd: 41.3,
+      maxCargo: 77.7
+    },
+    features: [
+      "TrailSport trims add all-terrain tires, skid plates, and off-road suspension tuning",
+      "5,000 lb towing — highest among 2-row midsize SUVs in this comparison",
+      "23° approach angle on TrailSport trims"
+    ],
+    dealerBrand: "honda",
+    sources: [
+      {
+        label: "Edmunds – 2026 Passport Trims",
+        url: "https://www.edmunds.com/honda/passport/2026/trims/"
+      },
+      {
+        label: "Honda News – IIHS TOP SAFETY PICK+",
+        url: "https://www.hondainamerica.com/2026-honda-passport-earns-top-safety-pick-rating-from-iihs/"
+      }
+    ]
+  },
+  {
+    id: "passport-rtl-towing",
+    make: "Honda",
+    model: "Passport",
+    trimNote: "RTL Towing",
+    className: "Midsize SUV",
+    drivetrain: "AWD standard",
+    price: {
+      low: 45650,
+      estimated: false
+    },
+    engine: "3.5L V6",
+    hp: "285 hp",
+    torque: "262 lb-ft",
+    zeroToSixty: "6.2 sec",
+    transmission: "10-speed automatic",
+    thirdRow: "No",
+    seats: "5",
+    mpgCity: "19 (RTL trims)",
+    mpgHighway: "25 (RTL trims)",
+    mpgCombined: "~20–22 (by trim)",
+    fuelTank: "~19.5 gal (est.)",
+    curbWeight: "~4,300–4,600 lb (est.)",
+    wheelbase: "110.9\" (est.)",
+    towing: "up to 5,000 lb",
+    groundClearance: "8.3\"",
+    reliability: {
+      value: 84,
+      display: "Excellent (84/100)",
+      detail: "Reliability score of 84/100 with 0 recalls and 0 owner complaints on file.",
+      estimated: false
+    },
+    resale: {
+      value: 65,
+      display: "Good",
+      detail: "No exact 2026 figure was published; estimated in line with Honda's generally strong resale performance.",
+      estimated: true
+    },
+    maintenance: {
+      annual: 521,
+      display: "Below average",
+      detail: "Estimated annual repair cost of $521.",
+      estimated: false
+    },
+    insurance: {
+      annual: 2000,
+      display: "$2,000/yr",
+      detail: "No published nameplate-specific figure found; estimated in line with the midsize SUV segment.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall",
+      estimated: false
+    },
+    iihs: {
+      rank: 3,
+      display: "TOP SAFETY PICK+",
+      estimated: false
+    },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
+    cargo: {
+      behind2nd: 41.3,
+      maxCargo: 77.7
+    },
+    features: [
+      "TrailSport trims add all-terrain tires, skid plates, and off-road suspension tuning",
+      "5,000 lb towing — highest among 2-row midsize SUVs in this comparison",
+      "23° approach angle on TrailSport trims"
+    ],
+    dealerBrand: "honda",
+    sources: [
+      {
+        label: "Edmunds – 2026 Passport Trims",
+        url: "https://www.edmunds.com/honda/passport/2026/trims/"
+      },
+      {
+        label: "Honda News – IIHS TOP SAFETY PICK+",
+        url: "https://www.hondainamerica.com/2026-honda-passport-earns-top-safety-pick-rating-from-iihs/"
+      }
+    ]
+  },
+  {
+    id: "passport-trailsport",
+    make: "Honda",
+    model: "Passport",
+    trimNote: "TrailSport",
+    className: "Midsize SUV",
+    drivetrain: "AWD standard",
+    price: {
+      low: 48650,
+      estimated: false
+    },
+    engine: "3.5L V6",
+    hp: "285 hp",
+    torque: "262 lb-ft",
+    zeroToSixty: "6.2 sec",
+    transmission: "10-speed automatic",
+    thirdRow: "No",
+    seats: "5",
+    mpgCity: "19 (RTL trims)",
+    mpgHighway: "25 (RTL trims)",
+    mpgCombined: "~20–22 (by trim)",
+    fuelTank: "~19.5 gal (est.)",
+    curbWeight: "~4,300–4,600 lb (est.)",
+    wheelbase: "110.9\" (est.)",
+    towing: "up to 5,000 lb",
+    groundClearance: "8.3\"",
+    reliability: {
+      value: 84,
+      display: "Excellent (84/100)",
+      detail: "Reliability score of 84/100 with 0 recalls and 0 owner complaints on file.",
+      estimated: false
+    },
+    resale: {
+      value: 65,
+      display: "Good",
+      detail: "No exact 2026 figure was published; estimated in line with Honda's generally strong resale performance.",
+      estimated: true
+    },
+    maintenance: {
+      annual: 521,
+      display: "Below average",
+      detail: "Estimated annual repair cost of $521.",
+      estimated: false
+    },
+    insurance: {
+      annual: 2000,
+      display: "$2,000/yr",
+      detail: "No published nameplate-specific figure found; estimated in line with the midsize SUV segment.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall",
+      estimated: false
+    },
+    iihs: {
+      rank: 3,
+      display: "TOP SAFETY PICK+",
+      estimated: false
+    },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
+    cargo: {
+      behind2nd: 41.3,
+      maxCargo: 77.7
+    },
+    features: [
+      "TrailSport trims add all-terrain tires, skid plates, and off-road suspension tuning",
+      "5,000 lb towing — highest among 2-row midsize SUVs in this comparison",
+      "23° approach angle on TrailSport trims"
+    ],
+    dealerBrand: "honda",
+    sources: [
+      {
+        label: "Edmunds – 2026 Passport Trims",
+        url: "https://www.edmunds.com/honda/passport/2026/trims/"
+      },
+      {
+        label: "Honda News – IIHS TOP SAFETY PICK+",
+        url: "https://www.hondainamerica.com/2026-honda-passport-earns-top-safety-pick-rating-from-iihs/"
+      }
+    ]
+  },
+  {
+    id: "passport-trailsport-elite",
+    make: "Honda",
+    model: "Passport",
+    trimNote: "TrailSport Elite",
+    className: "Midsize SUV",
+    drivetrain: "AWD standard",
+    price: {
+      low: 52650,
+      estimated: false
+    },
+    engine: "3.5L V6",
+    hp: "285 hp",
+    torque: "262 lb-ft",
+    zeroToSixty: "6.2 sec",
+    transmission: "10-speed automatic",
+    thirdRow: "No",
+    seats: "5",
+    mpgCity: "19 (RTL trims)",
+    mpgHighway: "25 (RTL trims)",
+    mpgCombined: "~20–22 (by trim)",
+    fuelTank: "~19.5 gal (est.)",
+    curbWeight: "~4,300–4,600 lb (est.)",
+    wheelbase: "110.9\" (est.)",
+    towing: "up to 5,000 lb",
+    groundClearance: "8.3\"",
+    reliability: {
+      value: 84,
+      display: "Excellent (84/100)",
+      detail: "Reliability score of 84/100 with 0 recalls and 0 owner complaints on file.",
+      estimated: false
+    },
+    resale: {
+      value: 65,
+      display: "Good",
+      detail: "No exact 2026 figure was published; estimated in line with Honda's generally strong resale performance.",
+      estimated: true
+    },
+    maintenance: {
+      annual: 521,
+      display: "Below average",
+      detail: "Estimated annual repair cost of $521.",
+      estimated: false
+    },
+    insurance: {
+      annual: 2000,
+      display: "$2,000/yr",
+      detail: "No published nameplate-specific figure found; estimated in line with the midsize SUV segment.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall",
+      estimated: false
+    },
+    iihs: {
+      rank: 3,
+      display: "TOP SAFETY PICK+",
+      estimated: false
+    },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
+    cargo: {
+      behind2nd: 41.3,
+      maxCargo: 77.7
+    },
+    features: [
+      "TrailSport trims add all-terrain tires, skid plates, and off-road suspension tuning",
+      "5,000 lb towing — highest among 2-row midsize SUVs in this comparison",
+      "23° approach angle on TrailSport trims"
+    ],
+    dealerBrand: "honda",
+    sources: [
+      {
+        label: "Edmunds – 2026 Passport Trims",
+        url: "https://www.edmunds.com/honda/passport/2026/trims/"
+      },
+      {
+        label: "Honda News – IIHS TOP SAFETY PICK+",
+        url: "https://www.hondainamerica.com/2026-honda-passport-earns-top-safety-pick-rating-from-iihs/"
+      }
+    ]
+  },
+  {
+    id: "highlander-xle",
+    make: "Toyota",
+    model: "Highlander",
+    trimNote: "XLE",
+    className: "Midsize SUV (3-Row)",
+    drivetrain: "AWD standard",
+    price: {
+      low: 45570,
+      estimated: false
+    },
+    engine: "2.4L Turbo I4",
+    hp: "265 hp",
+    torque: "310 lb-ft",
+    zeroToSixty: "7.4 sec",
+    transmission: "8-speed automatic",
+    thirdRow: "Yes",
+    seats: "7–8",
+    mpgCity: "21 (est.)",
+    mpgHighway: "28 (est.)",
+    mpgCombined: "~24",
+    fuelTank: "~17.1 gal (est.)",
+    curbWeight: "~4,300–4,500 lb (est.)",
+    wheelbase: "112.2\" (est.)",
+    towing: "up to 5,000 lb",
+    groundClearance: "~8.0\" (est.)",
+    reliability: {
+      value: 84,
+      display: "Excellent (84/100)",
+      detail: "Auto Reliability Index rates this generation 84/100 with 0 recalls and a below-average complaint rate.",
+      estimated: false
+    },
+    resale: {
+      value: 71,
+      display: "Strong",
+      detail: "Estimated to retain about 71.1% of its original value after 5 years — above average for the midsize 3-row segment.",
+      estimated: false
+    },
+    maintenance: {
+      annual: 489,
+      display: "Below average",
+      detail: "Estimated annual repair cost of $489, about $84 below the midsize SUV class average of $573.",
+      estimated: false
+    },
+    insurance: {
+      annual: 2000,
+      display: "$2,000/yr",
+      detail: "No clean isolated insurance figure was published; estimated in line with the midsize 3-row SUV segment.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall",
+      estimated: false
+    },
+    iihs: {
+      rank: 1,
+      display: "Tested — no overall Top Safety Pick award",
+      estimated: false
+    },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
+    cargo: {
+      behind2nd: 48.4,
+      maxCargo: 84.3
+    },
+    features: [
+      "Toyota dropped the base LE trim for 2026 — XLE is now the entry point",
+      "Seats 7 or 8 depending on 2nd-row captain's chairs vs. bench",
+      "Hybrid also available (~35 mpg combined, not shown)"
+    ],
+    dealerBrand: "toyota",
+    sources: [
+      {
+        label: "Edmunds – 2026 Highlander Trims",
+        url: "https://www.edmunds.com/toyota/highlander/2026/trims/"
+      },
+      {
+        label: "Auto Reliability Index – Highlander",
+        url: "https://autoreliabilityindex.com/toyota/highlander/2026"
+      },
+      {
+        label: "Cars.com – How Safe Is the 2026 Highlander?",
+        url: "https://www.cars.com/articles/how-safe-is-the-2026-toyota-highlander-526469/"
+      }
+    ]
+  },
+  {
+    id: "highlander-xse",
+    make: "Toyota",
+    model: "Highlander",
+    trimNote: "XSE",
+    className: "Midsize SUV (3-Row)",
+    drivetrain: "AWD standard",
+    price: {
+      low: 48500,
+      estimated: true
+    },
+    engine: "2.4L Turbo I4",
+    hp: "265 hp",
+    torque: "310 lb-ft",
+    zeroToSixty: "7.4 sec",
+    transmission: "8-speed automatic",
+    thirdRow: "Yes",
+    seats: "7–8",
+    mpgCity: "21 (est.)",
+    mpgHighway: "28 (est.)",
+    mpgCombined: "~24",
+    fuelTank: "~17.1 gal (est.)",
+    curbWeight: "~4,300–4,500 lb (est.)",
+    wheelbase: "112.2\" (est.)",
+    towing: "up to 5,000 lb",
+    groundClearance: "~8.0\" (est.)",
+    reliability: {
+      value: 84,
+      display: "Excellent (84/100)",
+      detail: "Auto Reliability Index rates this generation 84/100 with 0 recalls and a below-average complaint rate.",
+      estimated: false
+    },
+    resale: {
+      value: 71,
+      display: "Strong",
+      detail: "Estimated to retain about 71.1% of its original value after 5 years — above average for the midsize 3-row segment.",
+      estimated: false
+    },
+    maintenance: {
+      annual: 489,
+      display: "Below average",
+      detail: "Estimated annual repair cost of $489, about $84 below the midsize SUV class average of $573.",
+      estimated: false
+    },
+    insurance: {
+      annual: 2000,
+      display: "$2,000/yr",
+      detail: "No clean isolated insurance figure was published; estimated in line with the midsize 3-row SUV segment.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall",
+      estimated: false
+    },
+    iihs: {
+      rank: 1,
+      display: "Tested — no overall Top Safety Pick award",
+      estimated: false
+    },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
+    cargo: {
+      behind2nd: 48.4,
+      maxCargo: 84.3
+    },
+    features: [
+      "Toyota dropped the base LE trim for 2026 — XLE is now the entry point",
+      "Seats 7 or 8 depending on 2nd-row captain's chairs vs. bench",
+      "Hybrid also available (~35 mpg combined, not shown)"
+    ],
+    dealerBrand: "toyota",
+    sources: [
+      {
+        label: "Edmunds – 2026 Highlander Trims",
+        url: "https://www.edmunds.com/toyota/highlander/2026/trims/"
+      },
+      {
+        label: "Auto Reliability Index – Highlander",
+        url: "https://autoreliabilityindex.com/toyota/highlander/2026"
+      },
+      {
+        label: "Cars.com – How Safe Is the 2026 Highlander?",
+        url: "https://www.cars.com/articles/how-safe-is-the-2026-toyota-highlander-526469/"
+      }
+    ]
+  },
+  {
+    id: "highlander-limited",
+    make: "Toyota",
+    model: "Highlander",
+    trimNote: "Limited",
+    className: "Midsize SUV (3-Row)",
+    drivetrain: "AWD standard",
+    price: {
+      low: 50900,
+      estimated: true
+    },
+    engine: "2.4L Turbo I4",
+    hp: "265 hp",
+    torque: "310 lb-ft",
+    zeroToSixty: "7.4 sec",
+    transmission: "8-speed automatic",
+    thirdRow: "Yes",
+    seats: "7–8",
+    mpgCity: "21 (est.)",
+    mpgHighway: "28 (est.)",
+    mpgCombined: "~24",
+    fuelTank: "~17.1 gal (est.)",
+    curbWeight: "~4,300–4,500 lb (est.)",
+    wheelbase: "112.2\" (est.)",
+    towing: "up to 5,000 lb",
+    groundClearance: "~8.0\" (est.)",
+    reliability: {
+      value: 84,
+      display: "Excellent (84/100)",
+      detail: "Auto Reliability Index rates this generation 84/100 with 0 recalls and a below-average complaint rate.",
+      estimated: false
+    },
+    resale: {
+      value: 71,
+      display: "Strong",
+      detail: "Estimated to retain about 71.1% of its original value after 5 years — above average for the midsize 3-row segment.",
+      estimated: false
+    },
+    maintenance: {
+      annual: 489,
+      display: "Below average",
+      detail: "Estimated annual repair cost of $489, about $84 below the midsize SUV class average of $573.",
+      estimated: false
+    },
+    insurance: {
+      annual: 2000,
+      display: "$2,000/yr",
+      detail: "No clean isolated insurance figure was published; estimated in line with the midsize 3-row SUV segment.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall",
+      estimated: false
+    },
+    iihs: {
+      rank: 1,
+      display: "Tested — no overall Top Safety Pick award",
+      estimated: false
+    },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
+    cargo: {
+      behind2nd: 48.4,
+      maxCargo: 84.3
+    },
+    features: [
+      "Toyota dropped the base LE trim for 2026 — XLE is now the entry point",
+      "Seats 7 or 8 depending on 2nd-row captain's chairs vs. bench",
+      "Hybrid also available (~35 mpg combined, not shown)"
+    ],
+    dealerBrand: "toyota",
+    sources: [
+      {
+        label: "Edmunds – 2026 Highlander Trims",
+        url: "https://www.edmunds.com/toyota/highlander/2026/trims/"
+      },
+      {
+        label: "Auto Reliability Index – Highlander",
+        url: "https://autoreliabilityindex.com/toyota/highlander/2026"
+      },
+      {
+        label: "Cars.com – How Safe Is the 2026 Highlander?",
+        url: "https://www.cars.com/articles/how-safe-is-the-2026-toyota-highlander-526469/"
+      }
+    ]
+  },
+  {
+    id: "highlander-platinum",
+    make: "Toyota",
+    model: "Highlander",
+    trimNote: "Platinum",
+    className: "Midsize SUV (3-Row)",
+    drivetrain: "AWD standard",
+    price: {
+      low: 53225,
+      estimated: false
+    },
+    engine: "2.4L Turbo I4",
+    hp: "265 hp",
+    torque: "310 lb-ft",
+    zeroToSixty: "7.4 sec",
+    transmission: "8-speed automatic",
+    thirdRow: "Yes",
+    seats: "7–8",
+    mpgCity: "21 (est.)",
+    mpgHighway: "28 (est.)",
+    mpgCombined: "~24",
+    fuelTank: "~17.1 gal (est.)",
+    curbWeight: "~4,300–4,500 lb (est.)",
+    wheelbase: "112.2\" (est.)",
+    towing: "up to 5,000 lb",
+    groundClearance: "~8.0\" (est.)",
+    reliability: {
+      value: 84,
+      display: "Excellent (84/100)",
+      detail: "Auto Reliability Index rates this generation 84/100 with 0 recalls and a below-average complaint rate.",
+      estimated: false
+    },
+    resale: {
+      value: 71,
+      display: "Strong",
+      detail: "Estimated to retain about 71.1% of its original value after 5 years — above average for the midsize 3-row segment.",
+      estimated: false
+    },
+    maintenance: {
+      annual: 489,
+      display: "Below average",
+      detail: "Estimated annual repair cost of $489, about $84 below the midsize SUV class average of $573.",
+      estimated: false
+    },
+    insurance: {
+      annual: 2000,
+      display: "$2,000/yr",
+      detail: "No clean isolated insurance figure was published; estimated in line with the midsize 3-row SUV segment.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall",
+      estimated: false
+    },
+    iihs: {
+      rank: 1,
+      display: "Tested — no overall Top Safety Pick award",
+      estimated: false
+    },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
+    cargo: {
+      behind2nd: 48.4,
+      maxCargo: 84.3
+    },
+    features: [
+      "Toyota dropped the base LE trim for 2026 — XLE is now the entry point",
+      "Seats 7 or 8 depending on 2nd-row captain's chairs vs. bench",
+      "Hybrid also available (~35 mpg combined, not shown)"
+    ],
+    dealerBrand: "toyota",
+    sources: [
+      {
+        label: "Edmunds – 2026 Highlander Trims",
+        url: "https://www.edmunds.com/toyota/highlander/2026/trims/"
+      },
+      {
+        label: "Auto Reliability Index – Highlander",
+        url: "https://autoreliabilityindex.com/toyota/highlander/2026"
+      },
+      {
+        label: "Cars.com – How Safe Is the 2026 Highlander?",
+        url: "https://www.cars.com/articles/how-safe-is-the-2026-toyota-highlander-526469/"
+      }
+    ]
+  },
+  {
+    id: "telluride-lx",
+    make: "Kia",
+    model: "Telluride",
+    trimNote: "LX",
+    className: "Midsize SUV (3-Row)",
+    drivetrain: "FWD standard / AWD avail.",
+    price: {
+      low: 36800,
+      estimated: true
+    },
+    engine: "3.8L V6",
+    hp: "291 hp",
+    torque: "262 lb-ft",
+    zeroToSixty: "6.8 sec (X-Line: 6.9 sec; X-Pro: 7.0 sec)",
+    transmission: "8-speed automatic",
+    thirdRow: "Yes",
+    seats: "7–8",
+    mpgCity: "20 (FWD)",
+    mpgHighway: "26 (FWD)",
+    mpgCombined: "~22 (FWD); ~20 (AWD)",
+    fuelTank: "~18.8 gal (est.)",
+    curbWeight: "~4,400–4,700 lb (est.)",
+    wheelbase: "114.2\" (est.)",
+    towing: "5,000 lb (X-Pro: 5,500 lb)",
+    groundClearance: "~8.0\" (est.; X-Pro higher)",
+    reliability: {
+      value: 71,
+      display: "Good (71/100)",
+      detail: "Average reliability score of 71/100 across model years 2020–2025; common issues include windshield cracking and electrical system malfunctions.",
+      estimated: false
+    },
+    resale: {
+      value: 70,
+      display: "Strong",
+      detail: "Estimated to retain about 70.4% of its original value after 5 years.",
+      estimated: false
+    },
+    maintenance: {
+      annual: 573,
+      display: "Average",
+      detail: "Estimated annual repair cost of $573 for the midsize SUV segment.",
+      estimated: false
+    },
+    insurance: {
+      annual: 2100,
+      display: "$2,100/yr",
+      detail: "No published nameplate-specific figure found; estimated in line with the midsize 3-row SUV segment.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall",
+      estimated: false
+    },
+    iihs: {
+      rank: 3,
+      display: "TOP SAFETY PICK+ (2026 rating)",
+      estimated: false
+    },
+    warrantyBasic: "5 yr / 60,000 mi",
+    warrantyPowertrain: "10 yr / 100,000 mi",
+    cargo: {
+      behind2nd: 46.0,
+      maxCargo: 87.0
+    },
+    features: [
+      "Standard 3-row seating for 7 or 8",
+      "X-Pro adds enhanced cooling and a 5,500 lb tow rating",
+      "Hybrid variant available with 329 hp/339 lb-ft (not shown)"
+    ],
+    dealerBrand: "kia",
+    sources: [
+      {
+        label: "The Drive – 2027 Telluride Powertrain Changes",
+        url: "https://www.thedrive.com/news/2027-kia-telluride-trades-v6-power-for-fuel-economy-and-torque"
+      },
+      {
+        label: "iSeeCars – Telluride Reliability",
+        url: "https://www.iseecars.com/car/kia-telluride/reliability"
+      },
+      {
+        label: "Kia of Lincoln – IIHS TOP SAFETY PICK+",
+        url: "https://www.kiaoflincoln.com/2027-kia-telluride-earns-2026-iihs-top-safety-pick-rating/"
+      }
+    ]
+  },
+  {
+    id: "telluride-ex",
+    make: "Kia",
+    model: "Telluride",
+    trimNote: "EX",
+    className: "Midsize SUV (3-Row)",
+    drivetrain: "FWD standard / AWD avail.",
+    price: {
+      low: 42500,
+      estimated: true
+    },
+    engine: "3.8L V6",
+    hp: "291 hp",
+    torque: "262 lb-ft",
+    zeroToSixty: "6.8 sec (X-Line: 6.9 sec; X-Pro: 7.0 sec)",
+    transmission: "8-speed automatic",
+    thirdRow: "Yes",
+    seats: "7–8",
+    mpgCity: "20 (FWD)",
+    mpgHighway: "26 (FWD)",
+    mpgCombined: "~22 (FWD); ~20 (AWD)",
+    fuelTank: "~18.8 gal (est.)",
+    curbWeight: "~4,400–4,700 lb (est.)",
+    wheelbase: "114.2\" (est.)",
+    towing: "5,000 lb (X-Pro: 5,500 lb)",
+    groundClearance: "~8.0\" (est.; X-Pro higher)",
+    reliability: {
+      value: 71,
+      display: "Good (71/100)",
+      detail: "Average reliability score of 71/100 across model years 2020–2025; common issues include windshield cracking and electrical system malfunctions.",
+      estimated: false
+    },
+    resale: {
+      value: 70,
+      display: "Strong",
+      detail: "Estimated to retain about 70.4% of its original value after 5 years.",
+      estimated: false
+    },
+    maintenance: {
+      annual: 573,
+      display: "Average",
+      detail: "Estimated annual repair cost of $573 for the midsize SUV segment.",
+      estimated: false
+    },
+    insurance: {
+      annual: 2100,
+      display: "$2,100/yr",
+      detail: "No published nameplate-specific figure found; estimated in line with the midsize 3-row SUV segment.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall",
+      estimated: false
+    },
+    iihs: {
+      rank: 3,
+      display: "TOP SAFETY PICK+ (2026 rating)",
+      estimated: false
+    },
+    warrantyBasic: "5 yr / 60,000 mi",
+    warrantyPowertrain: "10 yr / 100,000 mi",
+    cargo: {
+      behind2nd: 46.0,
+      maxCargo: 87.0
+    },
+    features: [
+      "Standard 3-row seating for 7 or 8",
+      "X-Pro adds enhanced cooling and a 5,500 lb tow rating",
+      "Hybrid variant available with 329 hp/339 lb-ft (not shown)"
+    ],
+    dealerBrand: "kia",
+    sources: [
+      {
+        label: "The Drive – 2027 Telluride Powertrain Changes",
+        url: "https://www.thedrive.com/news/2027-kia-telluride-trades-v6-power-for-fuel-economy-and-torque"
+      },
+      {
+        label: "iSeeCars – Telluride Reliability",
+        url: "https://www.iseecars.com/car/kia-telluride/reliability"
+      },
+      {
+        label: "Kia of Lincoln – IIHS TOP SAFETY PICK+",
+        url: "https://www.kiaoflincoln.com/2027-kia-telluride-earns-2026-iihs-top-safety-pick-rating/"
+      }
+    ]
+  },
+  {
+    id: "telluride-sx",
+    make: "Kia",
+    model: "Telluride",
+    trimNote: "SX",
+    className: "Midsize SUV (3-Row)",
+    drivetrain: "FWD standard / AWD avail.",
+    price: {
+      low: 47900,
+      estimated: true
+    },
+    engine: "3.8L V6",
+    hp: "291 hp",
+    torque: "262 lb-ft",
+    zeroToSixty: "6.8 sec (X-Line: 6.9 sec; X-Pro: 7.0 sec)",
+    transmission: "8-speed automatic",
+    thirdRow: "Yes",
+    seats: "7–8",
+    mpgCity: "20 (FWD)",
+    mpgHighway: "26 (FWD)",
+    mpgCombined: "~22 (FWD); ~20 (AWD)",
+    fuelTank: "~18.8 gal (est.)",
+    curbWeight: "~4,400–4,700 lb (est.)",
+    wheelbase: "114.2\" (est.)",
+    towing: "5,000 lb (X-Pro: 5,500 lb)",
+    groundClearance: "~8.0\" (est.; X-Pro higher)",
+    reliability: {
+      value: 71,
+      display: "Good (71/100)",
+      detail: "Average reliability score of 71/100 across model years 2020–2025; common issues include windshield cracking and electrical system malfunctions.",
+      estimated: false
+    },
+    resale: {
+      value: 70,
+      display: "Strong",
+      detail: "Estimated to retain about 70.4% of its original value after 5 years.",
+      estimated: false
+    },
+    maintenance: {
+      annual: 573,
+      display: "Average",
+      detail: "Estimated annual repair cost of $573 for the midsize SUV segment.",
+      estimated: false
+    },
+    insurance: {
+      annual: 2100,
+      display: "$2,100/yr",
+      detail: "No published nameplate-specific figure found; estimated in line with the midsize 3-row SUV segment.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall",
+      estimated: false
+    },
+    iihs: {
+      rank: 3,
+      display: "TOP SAFETY PICK+ (2026 rating)",
+      estimated: false
+    },
+    warrantyBasic: "5 yr / 60,000 mi",
+    warrantyPowertrain: "10 yr / 100,000 mi",
+    cargo: {
+      behind2nd: 46.0,
+      maxCargo: 87.0
+    },
+    features: [
+      "Standard 3-row seating for 7 or 8",
+      "X-Pro adds enhanced cooling and a 5,500 lb tow rating",
+      "Hybrid variant available with 329 hp/339 lb-ft (not shown)"
+    ],
+    dealerBrand: "kia",
+    sources: [
+      {
+        label: "The Drive – 2027 Telluride Powertrain Changes",
+        url: "https://www.thedrive.com/news/2027-kia-telluride-trades-v6-power-for-fuel-economy-and-torque"
+      },
+      {
+        label: "iSeeCars – Telluride Reliability",
+        url: "https://www.iseecars.com/car/kia-telluride/reliability"
+      },
+      {
+        label: "Kia of Lincoln – IIHS TOP SAFETY PICK+",
+        url: "https://www.kiaoflincoln.com/2027-kia-telluride-earns-2026-iihs-top-safety-pick-rating/"
+      }
+    ]
+  },
+  {
+    id: "telluride-x-pro",
+    make: "Kia",
+    model: "Telluride",
+    trimNote: "X-Pro",
+    className: "Midsize SUV (3-Row)",
+    drivetrain: "FWD standard / AWD avail.",
+    price: {
+      low: 52500,
+      estimated: true
+    },
+    engine: "3.8L V6",
+    hp: "291 hp",
+    torque: "262 lb-ft",
+    zeroToSixty: "6.8 sec (X-Line: 6.9 sec; X-Pro: 7.0 sec)",
+    transmission: "8-speed automatic",
+    thirdRow: "Yes",
+    seats: "7–8",
+    mpgCity: "20 (FWD)",
+    mpgHighway: "26 (FWD)",
+    mpgCombined: "~22 (FWD); ~20 (AWD)",
+    fuelTank: "~18.8 gal (est.)",
+    curbWeight: "~4,400–4,700 lb (est.)",
+    wheelbase: "114.2\" (est.)",
+    towing: "5,000 lb (X-Pro: 5,500 lb)",
+    groundClearance: "~8.0\" (est.; X-Pro higher)",
+    reliability: {
+      value: 71,
+      display: "Good (71/100)",
+      detail: "Average reliability score of 71/100 across model years 2020–2025; common issues include windshield cracking and electrical system malfunctions.",
+      estimated: false
+    },
+    resale: {
+      value: 70,
+      display: "Strong",
+      detail: "Estimated to retain about 70.4% of its original value after 5 years.",
+      estimated: false
+    },
+    maintenance: {
+      annual: 573,
+      display: "Average",
+      detail: "Estimated annual repair cost of $573 for the midsize SUV segment.",
+      estimated: false
+    },
+    insurance: {
+      annual: 2100,
+      display: "$2,100/yr",
+      detail: "No published nameplate-specific figure found; estimated in line with the midsize 3-row SUV segment.",
+      estimated: true
+    },
+    nhtsa: {
+      stars: 5,
+      display: "5-star overall",
+      estimated: false
+    },
+    iihs: {
+      rank: 3,
+      display: "TOP SAFETY PICK+ (2026 rating)",
+      estimated: false
+    },
+    warrantyBasic: "5 yr / 60,000 mi",
+    warrantyPowertrain: "10 yr / 100,000 mi",
+    cargo: {
+      behind2nd: 46.0,
+      maxCargo: 87.0
+    },
+    features: [
+      "Standard 3-row seating for 7 or 8",
+      "X-Pro adds enhanced cooling and a 5,500 lb tow rating",
+      "Hybrid variant available with 329 hp/339 lb-ft (not shown)"
+    ],
+    dealerBrand: "kia",
+    sources: [
+      {
+        label: "The Drive – 2027 Telluride Powertrain Changes",
+        url: "https://www.thedrive.com/news/2027-kia-telluride-trades-v6-power-for-fuel-economy-and-torque"
+      },
+      {
+        label: "iSeeCars – Telluride Reliability",
+        url: "https://www.iseecars.com/car/kia-telluride/reliability"
+      },
+      {
+        label: "Kia of Lincoln – IIHS TOP SAFETY PICK+",
+        url: "https://www.kiaoflincoln.com/2027-kia-telluride-earns-2026-iihs-top-safety-pick-rating/"
+      }
+    ]
   }
 ];
-
-/*
- * Dealerships serving the Port St. Lucie, FL market (Fort Pierce & Stuart),
- * compiled September 2026 from dealer sites, KBB, Yelp, and Cars.com listings.
- */
 const DEALERS = {
   toyota: [
     {
@@ -4865,6 +7271,38 @@ const DEALERS = {
       phone: "(772) 242-7827",
       distance: "~9 miles from Port St. Lucie",
       website: "https://www.dyerchevyftpierce.com/",
+    },
+  ],
+  ford: [
+    {
+      name: "Sunrise Ford",
+      address: "5435 S US Highway 1, Fort Pierce, FL 34982",
+      phone: "(772) 461-6000",
+      distance: "~9 miles from Port St. Lucie",
+      website: "https://www.sunrise-ford.com/",
+    },
+    {
+      name: "Essential Ford of Stuart",
+      address: "4000 SE Federal Hwy, Stuart, FL 34997",
+      phone: "(772) 287-0955",
+      distance: "~15 miles from Port St. Lucie",
+      website: "https://www.essentialford.com/",
+    },
+  ],
+  jeep: [
+    {
+      name: "Arrigo Chrysler Dodge Jeep Ram FIAT Fort Pierce",
+      address: "5851 S US Hwy 1, Fort Pierce, FL 34982",
+      phone: "(772) 242-0031",
+      distance: "~9 miles from Port St. Lucie",
+      website: "https://www.arrigoftpierce.com/",
+    },
+    {
+      name: "Wallace Chrysler Jeep Dodge Ram",
+      address: "2755 SE Federal Hwy, Stuart, FL 34994",
+      phone: "(772) 247-1686",
+      distance: "~15 miles from Port St. Lucie",
+      website: "https://www.wallacecjd.com/",
     },
   ],
 };
