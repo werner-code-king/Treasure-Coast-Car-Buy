@@ -22,6 +22,36 @@
   // Populated once in init() for O(1) id -> vehicle lookup (avoids Array#find per click).
   let vehicleById = new Map();
 
+  // Value accessors for the sortable comparison-table columns, keyed by each
+  // <th data-key> in index.html. Free-text spec fields (hp, torque, mpg,
+  // towing, ground clearance) are reduced to their first number so a column
+  // like "1,750–3,500 lb" sorts sensibly by its lower bound.
+  const THIRD_ROW_RANK = { No: 0, Available: 1, Yes: 2 };
+  const TABLE_COLUMNS = {
+    name: (v) => `${v.make} ${v.model}`,
+    class: (v) => v.className,
+    price: (v) => v.price.low,
+    value: (v) => v._valueScore,
+    reliability: (v) => v.reliability.value,
+    resale: (v) => v.resale.value,
+    maintenance: (v) => v.maintenance.annual,
+    drivetrain: (v) => v.drivetrain,
+    engine: (v) => v.engine,
+    hp: (v) => parseLeadingNumber(v.hp),
+    torque: (v) => parseLeadingNumber(v.torque),
+    seats: (v) => parseLeadingNumber(v.seats),
+    thirdRow: (v) => THIRD_ROW_RANK[v.thirdRow] ?? 0,
+    cargo: (v) => v.cargo.behind2nd,
+    maxCargo: (v) => v.cargo.maxCargo,
+    mpg: (v) => parseLeadingNumber(v.mpgCombined),
+    towing: (v) => parseLeadingNumber(v.towing),
+    groundClearance: (v) => parseLeadingNumber(v.groundClearance),
+  };
+
+  // { key: null | one of TABLE_COLUMNS, dir: 1 | -1 }. Independent of the
+  // "Sort by" dropdown, which only controls card order.
+  const tableSort = { key: null, dir: 1 };
+
   // Cached element references, filled in init(). Avoids repeated getElementById
   // calls in applyFiltersAndSort(), which runs on every filter/sort interaction.
   const dom = {};
@@ -73,6 +103,29 @@
 
   function fmtCargo(n) {
     return n == null ? "—" : n + " cu ft";
+  }
+
+  // Pulls the first number out of a free-text spec string, e.g. "203 hp" -> 203,
+  // "284–295 hp" -> 284, "~7.7\"" -> 7.7. Returns null when there's no number
+  // (e.g. "System torque not directly comparable"), which the comparator below
+  // always sorts to the end regardless of direction.
+  function parseLeadingNumber(str) {
+    if (str == null) return null;
+    const match = String(str).replace(/,/g, "").match(/-?\d+(\.\d+)?/);
+    return match ? parseFloat(match[0]) : null;
+  }
+
+  function compareByColumn(key, dir) {
+    const accessor = TABLE_COLUMNS[key];
+    return (a, b) => {
+      const av = accessor(a);
+      const bv = accessor(b);
+      if (av == null && bv == null) return 0;
+      if (av == null) return 1;
+      if (bv == null) return -1;
+      if (typeof av === "string") return av.localeCompare(bv) * dir;
+      return (av - bv) * dir;
+    };
   }
 
   function valueLabel(score) {
@@ -272,7 +325,16 @@
     list.sort(SORTERS[sortBy] || SORTERS.value);
 
     renderCards(list);
-    renderTable(list);
+    renderTable(tableSort.key ? [...list].sort(compareByColumn(tableSort.key, tableSort.dir)) : list);
+  }
+
+  function updateSortIndicators() {
+    dom.tableHead.querySelectorAll("th[data-key]").forEach((th) => {
+      th.classList.remove("sort-asc", "sort-desc");
+      if (th.dataset.key === tableSort.key) {
+        th.classList.add(tableSort.dir === 1 ? "sort-asc" : "sort-desc");
+      }
+    });
   }
 
   // requestAnimationFrame throttle: the price slider fires many `input` events
@@ -301,6 +363,7 @@
 
     Object.assign(dom, {
       cards: document.getElementById("cards"),
+      tableHead: document.querySelector("#compare-table thead"),
       tableBody: document.querySelector("#compare-table tbody"),
       sortSelect: document.getElementById("sort-select"),
       classSelect: document.getElementById("class-select"),
@@ -334,6 +397,15 @@
     dom.tableBody.addEventListener("click", (e) => {
       const row = e.target.closest("tr");
       if (row) openDetail(row.dataset.id);
+    });
+    dom.tableHead.addEventListener("click", (e) => {
+      const th = e.target.closest("th[data-key]");
+      if (!th) return;
+      const key = th.dataset.key;
+      tableSort.dir = tableSort.key === key ? tableSort.dir * -1 : 1;
+      tableSort.key = key;
+      updateSortIndicators();
+      applyFiltersAndSort();
     });
 
     dom.sortSelect.addEventListener("change", applyFiltersAndSort);

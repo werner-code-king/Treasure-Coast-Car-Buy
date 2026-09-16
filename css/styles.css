@@ -240,6 +240,20 @@ th {
   font-weight: 600;
 }
 
+th[data-key] {
+  cursor: pointer;
+  user-select: none;
+}
+th[data-key]:hover { color: var(--text); }
+th[data-key]::after {
+  content: "\2195";
+  margin-left: 5px;
+  font-size: 0.75em;
+  opacity: 0.35;
+}
+th[data-key].sort-asc::after { content: "\2191"; opacity: 1; color: var(--accent); }
+th[data-key].sort-desc::after { content: "\2193"; opacity: 1; color: var(--accent); }
+
 tbody tr:hover { background: var(--surface-2); }
 tbody tr { cursor: pointer; }
 
