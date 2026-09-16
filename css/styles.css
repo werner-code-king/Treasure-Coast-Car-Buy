@@ -129,6 +129,38 @@ select {
 
 output { font-size: 0.85rem; color: var(--text); }
 
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 10px 4px;
+  margin-right: 20px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  cursor: pointer;
+}
+
+.tab-btn:hover { color: var(--text); }
+
+.tab-btn[aria-selected="true"] {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.table-hint {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin: -6px 0 12px;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));

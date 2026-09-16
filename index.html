@@ -10,8 +10,8 @@
   <header class="site-header">
     <div class="wrap">
       <h1>SUV Value Finder</h1>
-      <p class="subtitle">Compare real-world SUV pricing, reliability, resale value, maintenance cost, cargo space, and powertrain specs (engine, towing, ground clearance, seating) &mdash; plus dealerships near <strong>Port St. Lucie, FL</strong>.</p>
-      <p class="data-note">Data compiled September 2026 from KBB, Edmunds, TrueCar, CarEdge, J.D. Power, and Cars.com. <button class="link-btn" id="open-methodology">How is Value Score calculated?</button></p>
+      <p class="subtitle">Compare 30 real-world car-buying and performance metrics &mdash; pricing, reliability, resale, insurance, safety ratings, warranty, and full powertrain specs &mdash; plus dealerships near <strong>Port St. Lucie, FL</strong>.</p>
+      <p class="data-note">Data compiled September 2026 from KBB, Edmunds, TrueCar, CarEdge, J.D. Power, NHTSA, IIHS, RepairPal, and Cars.com. <button class="link-btn" id="open-methodology">How is Value Score calculated?</button></p>
     </div>
   </header>
 
@@ -38,8 +38,8 @@
       </div>
       <div class="control-group">
         <label for="max-price">Max starting price</label>
-        <input type="range" id="max-price" min="28000" max="55000" step="500" value="55000" />
-        <output id="max-price-out">$55,000+</output>
+        <input type="range" id="max-price" min="28000" max="100000" step="1000" value="100000" />
+        <output id="max-price-out">$100,000+</output>
       </div>
       <div class="control-group checkbox-group">
         <label><input type="checkbox" id="min-reliability" /> Reliability 85+ only</label>
@@ -49,37 +49,59 @@
       </div>
     </section>
 
-    <section id="cards" class="cards" aria-label="SUV comparison cards"></section>
+    <div class="tabs" role="tablist" aria-label="View">
+      <button class="tab-btn" role="tab" id="tab-cards" aria-controls="panel-cards" aria-selected="true">Compare Cards</button>
+      <button class="tab-btn" role="tab" id="tab-table" aria-controls="panel-table" aria-selected="false">Full Data Table (30 metrics)</button>
+    </div>
 
-    <section class="table-section">
-      <h2>Full Comparison Table</h2>
-      <div class="table-scroll">
-        <table id="compare-table">
-          <thead>
-            <tr>
-              <th data-key="name">SUV</th>
-              <th data-key="class">Class</th>
-              <th data-key="price">Starting Price</th>
-              <th data-key="value">Value Score</th>
-              <th data-key="reliability">Reliability</th>
-              <th data-key="resale">5-Yr Resale</th>
-              <th data-key="maintenance">Est. Annual Maintenance</th>
-              <th data-key="drivetrain">Drivetrain</th>
-              <th data-key="engine">Engine</th>
-              <th data-key="hp">HP</th>
-              <th data-key="torque">Torque</th>
-              <th data-key="seats">Seats</th>
-              <th data-key="thirdRow">3rd Row</th>
-              <th data-key="cargo">Cargo (2nd row)</th>
-              <th data-key="maxCargo">Max Cargo</th>
-              <th data-key="mpg">MPG Combined</th>
-              <th data-key="towing">Towing</th>
-              <th data-key="groundClearance">Ground Clearance</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
+    <section id="panel-cards" role="tabpanel" aria-labelledby="tab-cards">
+      <section id="cards" class="cards" aria-label="SUV comparison cards"></section>
+    </section>
+
+    <section id="panel-table" role="tabpanel" aria-labelledby="tab-table" hidden>
+      <section class="table-section">
+        <h2>Full Comparison Table</h2>
+        <p class="table-hint">Click any column header to sort by it; click again to reverse.</p>
+        <div class="table-scroll">
+          <table id="compare-table">
+            <thead>
+              <tr>
+                <th data-key="name">SUV</th>
+                <th data-key="class">Class</th>
+                <th data-key="price">Starting Price</th>
+                <th data-key="value">Value Score</th>
+                <th data-key="reliability">Reliability</th>
+                <th data-key="resale">5-Yr Resale</th>
+                <th data-key="maintenance">Est. Annual Maintenance</th>
+                <th data-key="insurance">Est. Annual Insurance</th>
+                <th data-key="drivetrain">Drivetrain</th>
+                <th data-key="engine">Engine</th>
+                <th data-key="transmission">Transmission</th>
+                <th data-key="hp">HP</th>
+                <th data-key="torque">Torque</th>
+                <th data-key="zeroToSixty">0&ndash;60 mph</th>
+                <th data-key="seats">Seats</th>
+                <th data-key="thirdRow">3rd Row</th>
+                <th data-key="cargo">Cargo (2nd row)</th>
+                <th data-key="maxCargo">Max Cargo</th>
+                <th data-key="mpgCity">MPG City</th>
+                <th data-key="mpgHighway">MPG Hwy</th>
+                <th data-key="mpg">MPG Combined</th>
+                <th data-key="fuelTank">Fuel Tank</th>
+                <th data-key="towing">Towing</th>
+                <th data-key="groundClearance">Ground Clearance</th>
+                <th data-key="curbWeight">Curb Weight</th>
+                <th data-key="wheelbase">Wheelbase</th>
+                <th data-key="nhtsa">NHTSA Rating</th>
+                <th data-key="iihs">IIHS Award</th>
+                <th data-key="warrantyBasic">Basic Warranty</th>
+                <th data-key="warrantyPowertrain">Powertrain Warranty</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
     </section>
   </main>
 

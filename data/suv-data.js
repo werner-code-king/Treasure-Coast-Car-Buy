@@ -1,21 +1,26 @@
 /*
- * SUV pricing, reliability, resale, maintenance, cargo, and powertrain data.
- * Compiled September 2026 from KBB, Edmunds, TrueCar, CarEdge, J.D. Power,
- * RepairPal, Auto Reliability Index, iSeeCars, Cars.com, manufacturer specs,
- * and dealership sites. See each vehicle's `sources` array and the
- * "Data & Methodology" panel in the app for details.
+ * SUV data across 30 car-buying and performance metrics: pricing (starting
+ * MSRP, typical price, resale, maintenance, insurance), safety (NHTSA, IIHS,
+ * warranty), and performance (engine, 0-60, transmission, MPG, towing,
+ * dimensions). Compiled September 2026 from KBB, Edmunds, TrueCar, CarEdge,
+ * J.D. Power, RepairPal, Auto Reliability Index, iSeeCars, Cars.com, NHTSA,
+ * IIHS, manufacturer specs, and dealership sites. See each vehicle's
+ * `sources` array and the "Data & Methodology" panel in the app for details.
  *
  * Fields marked `estimated: true` are analyst estimates derived from
- * qualitative source language, source disagreement, or a lack of
- * powertrain-specific data (e.g. a new hybrid variant that hasn't been
- * separately tested yet) rather than a single directly published figure.
- * Everything else is stated verbatim by a cited source. `price.typical*`
- * ranges (realistic transaction prices across popular trims, as opposed to
- * the bare Starting MSRP) are estimates unless noted otherwise.
+ * qualitative source language, source disagreement, shared-platform
+ * inference (e.g. a hybrid variant assumed to carry over a gas sibling's
+ * unconfirmed spec), or a lack of powertrain-specific data (a new variant
+ * that hasn't been separately tested yet) rather than a single directly
+ * published figure. Everything else is stated verbatim by a cited source.
+ * `price.typical*` ranges (realistic transaction prices across popular
+ * trims, as opposed to the bare Starting MSRP) are estimates unless noted
+ * otherwise.
  *
- * The Value Score methodology is unchanged from the original 8-SUV
- * comparison: reliability 25% / resale 20% / maintenance 20% / cargo 15% /
- * starting price 20%, normalized across every vehicle in this file.
+ * The Value Score methodology is unchanged from the original comparison:
+ * reliability 25% / resale 20% / maintenance 20% / cargo 15% / starting
+ * price 20%, normalized across every vehicle in this file. The other ~25
+ * metrics here are informational only and do not affect the score.
  */
 
 const SUV_DATA = [
@@ -30,9 +35,16 @@ const SUV_DATA = [
     engine: "2.5L I4",
     hp: "203 hp",
     torque: "163 lb-ft",
+    zeroToSixty: "~7.5 sec (est.)",
+    transmission: "8-speed automatic",
     thirdRow: "No",
     seats: "5",
+    mpgCity: "27 (est.)",
+    mpgHighway: "35 (est.)",
     mpgCombined: "~30",
+    fuelTank: "14.5 gal",
+    curbWeight: "~3,400 lb (est.)",
+    wheelbase: "105.9\"",
     towing: "1,750 lb (3,500 lb on most AWD trims)",
     groundClearance: "8.1\"",
     reliability: {
@@ -53,17 +65,25 @@ const SUV_DATA = [
       detail: "5-yr total cost of ownership (incl. insurance, depreciation, financing): $55,460–$67,110.",
       estimated: true,
     },
+    insurance: { annual: 1990, display: "$1,990/yr", detail: "CarEdge average for the RAV4 nameplate.", estimated: false },
+    nhtsa: { stars: 5, display: "5-star overall", estimated: false },
+    iihs: { rank: 0, display: "Not yet rated for MY2026 (redesign under evaluation)", estimated: false },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
     cargo: { behind2nd: 37.8, maxCargo: 70.4 },
     features: [
       "Toyota Safety Sense standard",
       "AWD available on every trim",
       "9 trims: $31,900–$43,300",
+      "Toyota's 2026 redesign shifts the lineup toward hybrid power — confirm current gas-only trim availability with the dealer.",
     ],
     dealerBrand: "toyota",
     sources: [
       { label: "J.D. Power – 2026 RAV4", url: "https://www.jdpower.com/cars/2026/toyota/rav4" },
       { label: "Edmunds – RAV4", url: "https://www.edmunds.com/toyota/rav4/" },
       { label: "RAV4Life – Specs Guide", url: "https://rav4life.com/2026-toyota-rav4-specs-guide-engine-mpg-dimensions-towing-trim-breakdown/" },
+      { label: "NHTSA – 2026 RAV4", url: "https://www.nhtsa.gov/vehicle/2026/TOYOTA/RAV4" },
+      { label: "CarEdge – RAV4 Insurance", url: "https://caredge.com/toyota/rav4/insurance" },
     ],
   },
   {
@@ -77,9 +97,16 @@ const SUV_DATA = [
     engine: "2.5L I4 + electric motors",
     hp: "236 hp (system)",
     torque: "System torque not directly comparable to gas engines",
+    zeroToSixty: "~7.5 sec",
+    transmission: "eCVT",
     thirdRow: "No",
     seats: "5",
+    mpgCity: "47",
+    mpgHighway: "40",
     mpgCombined: "~44",
+    fuelTank: "14.5 gal",
+    curbWeight: "3,640–3,920 lb",
+    wheelbase: "105.9\"",
     towing: "1,750–3,500 lb",
     groundClearance: "~8.1\"",
     reliability: {
@@ -100,6 +127,11 @@ const SUV_DATA = [
       detail: "Fuel savings help offset ownership cost; hybrid-specific service intervals are similar to the gas model's.",
       estimated: true,
     },
+    insurance: { annual: 1990, display: "$1,990/yr", detail: "Based on the RAV4 nameplate-wide CarEdge average; not hybrid-specific.", estimated: true },
+    nhtsa: { stars: 5, display: "5-star overall (carried from prior generation)", estimated: true },
+    iihs: { rank: 0, display: "Not yet rated for MY2026 (redesign under evaluation)", estimated: false },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
     cargo: { behind2nd: 37.8, maxCargo: 70.4 },
     features: [
       "40+ mpg combined",
@@ -110,6 +142,7 @@ const SUV_DATA = [
     sources: [
       { label: "J.D. Power – 2026 RAV4", url: "https://www.jdpower.com/cars/2026/toyota/rav4" },
       { label: "RAV4Life – Specs Guide", url: "https://rav4life.com/2026-toyota-rav4-specs-guide-engine-mpg-dimensions-towing-trim-breakdown/" },
+      { label: "CarEdge – RAV4 Insurance", url: "https://caredge.com/toyota/rav4/insurance" },
     ],
   },
   {
@@ -123,9 +156,16 @@ const SUV_DATA = [
     engine: "2.5L I4 + larger battery/electric motors",
     hp: "~324 hp (system)",
     torque: "System torque not directly comparable to gas engines",
+    zeroToSixty: "5.4 sec",
+    transmission: "eCVT",
     thirdRow: "No",
     seats: "5",
-    mpgCombined: "Varies – EPA combined rating not yet finalized",
+    mpgCity: "Varies (est.)",
+    mpgHighway: "Varies (est.)",
+    mpgCombined: "~41 in hybrid mode; 54 mi EV-only range",
+    fuelTank: "14.5 gal",
+    curbWeight: "4,430–4,435 lb",
+    wheelbase: "105.9\"",
     towing: "~2,500 lb",
     groundClearance: "~8.1\"",
     reliability: {
@@ -146,10 +186,15 @@ const SUV_DATA = [
       detail: "More complex plug-in hybrid hardware (larger battery, onboard charger) typically costs somewhat more to service than the standard Hybrid.",
       estimated: true,
     },
+    insurance: { annual: 2200, display: "$2,200/yr", detail: "Estimated above the gas/hybrid RAV4 average given the PHEV's higher MSRP and repair cost.", estimated: true },
+    nhtsa: { stars: null, display: "Not yet published for MY2026", estimated: false },
+    iihs: { rank: 0, display: "Not yet rated for MY2026", estimated: false },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi (plus separate hybrid battery coverage)",
     cargo: { behind2nd: 37.8, maxCargo: 70.4 },
     features: [
-      "Quickest RAV4 powertrain",
-      "EV-only driving range for short trips",
+      "Quickest RAV4 powertrain — 5.4 sec 0-60",
+      "EV-only driving range for short trips (~54 mi)",
       "Standard AWD",
     ],
     dealerBrand: "toyota",
@@ -168,9 +213,16 @@ const SUV_DATA = [
     engine: "1.5L Turbo I4",
     hp: "190 hp (Hybrid: up to 204 hp)",
     torque: "179 lb-ft",
+    zeroToSixty: "~7.5 sec (est.)",
+    transmission: "CVT",
     thirdRow: "No",
     seats: "5",
+    mpgCity: "28 (2WD)",
+    mpgHighway: "33 (2WD)",
     mpgCombined: "~30 (Hybrid: ~40)",
+    fuelTank: "14.0 gal",
+    curbWeight: "3,497 lb",
+    wheelbase: "106.3\"",
     towing: "1,500 lb (Hybrid: 1,000 lb)",
     groundClearance: "8.2\"",
     reliability: {
@@ -191,6 +243,11 @@ const SUV_DATA = [
       detail: "KBB 5-yr Cost to Own: $43,895 total ($31,860 out-of-pocket). Edmunds estimates ~$36,935 over 5 years.",
       estimated: true,
     },
+    insurance: { annual: 1932, display: "$1,932/yr", detail: "Market-average estimate for the CR-V nameplate.", estimated: false },
+    nhtsa: { stars: 5, display: "5-star overall", estimated: false },
+    iihs: { rank: 1, display: "Tested — no Top Safety Pick award", estimated: false },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
     cargo: { behind2nd: 39.3, maxCargo: 76.5 },
     features: [
       "Available Hybrid powertrain",
@@ -202,6 +259,8 @@ const SUV_DATA = [
       { label: "KBB – CR-V Cost to Own", url: "https://www.kbb.com/honda/cr-v/2026/cost-to-own" },
       { label: "Edmunds – CR-V Specs", url: "https://www.edmunds.com/honda/cr-v/2026/features-specs/" },
       { label: "CarEdge – CR-V", url: "https://caredge.com/honda/cr-v" },
+      { label: "IIHS – 2026 CR-V", url: "https://www.iihs.org/ratings/vehicle/honda/cr-v-4-door-suv/2026" },
+      { label: "NHTSA – 2026 CR-V", url: "https://www.nhtsa.gov/vehicle/2026/HONDA/CR-V" },
     ],
   },
   {
@@ -215,9 +274,16 @@ const SUV_DATA = [
     engine: "2.5L NA I4 w/ cylinder deactivation",
     hp: "187 hp",
     torque: "186 lb-ft",
+    zeroToSixty: "8.2 sec",
+    transmission: "6-speed automatic",
     thirdRow: "No",
     seats: "5",
-    mpgCombined: "~25",
+    mpgCity: "24",
+    mpgHighway: "30",
+    mpgCombined: "~26",
+    fuelTank: "14.8 gal",
+    curbWeight: "3,856 lb",
+    wheelbase: "110.8\"",
     towing: "1,500 lb",
     groundClearance: "8.0\"",
     reliability: {
@@ -238,17 +304,24 @@ const SUV_DATA = [
       detail: "Well-regarded naturally aspirated engine with standard AWD; ownership costs described as “impressively low” for the class.",
       estimated: true,
     },
+    insurance: { annual: 1947, display: "$1,947/yr", detail: "CarEdge average for the CX-5 nameplate.", estimated: false },
+    nhtsa: { stars: null, display: "Selected for testing; stars not yet published", estimated: false },
+    iihs: { rank: 3, display: "TOP SAFETY PICK+ (Mazda's 100th IIHS safety award)", estimated: false },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
     cargo: { behind2nd: 33.7, maxCargo: 66.5 },
     features: [
       "All-new redesign for 2026",
       "Standard AWD on every trim",
       "Google built-in infotainment",
-      "Cargo space up from 30 cu ft prior generation",
+      "IIHS TOP SAFETY PICK+ — Mazda's 100th such award",
     ],
     dealerBrand: "mazda",
     sources: [
       { label: "KBB – 2026 CX-5", url: "https://www.kbb.com/mazda/cx-5/" },
       { label: "J.D. Power – 2026 CX-5", url: "https://www.jdpower.com/cars/2026/mazda/cx-5" },
+      { label: "Mazda USA News – IIHS TSP+", url: "https://news.mazdausa.com/2026-07-09-Mazda-2026-CX-5-Earns-IIHS-TOP-SAFETY-PICK-Award-Marking-Mazdas-100th-IIHS-Top-Safety-Award" },
+      { label: "CarEdge – CX-5 Insurance", url: "https://caredge.com/mazda/cx-5/insurance" },
     ],
   },
   {
@@ -262,9 +335,16 @@ const SUV_DATA = [
     engine: "2.5L naturally aspirated Boxer H4",
     hp: "180 hp",
     torque: "178 lb-ft",
+    zeroToSixty: "9.2 sec",
+    transmission: "Lineartronic CVT",
     thirdRow: "No",
     seats: "5",
+    mpgCity: "26",
+    mpgHighway: "33",
     mpgCombined: "~26–27",
+    fuelTank: "16.6 gal",
+    curbWeight: "3,510–3,664 lb",
+    wheelbase: "105.1\"",
     towing: "1,500 lb",
     groundClearance: "8.7\"",
     reliability: {
@@ -285,6 +365,11 @@ const SUV_DATA = [
       detail: "No complimentary scheduled maintenance program — budget for routine service separately.",
       estimated: true,
     },
+    insurance: { annual: 1700, display: "$1,700/yr", detail: "Multiple sources cite the Forester as having the lowest average insurance cost among compact SUVs, though no exact 2026 figure was published.", estimated: true },
+    nhtsa: { stars: 5, display: "5-star overall", estimated: false },
+    iihs: { rank: 3, display: "TOP SAFETY PICK+", estimated: false },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
     cargo: { behind2nd: 29.6, maxCargo: 74.4 },
     features: [
       "Standard symmetrical AWD, every trim",
@@ -296,6 +381,8 @@ const SUV_DATA = [
     sources: [
       { label: "J.D. Power – 2026 Forester", url: "https://www.jdpower.com/cars/2026/subaru/forester" },
       { label: "Cars.com – 2026 Forester", url: "https://www.cars.com/research/subaru-forester-2026/" },
+      { label: "IIHS – 2026 Forester", url: "https://www.iihs.org/ratings/vehicle/subaru/forester-4-door-suv/2026" },
+      { label: "NHTSA – 2026 Forester", url: "https://www.nhtsa.gov/vehicle/2026/SUBARU/FORESTER" },
     ],
   },
   {
@@ -308,10 +395,17 @@ const SUV_DATA = [
     price: { low: 34700, high: null, avgPaid: null, typicalLow: 34000, typicalHigh: 40000, typicalEstimated: false, note: "Starting MSRP ~$34.7K" },
     engine: "2.5L Boxer H4 + electric motor",
     hp: "194 hp",
-    torque: "System torque not directly comparable to gas engines",
+    torque: "199 lb-ft (system)",
+    zeroToSixty: "8.8 sec",
+    transmission: "Lineartronic CVT (est.)",
     thirdRow: "No",
     seats: "5",
+    mpgCity: "35",
+    mpgHighway: "34",
     mpgCombined: "35",
+    fuelTank: "16.6 gal (est.)",
+    curbWeight: "~3,650–3,750 lb (est.)",
+    wheelbase: "105.1\"",
     towing: "1,500 lb",
     groundClearance: "8.7\"",
     reliability: {
@@ -332,6 +426,11 @@ const SUV_DATA = [
       detail: "No complimentary scheduled maintenance, plus added hybrid-system components; estimated somewhat higher than the gas model.",
       estimated: true,
     },
+    insurance: { annual: 1800, display: "$1,800/yr", detail: "Estimated slightly above the gas Forester given the newer, more complex hybrid hardware.", estimated: true },
+    nhtsa: { stars: 5, display: "5-star overall", estimated: false },
+    iihs: { rank: 3, display: "TOP SAFETY PICK+ (expected to share the gas Forester's award; not separately listed)", estimated: true },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
     cargo: { behind2nd: 27.5, maxCargo: 69.1 },
     features: [
       "35 mpg combined — best in the Forester lineup",
@@ -341,6 +440,7 @@ const SUV_DATA = [
     dealerBrand: "subaru",
     sources: [
       { label: "J.D. Power – 2026 Forester", url: "https://www.jdpower.com/cars/2026/subaru/forester" },
+      { label: "Edmunds – Forester Hybrid full review", url: "https://www.edmunds.com/car-news/2026-subaru-forester-hybrid-full-rating-review.html" },
     ],
   },
   {
@@ -354,9 +454,16 @@ const SUV_DATA = [
     engine: "2.5L I4",
     hp: "187 hp",
     torque: "178 lb-ft",
+    zeroToSixty: "9.1 sec (Hybrid: ~7.3 sec)",
+    transmission: "8-spd auto (Hybrid: 6-spd auto)",
     thirdRow: "No",
     seats: "5",
+    mpgCity: "24 (AWD)",
+    mpgHighway: "30 (AWD)",
     mpgCombined: "~28 (FWD)",
+    fuelTank: "14.3 gal (Hybrid: 13.7 gal)",
+    curbWeight: "3,827 lb",
+    wheelbase: "108.5\"",
     towing: "2,500 lb (w/ trailer brakes)",
     groundClearance: "8.3\"",
     reliability: {
@@ -377,17 +484,23 @@ const SUV_DATA = [
       detail: "Estimated at $462/yr, about $59 less than the compact SUV class average of $521/yr. (One source estimates a higher $1,414/yr — estimates vary by methodology.)",
       estimated: false,
     },
+    insurance: { annual: 1900, display: "$1,900/yr", detail: "No published nameplate-specific figure found; estimated in line with the compact SUV segment cluster ($1,900–$2,000/yr).", estimated: true },
+    nhtsa: { stars: null, display: "Not yet published for MY2026", estimated: false },
+    iihs: { rank: 3, display: "TOP SAFETY PICK+ (carried from 2025 rating)", estimated: false },
+    warrantyBasic: "5 yr / 60,000 mi",
+    warrantyPowertrain: "10 yr / 100,000 mi",
     cargo: { behind2nd: 39.6, maxCargo: 74.1 },
     features: [
       "Available Hybrid and PHEV variants",
       "Cargo/passenger space rivals midsize SUVs",
-      "Below-average maintenance costs",
+      "Industry-leading 10-yr/100,000-mi powertrain warranty",
     ],
     dealerBrand: "kia",
     sources: [
       { label: "CarEdge – Sportage", url: "https://caredge.com/kia/sportage" },
       { label: "KBB – Sportage Cost to Own", url: "https://www.kbb.com/kia/sportage/2026/cost-to-own/" },
       { label: "Auto Reliability Index", url: "https://autoreliabilityindex.com/kia/sportage/2026" },
+      { label: "IIHS – 2026 Sportage", url: "https://www.iihs.org/ratings/vehicle/kia/sportage-4-door-suv/2026" },
     ],
   },
   {
@@ -401,9 +514,16 @@ const SUV_DATA = [
     engine: "2.5L I4",
     hp: "187 hp",
     torque: "178 lb-ft",
+    zeroToSixty: "9.0 sec (Hybrid: 6.9 sec; PHEV: 7.1 sec)",
+    transmission: "8-speed Shiftronic automatic",
     thirdRow: "No",
     seats: "5",
+    mpgCity: "25 (FWD)",
+    mpgHighway: "33 (FWD)",
     mpgCombined: "~28 (FWD)",
+    fuelTank: "14.3 gal",
+    curbWeight: "3,429 lb",
+    wheelbase: "108.5\"",
     towing: "2,750 lb (w/ trailer brakes)",
     groundClearance: "8.3\"",
     reliability: {
@@ -424,6 +544,11 @@ const SUV_DATA = [
       detail: "Includes 3-yr/36,000-mile complimentary scheduled maintenance and a 10-yr/100,000-mile powertrain warranty.",
       estimated: true,
     },
+    insurance: { annual: 1905, display: "$1,905/yr", detail: "CarEdge average for the Tucson nameplate.", estimated: false },
+    nhtsa: { stars: 5, display: "5-star overall (4-star rollover)", estimated: false },
+    iihs: { rank: 3, display: "TOP SAFETY PICK+", estimated: false },
+    warrantyBasic: "5 yr / 60,000 mi",
+    warrantyPowertrain: "10 yr / 100,000 mi",
     cargo: { behind2nd: 41.2, maxCargo: 80.3 },
     features: [
       "Segment-leading cargo space",
@@ -434,6 +559,8 @@ const SUV_DATA = [
     sources: [
       { label: "KBB – Tucson Cost to Own", url: "https://www.kbb.com/hyundai/tucson/2026/cost-to-own" },
       { label: "Edmunds – Tucson", url: "https://www.edmunds.com/hyundai/tucson/" },
+      { label: "IIHS – 2026 Tucson", url: "https://www.informedforlife.com/cars/hyundai_tucson-4-door-suv_2026" },
+      { label: "CarEdge – Tucson Insurance", url: "https://caredge.com/hyundai/tucson/insurance" },
     ],
   },
   {
@@ -447,15 +574,22 @@ const SUV_DATA = [
     engine: "1.5L VC-Turbo I3",
     hp: "201 hp",
     torque: "225 lb-ft",
+    zeroToSixty: "~8.2 sec",
+    transmission: "CVT w/OD",
     thirdRow: "No",
     seats: "5",
-    mpgCombined: "~30",
+    mpgCity: "29 (FWD)",
+    mpgHighway: "36 (FWD)",
+    mpgCombined: "~32 (FWD)",
+    fuelTank: "14.5 gal",
+    curbWeight: "3,607 lb",
+    wheelbase: "106.5\"",
     towing: "1,500 lb",
     groundClearance: "8.2\"",
     reliability: {
       value: 80,
       display: "Very Good",
-      detail: "5-star NHTSA overall rating, IIHS Top Safety Pick+; consumer rating averages 4.0 / 5.0.",
+      detail: "5-star NHTSA overall rating, IIHS Top Safety Pick; consumer rating averages 4.0 / 5.0.",
       estimated: false,
     },
     resale: {
@@ -470,16 +604,22 @@ const SUV_DATA = [
       detail: "Annual maintenance runs an estimated $500–$600, in line with the compact SUV average.",
       estimated: false,
     },
+    insurance: { annual: 1950, display: "$1,950/yr", detail: "No published nameplate-specific figure found; estimated in line with the compact SUV segment cluster.", estimated: true },
+    nhtsa: { stars: 5, display: "5-star overall (4 consecutive years)", estimated: false },
+    iihs: { rank: 2, display: "TOP SAFETY PICK", estimated: false },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
     cargo: { behind2nd: 36.5, maxCargo: 74.1 },
     features: [
       "Divide-N-Hide flexible cargo system",
-      "IIHS Top Safety Pick+",
+      "IIHS Top Safety Pick",
       "Estimated ~$6,000 below class-average 5-yr ownership cost",
     ],
     dealerBrand: "nissan",
     sources: [
       { label: "Edmunds – 2026 Rogue full review", url: "https://www.edmunds.com/car-news/2026-nissan-rogue-full-rating-review.html" },
       { label: "KBB – Rogue", url: "https://www.kbb.com/nissan/rogue/" },
+      { label: "Nissan USA News – IIHS TSP", url: "https://usa.nissannews.com/en-US/releases/2026-nissan-rogue-earns-2025-iihs-top-safety-pick-with-enhanced-crash-protection" },
     ],
   },
   {
@@ -493,9 +633,16 @@ const SUV_DATA = [
     engine: "1.5L Turbo I4",
     hp: "175 hp (FWD)",
     torque: "184 lb-ft (203 lb-ft on AWD)",
+    zeroToSixty: "~8.5 sec (est.)",
+    transmission: "CVT (FWD) / 8-speed automatic (AWD)",
     thirdRow: "No",
     seats: "5",
-    mpgCombined: "~29",
+    mpgCity: "26 (FWD)",
+    mpgHighway: "29 (FWD)",
+    mpgCombined: "~27 (FWD)",
+    fuelTank: "14.8 gal",
+    curbWeight: "3,428–3,629 lb",
+    wheelbase: "107.5\"",
     towing: "1,500 lb",
     groundClearance: "~8.1\" (8.05–8.2\" by trim)",
     reliability: {
@@ -516,6 +663,11 @@ const SUV_DATA = [
       detail: "Averages $575/yr through the first 5 years of ownership.",
       estimated: false,
     },
+    insurance: { annual: 1900, display: "$1,900/yr", detail: "No consistent published figure found; estimated in line with the compact SUV segment (one source's much higher figure appeared to be an outlier and was disregarded).", estimated: true },
+    nhtsa: { stars: null, display: "Not yet published for MY2026", estimated: false },
+    iihs: { rank: 0, display: "Not yet published for MY2026", estimated: false },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
     cargo: { behind2nd: 29.8, maxCargo: null },
     features: [
       "Lowest starting price in this comparison",
@@ -526,6 +678,7 @@ const SUV_DATA = [
     sources: [
       { label: "J.D. Power – 2026 Equinox", url: "https://www.jdpower.com/cars/2026/chevrolet/equinox" },
       { label: "CarEdge – Equinox", url: "https://caredge.com/chevrolet/equinox" },
+      { label: "Edmunds – Equinox MPG", url: "https://www.edmunds.com/chevrolet/equinox/2026/mpg/" },
     ],
   },
   {
@@ -539,9 +692,16 @@ const SUV_DATA = [
     engine: "3.5L DOHC V6",
     hp: "284–295 hp",
     torque: "259–270 lb-ft",
+    zeroToSixty: "~6.5–7.5 sec (varies by trim)",
+    transmission: "9-speed automatic",
     thirdRow: "Yes",
     seats: "7–8",
+    mpgCity: "21 (2WD)",
+    mpgHighway: "27 (2WD)",
     mpgCombined: "~21–23",
+    fuelTank: "18.5 gal",
+    curbWeight: "4,334–4,489 lb",
+    wheelbase: "114.2\"",
     towing: "6,000 lb",
     groundClearance: "~7.7\"",
     reliability: {
@@ -562,6 +722,11 @@ const SUV_DATA = [
       detail: "RepairPal-tracked average annual repair cost of $542 — lower than the average SUV, though other estimates run $600–$800/yr.",
       estimated: false,
     },
+    insurance: { annual: 2477, display: "$2,477/yr", detail: "CarEdge average for the Pathfinder nameplate.", estimated: false },
+    nhtsa: { stars: 5, display: "5-star overall (5-star side, 4-star frontal/rollover)", estimated: false },
+    iihs: { rank: 3, display: "TOP SAFETY PICK+ (carried from prior year)", estimated: false },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
     cargo: { behind2nd: 45.0, maxCargo: 80.5 },
     features: [
       "Seats up to 8 across 3 rows",
@@ -574,6 +739,9 @@ const SUV_DATA = [
       { label: "RepairPal – Pathfinder Reliability", url: "https://repairpal.com/reliability/nissan/pathfinder" },
       { label: "iSeeCars – Pathfinder Resale Value", url: "https://www.iseecars.com/car/nissan-pathfinder/resale-value" },
       { label: "KBB – 2026 Pathfinder Pricing", url: "https://www.kbb.com/car-news/2026-nissan-pathfinder-starts-at-38995/" },
+      { label: "IIHS – 2026 Pathfinder", url: "https://www.iihs.org/ratings/vehicle/nissan/pathfinder-4-door-suv/2026" },
+      { label: "NHTSA – 2026 Pathfinder", url: "https://www.nhtsa.gov/vehicle/2026/Nissan/Pathfinder" },
+      { label: "CarEdge – Pathfinder Insurance", url: "https://caredge.com/nissan/pathfinder/insurance" },
     ],
   },
   {
@@ -587,9 +755,16 @@ const SUV_DATA = [
     engine: "2.4L Turbo I4",
     hp: "278 hp",
     torque: "317 lb-ft",
+    zeroToSixty: "7.3–8.2 sec (by trim)",
+    transmission: "8-speed automatic",
     thirdRow: "Available",
     seats: "5–7",
+    mpgCity: "20 (4WD)",
+    mpgHighway: "25 (4WD)",
     mpgCombined: "~21–22",
+    fuelTank: "19.0 gal",
+    curbWeight: "4,455–4,730 lb",
+    wheelbase: "112.2\"",
     towing: "6,000 lb",
     groundClearance: "8.1–9.2\"",
     reliability: {
@@ -610,6 +785,11 @@ const SUV_DATA = [
       detail: "Averages about $1,169/yr, roughly $5,847 over 5 years — more than compact SUVs, but body-on-frame durability and legendary longevity offset the extra cost for many buyers.",
       estimated: false,
     },
+    insurance: { annual: 2045, display: "$2,045/yr", detail: "CarEdge average for the 4Runner nameplate.", estimated: false },
+    nhtsa: { stars: 4, display: "4-star overall", estimated: false },
+    iihs: { rank: 1, display: "Mixed: Marginal (moderate overlap front) / Good (side); rating incomplete pending further tests", estimated: false },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi",
     cargo: { behind2nd: 48.4, maxCargo: 82 },
     features: [
       "Body-on-frame off-road capability",
@@ -622,6 +802,7 @@ const SUV_DATA = [
       { label: "Auto Reliability Index – 4Runner", url: "https://autoreliabilityindex.com/toyota/4runner" },
       { label: "KBB – 4Runner Cost to Own", url: "https://www.kbb.com/toyota/4runner/2026/cost-to-own/" },
       { label: "Money Digest – 4Runner Resale Value", url: "https://www.moneydigest.com/2252207/toyota-4runner-suv-great-resale-value-2026-worth-buying/" },
+      { label: "CarEdge – 4Runner Insurance", url: "https://caredge.com/toyota/4runner/insurance" },
     ],
   },
   {
@@ -635,20 +816,27 @@ const SUV_DATA = [
     engine: "2.4L Turbo I4 + hybrid motor",
     hp: "326 hp",
     torque: "465 lb-ft",
+    zeroToSixty: "~6.5–7 sec (est.)",
+    transmission: "8-speed automatic (est.)",
     thirdRow: "Available",
     seats: "5–7",
-    mpgCombined: "~22",
+    mpgCity: "23",
+    mpgHighway: "24",
+    mpgCombined: "23",
+    fuelTank: "19.0 gal",
+    curbWeight: "5,225–5,500 lb",
+    wheelbase: "112.2\"",
     towing: "6,000 lb",
     groundClearance: "8.1–9.2\"",
     reliability: {
       value: 84,
-      display: "Excellent (est.)",
+      display: "Excellent",
       detail: "Shares the 4Runner's excellent reliability reputation and its 84/100 Auto Reliability Index score, though the i-FORCE MAX hybrid system is newer and not yet separately rated.",
       estimated: true,
     },
     resale: {
       value: 60,
-      display: "Excellent (est.)",
+      display: "Excellent",
       detail: "Expected to track at or above the gas 4Runner's strong 58% 5-year retention, as the range-topping hybrid trim typically sees the highest demand.",
       estimated: true,
     },
@@ -658,6 +846,11 @@ const SUV_DATA = [
       detail: "Likely somewhat above the gas 4Runner's ~$1,169/yr average due to added hybrid-system components; no separately published figure yet.",
       estimated: true,
     },
+    insurance: { annual: 2300, display: "$2,300/yr", detail: "Estimated above the gas 4Runner given the higher MSRP and added hybrid-system repair cost.", estimated: true },
+    nhtsa: { stars: 4, display: "4-star overall (shared platform rating)", estimated: true },
+    iihs: { rank: 1, display: "Mixed rating shared with the gas 4Runner platform; incomplete pending further tests", estimated: true },
+    warrantyBasic: "3 yr / 36,000 mi",
+    warrantyPowertrain: "5 yr / 60,000 mi (plus separate hybrid battery coverage)",
     cargo: { behind2nd: 48.4, maxCargo: 82 },
     features: [
       "Most powerful 4Runner ever — 326 hp / 465 lb-ft",
@@ -669,6 +862,7 @@ const SUV_DATA = [
     sources: [
       { label: "Auto Reliability Index – 4Runner", url: "https://autoreliabilityindex.com/toyota/4runner" },
       { label: "KBB – 4Runner Cost to Own", url: "https://www.kbb.com/toyota/4runner/2026/cost-to-own/" },
+      { label: "Valley Hi Toyota – i-FORCE MAX guide", url: "https://www.valleyhitoyota.com/2026-toyota-4runner-i-force-max-specs-features-model-research/" },
     ],
   },
 ];

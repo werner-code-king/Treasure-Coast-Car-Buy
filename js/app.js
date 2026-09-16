@@ -35,17 +35,29 @@
     reliability: (v) => v.reliability.value,
     resale: (v) => v.resale.value,
     maintenance: (v) => v.maintenance.annual,
+    insurance: (v) => v.insurance.annual,
     drivetrain: (v) => v.drivetrain,
     engine: (v) => v.engine,
+    transmission: (v) => v.transmission,
     hp: (v) => parseLeadingNumber(v.hp),
     torque: (v) => parseLeadingNumber(v.torque),
+    zeroToSixty: (v) => parseLeadingNumber(v.zeroToSixty),
     seats: (v) => parseLeadingNumber(v.seats),
     thirdRow: (v) => THIRD_ROW_RANK[v.thirdRow] ?? 0,
     cargo: (v) => v.cargo.behind2nd,
     maxCargo: (v) => v.cargo.maxCargo,
+    mpgCity: (v) => parseLeadingNumber(v.mpgCity),
+    mpgHighway: (v) => parseLeadingNumber(v.mpgHighway),
     mpg: (v) => parseLeadingNumber(v.mpgCombined),
+    fuelTank: (v) => parseLeadingNumber(v.fuelTank),
     towing: (v) => parseLeadingNumber(v.towing),
     groundClearance: (v) => parseLeadingNumber(v.groundClearance),
+    curbWeight: (v) => parseLeadingNumber(v.curbWeight),
+    wheelbase: (v) => parseLeadingNumber(v.wheelbase),
+    nhtsa: (v) => v.nhtsa.stars,
+    iihs: (v) => v.iihs.rank,
+    warrantyBasic: (v) => parseLeadingNumber(v.warrantyBasic),
+    warrantyPowertrain: (v) => parseLeadingNumber(v.warrantyPowertrain),
   };
 
   // { key: null | one of TABLE_COLUMNS, dir: 1 | -1 }. Independent of the
@@ -178,8 +190,10 @@
           ${statCell("Reliability", v.reliability.display + estBadge(v.reliability.estimated))}
           ${statCell("5-Yr Resale", v.resale.display + estBadge(v.resale.estimated))}
           ${statCell("Maintenance/yr", fmtMoney(v.maintenance.annual) + estBadge(v.maintenance.estimated))}
+          ${statCell("Insurance/yr", v.insurance.display + estBadge(v.insurance.estimated))}
           ${statCell("Cargo (2nd row)", fmtCargo(v.cargo.behind2nd))}
           ${statCell("Seats", v.seats + (v.thirdRow !== "No" ? " (3rd row " + v.thirdRow.toLowerCase() + ")" : ""))}
+          ${statCell("0&ndash;60 mph", v.zeroToSixty)}
           ${statCell("Towing", v.towing)}
         </div>
         <div class="card-cta">View details &amp; local dealers &rarr;</div>
@@ -201,17 +215,29 @@
         <td>${v.reliability.display}${estBadge(v.reliability.estimated)}</td>
         <td>${v.resale.display}${estBadge(v.resale.estimated)}</td>
         <td>${fmtMoney(v.maintenance.annual)}${estBadge(v.maintenance.estimated)}</td>
+        <td>${v.insurance.display}${estBadge(v.insurance.estimated)}</td>
         <td>${v.drivetrain}</td>
         <td>${v.engine}</td>
+        <td>${v.transmission}</td>
         <td>${v.hp}</td>
         <td>${v.torque}</td>
+        <td>${v.zeroToSixty}</td>
         <td>${v.seats}</td>
         <td>${v.thirdRow}</td>
         <td>${fmtCargo(v.cargo.behind2nd)}</td>
         <td>${fmtCargo(v.cargo.maxCargo)}</td>
+        <td>${v.mpgCity}</td>
+        <td>${v.mpgHighway}</td>
         <td>${v.mpgCombined}</td>
+        <td>${v.fuelTank}</td>
         <td>${v.towing}</td>
         <td>${v.groundClearance}</td>
+        <td>${v.curbWeight}</td>
+        <td>${v.wheelbase}</td>
+        <td>${v.nhtsa.display}${estBadge(v.nhtsa.estimated)}</td>
+        <td>${v.iihs.display}${estBadge(v.iihs.estimated)}</td>
+        <td>${v.warrantyBasic}</td>
+        <td>${v.warrantyPowertrain}</td>
       </tr>
     `
       )
@@ -250,21 +276,42 @@
         <h3>Maintenance Cost &mdash; ~${fmtMoney(v.maintenance.annual)}/yr${estBadge(v.maintenance.estimated)}</h3>
         <p>${v.maintenance.detail}</p>
       </div>
+      <div class="detail-section">
+        <h3>Insurance Cost &mdash; ${v.insurance.display}${estBadge(v.insurance.estimated)}</h3>
+        <p>${v.insurance.detail}</p>
+      </div>
+
+      <div class="detail-section">
+        <h3>Safety &amp; Warranty</h3>
+        <div class="spec-grid">
+          ${specRow("NHTSA Rating", v.nhtsa.display + estBadge(v.nhtsa.estimated))}
+          ${specRow("IIHS Award", v.iihs.display + estBadge(v.iihs.estimated))}
+          ${specRow("Basic Warranty", v.warrantyBasic)}
+          ${specRow("Powertrain Warranty", v.warrantyPowertrain)}
+        </div>
+      </div>
 
       <div class="detail-section">
         <h3>Powertrain &amp; Capability</h3>
         <div class="spec-grid">
           ${specRow("Drivetrain", v.drivetrain)}
           ${specRow("Engine", v.engine)}
+          ${specRow("Transmission", v.transmission)}
           ${specRow("Horsepower", v.hp)}
           ${specRow("Torque", v.torque)}
+          ${specRow("0&ndash;60 mph", v.zeroToSixty)}
           ${specRow("Seats", v.seats)}
           ${specRow("3rd Row", v.thirdRow)}
           ${specRow("Cargo (behind 2nd row)", fmtCargo(v.cargo.behind2nd))}
           ${specRow("Max Cargo (seats folded)", fmtCargo(v.cargo.maxCargo))}
+          ${specRow("MPG City", v.mpgCity)}
+          ${specRow("MPG Highway", v.mpgHighway)}
           ${specRow("MPG Combined", v.mpgCombined)}
+          ${specRow("Fuel Tank", v.fuelTank)}
           ${specRow("Towing", v.towing)}
           ${specRow("Ground Clearance", v.groundClearance)}
+          ${specRow("Curb Weight", v.curbWeight)}
+          ${specRow("Wheelbase", v.wheelbase)}
         </div>
         ${v.cargo.note ? `<p>${v.cargo.note}</p>` : ""}
       </div>
@@ -379,7 +426,20 @@
       openMethodology: document.getElementById("open-methodology"),
       methodologyClose: document.getElementById("methodology-close"),
       methodologyBackdrop: document.getElementById("methodology-backdrop"),
+      tabCards: document.getElementById("tab-cards"),
+      tabTable: document.getElementById("tab-table"),
+      panelCards: document.getElementById("panel-cards"),
+      panelTable: document.getElementById("panel-table"),
     });
+
+    function activateTab(tabBtn, panel, otherTabBtn, otherPanel) {
+      tabBtn.setAttribute("aria-selected", "true");
+      otherTabBtn.setAttribute("aria-selected", "false");
+      panel.hidden = false;
+      otherPanel.hidden = true;
+    }
+    dom.tabCards.addEventListener("click", () => activateTab(dom.tabCards, dom.panelCards, dom.tabTable, dom.panelTable));
+    dom.tabTable.addEventListener("click", () => activateTab(dom.tabTable, dom.panelTable, dom.tabCards, dom.panelCards));
 
     // Event delegation: one listener per container instead of re-binding a
     // click/keydown handler on every card/row after each re-render.
