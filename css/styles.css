@@ -217,7 +217,17 @@ output { font-size: 0.85rem; color: var(--text); }
   font-size: 1.15rem;
   font-weight: 700;
 }
-.price-row .avg { font-size: 0.8rem; font-weight: 400; color: var(--text-dim); }
+
+.card-trim {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.table-trim {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
 
 .stat-grid {
   display: grid;

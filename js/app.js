@@ -28,7 +28,7 @@
   // like "1,750–3,500 lb" sorts sensibly by its lower bound.
   const THIRD_ROW_RANK = { No: 0, Available: 1, Yes: 2 };
   const TABLE_COLUMNS = {
-    name: (v) => `${v.make} ${v.model}`,
+    name: (v) => `${v.make} ${v.model} ${v.trimNote}`,
     class: (v) => v.className,
     price: (v) => v.price.low,
     value: (v) => v._valueScore,
@@ -151,13 +151,6 @@
     return isEstimated ? '<span class="est-badge" title="Analyst estimate; no single published figure covers this metric across all vehicles">est.</span>' : "";
   }
 
-  function typicalPriceText(v) {
-    const p = v.price;
-    if (p.typicalLow == null) return "";
-    const range = p.typicalHigh ? `${fmtMoney(p.typicalLow)} – ${fmtMoney(p.typicalHigh)}` : `${fmtMoney(p.typicalLow)}+`;
-    return `Typical price: ${range}${p.typicalEstimated ? " (est.)" : ""}`;
-  }
-
   // Small builders to cut the repetition in renderCards()/openDetail() down to one line per spec.
   function statCell(label, valueHtml) {
     return `<div><div class="stat-label">${label}</div><div class="stat-value">${valueHtml}</div></div>`;
@@ -174,18 +167,15 @@
       <article class="card" data-id="${v.id}" tabindex="0" role="button" aria-label="View details for ${v.make} ${v.model}">
         <div class="card-top">
           <div>
-            <h3 class="card-title">${v.make} ${v.model}</h3>
-            <p class="card-class">${v.className} &middot; ${v.trimNote}</p>
+            <h3 class="card-title">${v.make} ${v.model} <span class="card-trim">${v.trimNote}</span></h3>
+            <p class="card-class">${v.className}</p>
           </div>
           <div class="value-badge" title="Value Score">
             <span class="num">${v._valueScore}</span>
             <span class="lbl">${valueLabel(v._valueScore)}</span>
           </div>
         </div>
-        <div class="price-row">${fmtMoney(v.price.low)}${v.price.high ? " – " + fmtMoney(v.price.high) : ""}
-          ${v.price.avgPaid ? `<div class="avg">Avg. paid: ${fmtMoney(v.price.avgPaid)}</div>` : ""}
-          ${typicalPriceText(v) ? `<div class="avg">${typicalPriceText(v)}</div>` : ""}
-        </div>
+        <div class="price-row">${fmtMoney(v.price.low)}${estBadge(v.price.estimated)}</div>
         <div class="stat-grid">
           ${statCell("Reliability", v.reliability.display + estBadge(v.reliability.estimated))}
           ${statCell("5-Yr Resale", v.resale.display + estBadge(v.resale.estimated))}
@@ -208,9 +198,9 @@
       .map(
         (v) => `
       <tr data-id="${v.id}">
-        <td>${v.make} ${v.model}</td>
+        <td>${v.make} ${v.model} <span class="table-trim">${v.trimNote}</span></td>
         <td>${v.className}</td>
-        <td>${fmtMoney(v.price.low)}</td>
+        <td>${fmtMoney(v.price.low)}${estBadge(v.price.estimated)}</td>
         <td>${v._valueScore} (${valueLabel(v._valueScore)})</td>
         <td>${v.reliability.display}${estBadge(v.reliability.estimated)}</td>
         <td>${v.resale.display}${estBadge(v.resale.estimated)}</td>
@@ -250,13 +240,10 @@
     const dealers = DEALERS[v.dealerBrand] || [];
 
     dom.modalContent.innerHTML = `
-      <h2 id="modal-title">${v.make} ${v.model} <span class="modal-meta">(${v.trimNote})</span></h2>
+      <h2 id="modal-title">${v.make} ${v.model} <span class="modal-meta">(${v.trimNote} trim)</span></h2>
       <p class="modal-subtitle">${v.className}</p>
-      <div class="detail-price">${fmtMoney(v.price.low)}${v.price.high ? " – " + fmtMoney(v.price.high) : ""}
-        <span class="modal-meta">
-          ${v.price.avgPaid ? " &middot; Avg. paid " + fmtMoney(v.price.avgPaid) : ""}${v.price.note ? " &middot; " + v.price.note : ""}
-        </span>
-        ${typicalPriceText(v) ? `<div class="modal-meta">${typicalPriceText(v)}</div>` : ""}
+      <div class="detail-price">${fmtMoney(v.price.low)}${estBadge(v.price.estimated)}
+        <span class="modal-meta">MSRP for the ${v.trimNote} trim</span>
       </div>
 
       <div class="detail-section">
