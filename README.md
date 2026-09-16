@@ -20,10 +20,10 @@ python3 -m http.server 8000
 - `js/app.js` &mdash; value-score calculation, filtering/sorting, and rendering
 - `data/suv-data.js` &mdash; sourced SUV specs/pricing and local dealer listings (compiled September 2026 from KBB, Edmunds, TrueCar, CarEdge, J.D. Power, RepairPal, Auto Reliability Index, iSeeCars, and Cars.com &mdash; see in-app source links and the "How is Value Score calculated?" panel for methodology and estimate flags)
 
-Fourteen SUVs and powertrain variants are covered: Toyota RAV4 (Gas/Hybrid/PHEV), Honda CR-V, Mazda CX-5, Subaru Forester (Gas/Hybrid), Kia Sportage, Hyundai Tucson, Nissan Rogue, Chevrolet Equinox, Nissan Pathfinder, and Toyota 4Runner (i-FORCE/i-FORCE MAX Hybrid).
+20 SUV models/powertrains (83 individual trim levels) are covered: Toyota RAV4 (Hybrid/PHEV), Honda CR-V, Mazda CX-5, Subaru Forester (Gas/Hybrid), Kia Sportage, Hyundai Tucson, Nissan Rogue, Chevrolet Equinox, Nissan Pathfinder, Toyota 4Runner (i-FORCE/i-FORCE MAX Hybrid), Ford Escape, Mazda CX-50, Jeep Grand Cherokee, Hyundai Santa Fe, Honda Passport, Toyota Highlander, and Kia Telluride.
 
 Prices, incentives, and dealer inventory change frequently; always confirm current figures with the dealership before purchase.
 
 ## Live version
 
-A polished, redesigned version of this tool is also published as a Claude Artifact: [Treasure Coast SUV Finder](https://claude.ai/code/artifact/33890b3b-2a42-48be-b71e-c87185ed0012).
+A polished, redesigned version of this tool is also published as a Claude Artifact: [Treasure Coast SUV Finder](https://claude.ai/artifact/7N6q8SqwHmE7iBeNRpVNY9).
