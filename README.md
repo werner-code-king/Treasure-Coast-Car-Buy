@@ -26,4 +26,4 @@ Prices, incentives, and dealer inventory change frequently; always confirm curre
 
 ## Live version
 
-A polished, redesigned version of this tool is also published as a Claude Artifact: [Treasure Coast SUV Finder](https://claude.ai/artifact/7N6q8SqwHmE7iBeNRpVNY9).
+A polished, redesigned version of this tool is also published as a Claude Artifact: [Treasure Coast SUV Finder](https://claude.ai/code/artifact/33890b3b-2a42-48be-b71e-c87185ed0012).
