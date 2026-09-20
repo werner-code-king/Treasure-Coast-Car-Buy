@@ -53,6 +53,7 @@
     <div class="tabs" role="tablist" aria-label="View">
       <button class="tab-btn" role="tab" id="tab-cards" aria-controls="panel-cards" aria-selected="true">Compare Cards</button>
       <button class="tab-btn" role="tab" id="tab-table" aria-controls="panel-table" aria-selected="false">Full Data Table (30 metrics)</button>
+      <button class="tab-btn" role="tab" id="tab-criteria" aria-controls="panel-criteria" aria-selected="false">Criteria &amp; Rankings</button>
     </div>
 
     <section id="panel-cards" role="tabpanel" aria-labelledby="tab-cards">
@@ -102,6 +103,19 @@
             <tbody></tbody>
           </table>
         </div>
+      </section>
+    </section>
+
+    <section id="panel-criteria" role="tabpanel" aria-labelledby="tab-criteria" hidden>
+      <section class="criteria-section">
+        <h2>Category Leaders</h2>
+        <p class="table-hint">The single best-scoring trim across all 83 rows for each rankable metric. Click a card to open its full spec sheet.</p>
+        <div id="leader-grid" class="leader-grid" aria-label="Best vehicle per metric"></div>
+      </section>
+      <section class="criteria-section">
+        <h2>All 30 Measurement Criteria</h2>
+        <p class="table-hint">What each column in the Full Data Table measures and where it comes from.</p>
+        <div id="glossary-list" class="glossary-list"></div>
       </section>
     </section>
   </main>

@@ -260,6 +260,68 @@ output { font-size: 0.85rem; color: var(--text); }
 
 .table-section h2 { font-size: 1.2rem; }
 
+.criteria-section { margin-bottom: 40px; }
+.criteria-section h2 { font-size: 1.2rem; margin-bottom: 4px; }
+
+.leader-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.leader-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.leader-card:hover, .leader-card:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(20, 24, 32, 0.12), 0 14px 28px rgba(20, 24, 32, 0.1);
+}
+
+.leader-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.leader-winner { font-weight: 600; font-size: 0.95rem; }
+.leader-trim { font-weight: 500; color: var(--text-dim); font-size: 0.85em; }
+.leader-value { margin-top: 4px; font-size: 0.85rem; color: var(--text-dim); }
+
+.glossary-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px 28px;
+  margin-top: 16px;
+}
+
+.glossary-group h3 {
+  font-size: 0.95rem;
+  margin: 0 0 8px;
+  color: var(--accent-2);
+}
+
+.glossary-dl { margin: 0; }
+.glossary-dl dt {
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-top: 8px;
+}
+.glossary-dl dt:first-child { margin-top: 0; }
+.glossary-dl dd {
+  margin: 2px 0 0;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+
 .table-scroll {
   overflow: auto;
   border: 1px solid var(--border);

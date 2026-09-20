@@ -64,6 +64,96 @@
   // "Sort by" dropdown, which only controls card order.
   const tableSort = { key: null, dir: 1 };
 
+  // Glossary content for the "Criteria & Rankings" tab — one entry per
+  // column in the Full Data Table (29 metrics; the 30th is the vehicle
+  // name/trim itself, which isn't a "measurement").
+  const METRIC_GROUPS = [
+    {
+      title: "Pricing & Value",
+      items: [
+        { label: "Starting Price", detail: "MSRP for this specific trim, as published by the manufacturer or KBB/Edmunds." },
+        { label: "Value Score", detail: "0–100 blend of price, reliability, resale, maintenance, and cargo, normalized across all 83 rows (25/20/20/15/20% weights)." },
+      ],
+    },
+    {
+      title: "Reliability & Ownership Cost",
+      items: [
+        { label: "Reliability", detail: "J.D. Power / Consumer Reports / Edmunds ratings, converted to a 0–100 scale." },
+        { label: "5-Yr Resale", detail: "Percentage of MSRP retained after 5 years (KBB/CarEdge)." },
+        { label: "Est. Annual Maintenance", detail: "Estimated yearly maintenance/repair cost (RepairPal, KBB 5-Yr Cost to Own)." },
+        { label: "Est. Annual Insurance", detail: "Estimated yearly insurance premium (CarEdge market averages)." },
+        { label: "Basic Warranty", detail: "Bumper-to-bumper coverage period." },
+        { label: "Powertrain Warranty", detail: "Engine/transmission/drivetrain coverage period." },
+      ],
+    },
+    {
+      title: "Performance & Powertrain",
+      items: [
+        { label: "Drivetrain", detail: "FWD/AWD/4WD availability, standard vs. optional." },
+        { label: "Engine", detail: "Displacement and engine type/configuration." },
+        { label: "Transmission", detail: "Transmission type (CVT, automatic, eCVT, etc.)." },
+        { label: "HP", detail: "Peak horsepower." },
+        { label: "Torque", detail: "Peak torque (lb-ft)." },
+        { label: "0–60 mph", detail: "Published or tested acceleration time." },
+        { label: "Towing", detail: "Maximum tow rating, properly equipped." },
+      ],
+    },
+    {
+      title: "Practicality",
+      items: [
+        { label: "Class", detail: "SUV segment: Compact, Midsize (2-row), or Midsize (3-Row)." },
+        { label: "Seats", detail: "Standard seating capacity." },
+        { label: "3rd Row", detail: "Whether a 3rd row is standard, available, or not offered." },
+        { label: "Cargo (2nd row)", detail: "Cubic feet of cargo space behind the 2nd row." },
+        { label: "Max Cargo", detail: "Cubic feet with all rear seats folded flat." },
+        { label: "Ground Clearance", detail: "Unladen ground clearance." },
+        { label: "Curb Weight", detail: "Manufacturer-published curb weight." },
+        { label: "Wheelbase", detail: "Distance between front and rear axles." },
+      ],
+    },
+    {
+      title: "Efficiency & Range",
+      items: [
+        { label: "MPG City / Hwy / Combined", detail: "EPA fuel-economy ratings." },
+        { label: "Fuel Tank", detail: "Fuel tank capacity in gallons." },
+      ],
+    },
+    {
+      title: "Safety",
+      items: [
+        { label: "NHTSA Rating", detail: "Overall NHTSA crash-test star rating." },
+        { label: "IIHS Award", detail: "IIHS Top Safety Pick / Top Safety Pick+ status." },
+      ],
+    },
+  ];
+
+  // Metrics with a clear "better" direction, used to compute the Category
+  // Leaders grid. dir: 1 = lower is better, -1 = higher is better. Purely
+  // descriptive columns (class, drivetrain, engine, transmission, seats,
+  // 3rd row, curb weight, wheelbase, fuel tank, IIHS) have no single "best"
+  // value and are glossary-only.
+  const RANKED_METRICS = [
+    { label: "Best Value Score", dir: -1, get: (v) => v._valueScore, fmt: (v) => `${v._valueScore} (${valueLabel(v._valueScore)})` },
+    { label: "Lowest Starting Price", dir: 1, get: (v) => v.price.low, fmt: (v) => fmtMoney(v.price.low) },
+    { label: "Best Reliability", dir: -1, get: (v) => v.reliability.value, fmt: (v) => v.reliability.display },
+    { label: "Best 5-Yr Resale", dir: -1, get: (v) => v.resale.value, fmt: (v) => v.resale.display },
+    { label: "Lowest Maintenance Cost", dir: 1, get: (v) => v.maintenance.annual, fmt: (v) => fmtMoney(v.maintenance.annual) + "/yr" },
+    { label: "Lowest Insurance Cost", dir: 1, get: (v) => v.insurance.annual, fmt: (v) => v.insurance.display },
+    { label: "Most Cargo (2nd Row)", dir: -1, get: (v) => v.cargo.behind2nd, fmt: (v) => fmtCargo(v.cargo.behind2nd) },
+    { label: "Most Max Cargo", dir: -1, get: (v) => v.cargo.maxCargo, fmt: (v) => fmtCargo(v.cargo.maxCargo) },
+    { label: "Best MPG City", dir: -1, get: (v) => parseLeadingNumber(v.mpgCity), fmt: (v) => v.mpgCity },
+    { label: "Best MPG Highway", dir: -1, get: (v) => parseLeadingNumber(v.mpgHighway), fmt: (v) => v.mpgHighway },
+    { label: "Best MPG Combined", dir: -1, get: (v) => parseLeadingNumber(v.mpgCombined), fmt: (v) => v.mpgCombined },
+    { label: "Quickest 0–60 mph", dir: 1, get: (v) => parseLeadingNumber(v.zeroToSixty), fmt: (v) => v.zeroToSixty },
+    { label: "Most Horsepower", dir: -1, get: (v) => parseLeadingNumber(v.hp), fmt: (v) => v.hp },
+    { label: "Most Torque", dir: -1, get: (v) => parseLeadingNumber(v.torque), fmt: (v) => v.torque },
+    { label: "Highest Tow Rating", dir: -1, get: (v) => parseLeadingNumber(v.towing), fmt: (v) => v.towing },
+    { label: "Most Ground Clearance", dir: -1, get: (v) => parseLeadingNumber(v.groundClearance), fmt: (v) => v.groundClearance },
+    { label: "Longest Basic Warranty", dir: -1, get: (v) => parseLeadingNumber(v.warrantyBasic), fmt: (v) => v.warrantyBasic },
+    { label: "Longest Powertrain Warranty", dir: -1, get: (v) => parseLeadingNumber(v.warrantyPowertrain), fmt: (v) => v.warrantyPowertrain },
+    { label: "Best NHTSA Rating", dir: -1, get: (v) => v.nhtsa.stars, fmt: (v) => v.nhtsa.display },
+  ];
+
   // Cached element references, filled in init(). Avoids repeated getElementById
   // calls in applyFiltersAndSort(), which runs on every filter/sort interaction.
   const dom = {};
@@ -232,6 +322,48 @@
     `
       )
       .join("");
+  }
+
+  // Picks the single best row for a ranked metric across the *entire*
+  // dataset (not the current filter selection) — this tab is a reference,
+  // independent of whatever the user has filtered/sorted elsewhere.
+  function computeLeader(metric) {
+    let best = null;
+    let bestVal = null;
+    for (const v of SUV_DATA) {
+      const val = metric.get(v);
+      if (val == null) continue;
+      if (bestVal === null || (metric.dir === 1 ? val < bestVal : val > bestVal)) {
+        bestVal = val;
+        best = v;
+      }
+    }
+    return best;
+  }
+
+  function renderCriteria() {
+    dom.glossaryList.innerHTML = METRIC_GROUPS.map(
+      (group) => `
+      <div class="glossary-group">
+        <h3>${group.title}</h3>
+        <dl class="glossary-dl">
+          ${group.items.map((item) => `<dt>${item.label}</dt><dd>${item.detail}</dd>`).join("")}
+        </dl>
+      </div>
+    `
+    ).join("");
+
+    dom.leaderGrid.innerHTML = RANKED_METRICS.map((metric) => {
+      const winner = computeLeader(metric);
+      if (!winner) return "";
+      return `
+        <article class="leader-card" data-id="${winner.id}" tabindex="0" role="button" aria-label="View details for ${winner.make} ${winner.model}">
+          <div class="leader-label">${metric.label}</div>
+          <div class="leader-winner">${winner.make} ${winner.model} <span class="leader-trim">${winner.trimNote}</span></div>
+          <div class="leader-value">${metric.fmt(winner)}</div>
+        </article>
+      `;
+    }).join("");
   }
 
   function openDetail(id) {
@@ -415,18 +547,39 @@
       methodologyBackdrop: document.getElementById("methodology-backdrop"),
       tabCards: document.getElementById("tab-cards"),
       tabTable: document.getElementById("tab-table"),
+      tabCriteria: document.getElementById("tab-criteria"),
       panelCards: document.getElementById("panel-cards"),
       panelTable: document.getElementById("panel-table"),
+      panelCriteria: document.getElementById("panel-criteria"),
+      glossaryList: document.getElementById("glossary-list"),
+      leaderGrid: document.getElementById("leader-grid"),
     });
 
-    function activateTab(tabBtn, panel, otherTabBtn, otherPanel) {
-      tabBtn.setAttribute("aria-selected", "true");
-      otherTabBtn.setAttribute("aria-selected", "false");
-      panel.hidden = false;
-      otherPanel.hidden = true;
+    const tabs = [
+      { btn: dom.tabCards, panel: dom.panelCards },
+      { btn: dom.tabTable, panel: dom.panelTable },
+      { btn: dom.tabCriteria, panel: dom.panelCriteria },
+    ];
+    function activateTab(activeBtn) {
+      tabs.forEach(({ btn, panel }) => {
+        const isActive = btn === activeBtn;
+        btn.setAttribute("aria-selected", isActive ? "true" : "false");
+        panel.hidden = !isActive;
+      });
     }
-    dom.tabCards.addEventListener("click", () => activateTab(dom.tabCards, dom.panelCards, dom.tabTable, dom.panelTable));
-    dom.tabTable.addEventListener("click", () => activateTab(dom.tabTable, dom.panelTable, dom.tabCards, dom.panelCards));
+    tabs.forEach(({ btn }) => btn.addEventListener("click", () => activateTab(btn)));
+
+    dom.leaderGrid.addEventListener("click", (e) => {
+      const card = e.target.closest(".leader-card");
+      if (card) openDetail(card.dataset.id);
+    });
+    dom.leaderGrid.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      const card = e.target.closest(".leader-card");
+      if (!card) return;
+      e.preventDefault();
+      openDetail(card.dataset.id);
+    });
 
     // Event delegation: one listener per container instead of re-binding a
     // click/keydown handler on every card/row after each re-render.
@@ -480,6 +633,7 @@
 
     updateMaxPriceLabel();
     applyFiltersAndSort();
+    renderCriteria();
   }
 
   document.addEventListener("DOMContentLoaded", init);
