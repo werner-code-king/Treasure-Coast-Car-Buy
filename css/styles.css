@@ -279,14 +279,36 @@ output { font-size: 0.85rem; color: var(--text); }
   box-shadow: var(--shadow);
 }
 
+.leader-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 8px;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
 .leader-label {
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.02em;
   color: var(--accent);
-  margin-bottom: 8px;
 }
+
+.leader-chevron {
+  flex-shrink: 0;
+  color: var(--text-dim);
+  font-size: 0.7rem;
+  transition: transform 0.15s ease;
+}
+.leader-card.expanded .leader-chevron { transform: rotate(180deg); }
 
 .leader-list {
   list-style: none;
@@ -305,6 +327,10 @@ output { font-size: 0.85rem; color: var(--text); }
   cursor: pointer;
   font-size: 0.85rem;
 }
+.leader-row:not(.leader-row-top) { display: none; }
+.leader-card.expanded .leader-row:not(.leader-row-top) { display: flex; }
+.leader-row-top { border-bottom: none; }
+.leader-card.expanded .leader-row-top { border-bottom: 1px dashed var(--border); }
 .leader-row:last-child { border-bottom: none; }
 .leader-row:hover, .leader-row:focus-visible { color: var(--accent); }
 

@@ -351,17 +351,20 @@
     `
     ).join("");
 
-    dom.leaderGrid.innerHTML = RANKED_METRICS.map((metric) => {
+    dom.leaderGrid.innerHTML = RANKED_METRICS.map((metric, mi) => {
       const top5 = computeTopN(metric, 5);
       if (!top5.length) return "";
       return `
-        <article class="leader-card">
-          <div class="leader-label">${metric.label}</div>
-          <ol class="leader-list">
+        <article class="leader-card" data-metric="${mi}">
+          <button class="leader-header" aria-expanded="false" aria-controls="leader-list-${mi}">
+            <span class="leader-label">${metric.label}</span>
+            <span class="leader-chevron" aria-hidden="true">&#9662;</span>
+          </button>
+          <ol class="leader-list" id="leader-list-${mi}">
             ${top5
               .map(
                 (v, i) => `
-              <li class="leader-row" data-id="${v.id}" tabindex="0" role="button" aria-label="View details for ${v.make} ${v.model}">
+              <li class="leader-row${i === 0 ? " leader-row-top" : ""}" data-id="${v.id}" tabindex="0" role="button" aria-label="View details for ${v.make} ${v.model}">
                 <span class="leader-rank">${i + 1}</span>
                 <span class="leader-name">${v.make} ${v.model} <span class="leader-trim">${v.trimNote}</span></span>
                 <span class="leader-value">${metric.fmt(v)}</span>
@@ -581,6 +584,13 @@
     tabs.forEach(({ btn }) => btn.addEventListener("click", () => activateTab(btn)));
 
     dom.leaderGrid.addEventListener("click", (e) => {
+      const header = e.target.closest(".leader-header");
+      if (header) {
+        const card = header.closest(".leader-card");
+        const expanded = card.classList.toggle("expanded");
+        header.setAttribute("aria-expanded", expanded ? "true" : "false");
+        return;
+      }
       const row = e.target.closest(".leader-row");
       if (row) openDetail(row.dataset.id);
     });
