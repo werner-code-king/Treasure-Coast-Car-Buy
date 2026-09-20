@@ -329,21 +329,14 @@
       .join("");
   }
 
-  // Picks the single best row for a ranked metric across the *entire*
-  // dataset (not the current filter selection) — this tab is a reference,
-  // independent of whatever the user has filtered/sorted elsewhere.
-  function computeLeader(metric) {
-    let best = null;
-    let bestVal = null;
-    for (const v of SUV_DATA) {
-      const val = metric.get(v);
-      if (val == null) continue;
-      if (bestVal === null || (metric.dir === 1 ? val < bestVal : val > bestVal)) {
-        bestVal = val;
-        best = v;
-      }
-    }
-    return best;
+  // Ranks the entire dataset (not the current filter selection) for a
+  // metric and returns the top N — this tab is a reference, independent
+  // of whatever the user has filtered/sorted elsewhere.
+  function computeTopN(metric, n) {
+    return SUV_DATA
+      .filter((v) => metric.get(v) != null)
+      .sort((a, b) => (metric.get(a) - metric.get(b)) * metric.dir)
+      .slice(0, n);
   }
 
   function renderCriteria() {
@@ -359,13 +352,24 @@
     ).join("");
 
     dom.leaderGrid.innerHTML = RANKED_METRICS.map((metric) => {
-      const winner = computeLeader(metric);
-      if (!winner) return "";
+      const top5 = computeTopN(metric, 5);
+      if (!top5.length) return "";
       return `
-        <article class="leader-card" data-id="${winner.id}" tabindex="0" role="button" aria-label="View details for ${winner.make} ${winner.model}">
+        <article class="leader-card">
           <div class="leader-label">${metric.label}</div>
-          <div class="leader-winner">${winner.make} ${winner.model} <span class="leader-trim">${winner.trimNote}</span></div>
-          <div class="leader-value">${metric.fmt(winner)}</div>
+          <ol class="leader-list">
+            ${top5
+              .map(
+                (v, i) => `
+              <li class="leader-row" data-id="${v.id}" tabindex="0" role="button" aria-label="View details for ${v.make} ${v.model}">
+                <span class="leader-rank">${i + 1}</span>
+                <span class="leader-name">${v.make} ${v.model} <span class="leader-trim">${v.trimNote}</span></span>
+                <span class="leader-value">${metric.fmt(v)}</span>
+              </li>
+            `
+              )
+              .join("")}
+          </ol>
         </article>
       `;
     }).join("");
@@ -577,15 +581,15 @@
     tabs.forEach(({ btn }) => btn.addEventListener("click", () => activateTab(btn)));
 
     dom.leaderGrid.addEventListener("click", (e) => {
-      const card = e.target.closest(".leader-card");
-      if (card) openDetail(card.dataset.id);
+      const row = e.target.closest(".leader-row");
+      if (row) openDetail(row.dataset.id);
     });
     dom.leaderGrid.addEventListener("keydown", (e) => {
       if (e.key !== "Enter" && e.key !== " ") return;
-      const card = e.target.closest(".leader-card");
-      if (!card) return;
+      const row = e.target.closest(".leader-row");
+      if (!row) return;
       e.preventDefault();
-      openDetail(card.dataset.id);
+      openDetail(row.dataset.id);
     });
 
     // Event delegation: one listener per container instead of re-binding a
