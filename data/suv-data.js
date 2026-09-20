@@ -4,44 +4,31 @@
  * models/powertrains (83 rows total) so price and value comparisons
  * reflect what a specific trim actually costs rather than a nameplate-wide
  * range. Pricing (starting MSRP, resale, maintenance, insurance), safety
- * (NHTSA, IIHS, warranty), and performance (engine, 0-60, transmission,
- * MPG, towing, dimensions) compiled September 2026 from KBB, Edmunds,
- * TrueCar, CarEdge, J.D. Power, RepairPal, Auto Reliability Index,
- * iSeeCars, Cars.com, NHTSA, IIHS, manufacturer trim/pricing pages, and
- * dealership sites. See each vehicle's `sources` array and the "Data &
- * Methodology" panel in the app for details.
+ * (NHTSA, IIHS, warranty), off-road capability, and performance (engine,
+ * 0-60, transmission, MPG, towing, dimensions) compiled September 2026
+ * from KBB, Edmunds, TrueCar, CarEdge, J.D. Power, RepairPal, Auto
+ * Reliability Index, iSeeCars, Cars.com, NHTSA, IIHS, manufacturer
+ * trim/pricing and off-road-specific pages, and dealership sites. See each
+ * vehicle's `sources` array and the "Criteria & Rankings" tab for details.
  *
- * Fields marked `estimated: true` (including `price.estimated`) are analyst
- * estimates — a trim price interpolated between two published price points,
- * a spec figure not published this cycle and carried over from a closely
- * related model/generation, qualitative source language, shared-platform
- * inference, or a lack of trim-specific data — rather than a figure stated
- * directly by a source. Everything else is stated verbatim by a cited
- * source. A few figures (noted in their `detail` text) that appeared to be
- * scraping/unit errors in a source (e.g. an implausible insurance quote)
- * were disregarded in favor of a segment-consistent estimate.
+ * `offRoad` is a qualitative Minimal/Light/Moderate/Serious tier (also
+ * scored 0-100 for sorting) based on standard hardware for that specific
+ * trim: locking differentials and low-range transfer cases score
+ * "Serious"; all-terrain tires, off-road drive/terrain modes, and
+ * augmented ground clearance score "Moderate"; a basic AWD system with at
+ * most a drive-mode dial scores "Light"/"Minimal". It is NOT a measure of
+ * on-road value, so it is not part of the Value Score.
  *
- * Reliability, resale, maintenance, insurance, safety, and powertrain specs
- * are researched at the nameplate/powertrain level (not per trim, since
- * these generally don't vary by trim) and are shared across every trim row
- * within the same model/powertrain family; only price (and occasionally
- * drivetrain/engine availability, noted in the relevant field) is
- * trim-specific.
- *
- * The Value Score methodology is unchanged: reliability 25% / resale 20% /
- * maintenance 20% / cargo 15% / starting price 20%, normalized across every
- * row in this file. Because reliability/resale/maintenance/cargo are shared
- * within a family, higher trims of the same model score lower on Value only
- * because they cost more for the same core vehicle — the score does not
- * capture the extra content those trims add.
- *
- * Note: Toyota made the RAV4 Hybrid standard across its whole 2026 lineup
- * (no separate gas-only RAV4 is sold this year), so the RAV4 Gas family from
- * earlier versions of this dataset has been merged into RAV4 Hybrid below.
+ * Fields marked `estimated: true` are analyst estimates (no single
+ * directly comparable figure was published across every vehicle for that
+ * metric) rather than a figure stated verbatim by a cited source. A few
+ * figures (e.g. one nameplate's insurance-cost datapoint) that appeared to
+ * be scraping/unit errors relative to every other vehicle in the segment
+ * were disregarded in favor of a segment-consistent estimate, noted in
+ * that field's `detail` text.
  *
  * Classes: "Compact SUV", "Midsize SUV" (2-row), and "Midsize SUV (3-Row)".
  */
-
 const SUV_DATA = [
   {
     id: "rav4-hybrid-le",
@@ -128,7 +115,13 @@ const SUV_DATA = [
         label: "RAV4Life – Specs Guide",
         url: "https://rav4life.com/2026-toyota-rav4-specs-guide-engine-mpg-dimensions-towing-trim-breakdown/"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with a basic drive-mode selector; no all-terrain tires, augmented ground clearance, or underbody protection on this trim.",
+      estimated: false
+    }
   },
   {
     id: "rav4-hybrid-se",
@@ -215,7 +208,13 @@ const SUV_DATA = [
         label: "RAV4Life – Specs Guide",
         url: "https://rav4life.com/2026-toyota-rav4-specs-guide-engine-mpg-dimensions-towing-trim-breakdown/"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with a basic drive-mode selector; no all-terrain tires, augmented ground clearance, or underbody protection on this trim.",
+      estimated: false
+    }
   },
   {
     id: "rav4-hybrid-xle-premium",
@@ -302,7 +301,13 @@ const SUV_DATA = [
         label: "RAV4Life – Specs Guide",
         url: "https://rav4life.com/2026-toyota-rav4-specs-guide-engine-mpg-dimensions-towing-trim-breakdown/"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with a basic drive-mode selector; no all-terrain tires, augmented ground clearance, or underbody protection on this trim.",
+      estimated: false
+    }
   },
   {
     id: "rav4-hybrid-woodland",
@@ -389,7 +394,13 @@ const SUV_DATA = [
         label: "RAV4Life – Specs Guide",
         url: "https://rav4life.com/2026-toyota-rav4-specs-guide-engine-mpg-dimensions-towing-trim-breakdown/"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "Woodland-exclusive all-terrain tires, TRD-tuned suspension, 8.5\" ground clearance, standard tow hitch, and underbody skid protection — the most trail-ready RAV4 trim, though it lacks a locking differential or low-range transfer case.",
+      estimated: false
+    }
   },
   {
     id: "rav4-hybrid-limited",
@@ -476,7 +487,13 @@ const SUV_DATA = [
         label: "RAV4Life – Specs Guide",
         url: "https://rav4life.com/2026-toyota-rav4-specs-guide-engine-mpg-dimensions-towing-trim-breakdown/"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with a basic drive-mode selector; no all-terrain tires, augmented ground clearance, or underbody protection on this trim.",
+      estimated: false
+    }
   },
   {
     id: "rav4-phev-se",
@@ -559,7 +576,13 @@ const SUV_DATA = [
         label: "J.D. Power – 2026 RAV4",
         url: "https://www.jdpower.com/cars/2026/toyota/rav4"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with a basic drive-mode selector; no all-terrain tires, augmented ground clearance, or underbody protection on this trim.",
+      estimated: false
+    }
   },
   {
     id: "rav4-phev-woodland",
@@ -642,7 +665,13 @@ const SUV_DATA = [
         label: "J.D. Power – 2026 RAV4",
         url: "https://www.jdpower.com/cars/2026/toyota/rav4"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "Woodland-exclusive all-terrain tires, TRD-tuned suspension, 8.5\" ground clearance, standard tow hitch, and underbody skid protection — the most trail-ready RAV4 trim, though it lacks a locking differential or low-range transfer case.",
+      estimated: false
+    }
   },
   {
     id: "rav4-phev-xse",
@@ -725,7 +754,13 @@ const SUV_DATA = [
         label: "J.D. Power – 2026 RAV4",
         url: "https://www.jdpower.com/cars/2026/toyota/rav4"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with a basic drive-mode selector; no all-terrain tires, augmented ground clearance, or underbody protection on this trim.",
+      estimated: false
+    }
   },
   {
     id: "rav4-phev-gr-sport",
@@ -808,7 +843,13 @@ const SUV_DATA = [
         label: "J.D. Power – 2026 RAV4",
         url: "https://www.jdpower.com/cars/2026/toyota/rav4"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with a basic drive-mode selector; no all-terrain tires, augmented ground clearance, or underbody protection on this trim.",
+      estimated: false
+    }
   },
   {
     id: "crv-lx",
@@ -895,7 +936,13 @@ const SUV_DATA = [
         label: "IIHS – 2026 CR-V",
         url: "https://www.iihs.org/ratings/vehicle/honda/cr-v-4-door-suv/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD (Real Time AWD with Intelligent Control on applicable trims); no off-road-specific trim, all-terrain tires, or underbody protection offered on the CR-V.",
+      estimated: false
+    }
   },
   {
     id: "crv-ex",
@@ -982,7 +1029,13 @@ const SUV_DATA = [
         label: "IIHS – 2026 CR-V",
         url: "https://www.iihs.org/ratings/vehicle/honda/cr-v-4-door-suv/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD (Real Time AWD with Intelligent Control on applicable trims); no off-road-specific trim, all-terrain tires, or underbody protection offered on the CR-V.",
+      estimated: false
+    }
   },
   {
     id: "crv-ex-l",
@@ -1069,7 +1122,13 @@ const SUV_DATA = [
         label: "IIHS – 2026 CR-V",
         url: "https://www.iihs.org/ratings/vehicle/honda/cr-v-4-door-suv/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD (Real Time AWD with Intelligent Control on applicable trims); no off-road-specific trim, all-terrain tires, or underbody protection offered on the CR-V.",
+      estimated: false
+    }
   },
   {
     id: "crv-sport-touring-hybrid",
@@ -1156,7 +1215,13 @@ const SUV_DATA = [
         label: "IIHS – 2026 CR-V",
         url: "https://www.iihs.org/ratings/vehicle/honda/cr-v-4-door-suv/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD (Real Time AWD with Intelligent Control on applicable trims); no off-road-specific trim, all-terrain tires, or underbody protection offered on the CR-V.",
+      estimated: false
+    }
   },
   {
     id: "cx5-25-s",
@@ -1243,7 +1308,13 @@ const SUV_DATA = [
         label: "Mazda USA News – IIHS TSP+",
         url: "https://news.mazdausa.com/2026-07-09-Mazda-2026-CX-5-Earns-IIHS-TOP-SAFETY-PICK-Award-Marking-Mazdas-100th-IIHS-Top-Safety-Award"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard i-Activ AWD; CX-5 does not offer the CX-50's Mi-Drive Off-Road mode, all-terrain tires, or raised suspension.",
+      estimated: false
+    }
   },
   {
     id: "cx5-25-s-select",
@@ -1330,7 +1401,13 @@ const SUV_DATA = [
         label: "Mazda USA News – IIHS TSP+",
         url: "https://news.mazdausa.com/2026-07-09-Mazda-2026-CX-5-Earns-IIHS-TOP-SAFETY-PICK-Award-Marking-Mazdas-100th-IIHS-Top-Safety-Award"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard i-Activ AWD; CX-5 does not offer the CX-50's Mi-Drive Off-Road mode, all-terrain tires, or raised suspension.",
+      estimated: false
+    }
   },
   {
     id: "cx5-25-s-preferred",
@@ -1417,7 +1494,13 @@ const SUV_DATA = [
         label: "Mazda USA News – IIHS TSP+",
         url: "https://news.mazdausa.com/2026-07-09-Mazda-2026-CX-5-Earns-IIHS-TOP-SAFETY-PICK-Award-Marking-Mazdas-100th-IIHS-Top-Safety-Award"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard i-Activ AWD; CX-5 does not offer the CX-50's Mi-Drive Off-Road mode, all-terrain tires, or raised suspension.",
+      estimated: false
+    }
   },
   {
     id: "cx5-25-s-premium",
@@ -1504,7 +1587,13 @@ const SUV_DATA = [
         label: "Mazda USA News – IIHS TSP+",
         url: "https://news.mazdausa.com/2026-07-09-Mazda-2026-CX-5-Earns-IIHS-TOP-SAFETY-PICK-Award-Marking-Mazdas-100th-IIHS-Top-Safety-Award"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard i-Activ AWD; CX-5 does not offer the CX-50's Mi-Drive Off-Road mode, all-terrain tires, or raised suspension.",
+      estimated: false
+    }
   },
   {
     id: "cx5-25-s-premium-plus",
@@ -1591,7 +1680,13 @@ const SUV_DATA = [
         label: "Mazda USA News – IIHS TSP+",
         url: "https://news.mazdausa.com/2026-07-09-Mazda-2026-CX-5-Earns-IIHS-TOP-SAFETY-PICK-Award-Marking-Mazdas-100th-IIHS-Top-Safety-Award"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard i-Activ AWD; CX-5 does not offer the CX-50's Mi-Drive Off-Road mode, all-terrain tires, or raised suspension.",
+      estimated: false
+    }
   },
   {
     id: "forester-gas-base",
@@ -1678,7 +1773,13 @@ const SUV_DATA = [
         label: "IIHS – 2026 Forester",
         url: "https://www.iihs.org/ratings/vehicle/subaru/forester-4-door-suv/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "Standard Symmetrical AWD with X-MODE and automatic Hill Descent Control, plus 8.7\" ground clearance — genuinely more capable than typical crossover AWD, though this lineup doesn't include the Wilderness trim's 9.3\" clearance, skid plate, and dual-function X-MODE.",
+      estimated: false
+    }
   },
   {
     id: "forester-gas-premium",
@@ -1765,7 +1866,13 @@ const SUV_DATA = [
         label: "IIHS – 2026 Forester",
         url: "https://www.iihs.org/ratings/vehicle/subaru/forester-4-door-suv/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "Standard Symmetrical AWD with X-MODE and automatic Hill Descent Control, plus 8.7\" ground clearance — genuinely more capable than typical crossover AWD, though this lineup doesn't include the Wilderness trim's 9.3\" clearance, skid plate, and dual-function X-MODE.",
+      estimated: false
+    }
   },
   {
     id: "forester-gas-limited",
@@ -1852,7 +1959,13 @@ const SUV_DATA = [
         label: "IIHS – 2026 Forester",
         url: "https://www.iihs.org/ratings/vehicle/subaru/forester-4-door-suv/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "Standard Symmetrical AWD with X-MODE and automatic Hill Descent Control, plus 8.7\" ground clearance — genuinely more capable than typical crossover AWD, though this lineup doesn't include the Wilderness trim's 9.3\" clearance, skid plate, and dual-function X-MODE.",
+      estimated: false
+    }
   },
   {
     id: "forester-gas-touring",
@@ -1939,7 +2052,13 @@ const SUV_DATA = [
         label: "IIHS – 2026 Forester",
         url: "https://www.iihs.org/ratings/vehicle/subaru/forester-4-door-suv/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "Standard Symmetrical AWD with X-MODE and automatic Hill Descent Control, plus 8.7\" ground clearance — genuinely more capable than typical crossover AWD, though this lineup doesn't include the Wilderness trim's 9.3\" clearance, skid plate, and dual-function X-MODE.",
+      estimated: false
+    }
   },
   {
     id: "forester-hybrid-premium",
@@ -2022,7 +2141,13 @@ const SUV_DATA = [
         label: "J.D. Power – 2026 Forester",
         url: "https://www.jdpower.com/cars/2026/subaru/forester"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "Standard Symmetrical AWD with X-MODE and automatic Hill Descent Control, plus 8.7\" ground clearance — genuinely more capable than typical crossover AWD, though this lineup doesn't include the Wilderness trim's 9.3\" clearance, skid plate, and dual-function X-MODE.",
+      estimated: false
+    }
   },
   {
     id: "forester-hybrid-sport",
@@ -2105,7 +2230,13 @@ const SUV_DATA = [
         label: "J.D. Power – 2026 Forester",
         url: "https://www.jdpower.com/cars/2026/subaru/forester"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "Standard Symmetrical AWD with X-MODE and automatic Hill Descent Control, plus 8.7\" ground clearance — genuinely more capable than typical crossover AWD, though this lineup doesn't include the Wilderness trim's 9.3\" clearance, skid plate, and dual-function X-MODE.",
+      estimated: false
+    }
   },
   {
     id: "forester-hybrid-limited",
@@ -2188,7 +2319,13 @@ const SUV_DATA = [
         label: "J.D. Power – 2026 Forester",
         url: "https://www.jdpower.com/cars/2026/subaru/forester"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "Standard Symmetrical AWD with X-MODE and automatic Hill Descent Control, plus 8.7\" ground clearance — genuinely more capable than typical crossover AWD, though this lineup doesn't include the Wilderness trim's 9.3\" clearance, skid plate, and dual-function X-MODE.",
+      estimated: false
+    }
   },
   {
     id: "forester-hybrid-touring",
@@ -2271,7 +2408,13 @@ const SUV_DATA = [
         label: "J.D. Power – 2026 Forester",
         url: "https://www.jdpower.com/cars/2026/subaru/forester"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "Standard Symmetrical AWD with X-MODE and automatic Hill Descent Control, plus 8.7\" ground clearance — genuinely more capable than typical crossover AWD, though this lineup doesn't include the Wilderness trim's 9.3\" clearance, skid plate, and dual-function X-MODE.",
+      estimated: false
+    }
   },
   {
     id: "sportage-lx",
@@ -2358,7 +2501,13 @@ const SUV_DATA = [
         label: "IIHS – 2026 Sportage",
         url: "https://www.iihs.org/ratings/vehicle/kia/sportage-4-door-suv/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD (HTRAC on AWD trims) with a Terrain mode on upper trims; Sportage's off-road-focused X-Line/X-Pro trims aren't part of this lineup.",
+      estimated: false
+    }
   },
   {
     id: "sportage-ex",
@@ -2445,7 +2594,13 @@ const SUV_DATA = [
         label: "IIHS – 2026 Sportage",
         url: "https://www.iihs.org/ratings/vehicle/kia/sportage-4-door-suv/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD (HTRAC on AWD trims) with a Terrain mode on upper trims; Sportage's off-road-focused X-Line/X-Pro trims aren't part of this lineup.",
+      estimated: false
+    }
   },
   {
     id: "sportage-sx",
@@ -2532,7 +2687,13 @@ const SUV_DATA = [
         label: "IIHS – 2026 Sportage",
         url: "https://www.iihs.org/ratings/vehicle/kia/sportage-4-door-suv/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD (HTRAC on AWD trims) with a Terrain mode on upper trims; Sportage's off-road-focused X-Line/X-Pro trims aren't part of this lineup.",
+      estimated: false
+    }
   },
   {
     id: "sportage-sx-prestige-hybrid",
@@ -2619,7 +2780,13 @@ const SUV_DATA = [
         label: "IIHS – 2026 Sportage",
         url: "https://www.iihs.org/ratings/vehicle/kia/sportage-4-door-suv/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD (HTRAC on AWD trims) with a Terrain mode on upper trims; Sportage's off-road-focused X-Line/X-Pro trims aren't part of this lineup.",
+      estimated: false
+    }
   },
   {
     id: "tucson-se",
@@ -2706,7 +2873,13 @@ const SUV_DATA = [
         label: "IIHS – 2026 Tucson",
         url: "https://www.informedforlife.com/cars/hyundai_tucson-4-door-suv_2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with no terrain-mode selector or off-road hardware on this trim.",
+      estimated: false
+    }
   },
   {
     id: "tucson-xrt",
@@ -2793,7 +2966,13 @@ const SUV_DATA = [
         label: "IIHS – 2026 Tucson",
         url: "https://www.informedforlife.com/cars/hyundai_tucson-4-door-suv_2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "XRT-exclusive all-terrain tires and 8.3\" ground clearance (vs. standard Tucson) plus a Terrain mode with mud/snow/sand settings — rugged styling backed by real hardware, though Hyundai markets it more for looks than serious trail use.",
+      estimated: false
+    }
   },
   {
     id: "tucson-sel-premium",
@@ -2880,7 +3059,13 @@ const SUV_DATA = [
         label: "IIHS – 2026 Tucson",
         url: "https://www.informedforlife.com/cars/hyundai_tucson-4-door-suv_2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with no terrain-mode selector or off-road hardware on this trim.",
+      estimated: false
+    }
   },
   {
     id: "tucson-limited",
@@ -2967,7 +3152,13 @@ const SUV_DATA = [
         label: "IIHS – 2026 Tucson",
         url: "https://www.informedforlife.com/cars/hyundai_tucson-4-door-suv_2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with no terrain-mode selector or off-road hardware on this trim.",
+      estimated: false
+    }
   },
   {
     id: "rogue-s",
@@ -3054,7 +3245,13 @@ const SUV_DATA = [
         label: "Nissan USA News – IIHS TSP",
         url: "https://usa.nissannews.com/en-US/releases/2026-nissan-rogue-earns-2025-iihs-top-safety-pick-with-enhanced-crash-protection"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with no terrain-mode selector or all-terrain tires on this trim.",
+      estimated: false
+    }
   },
   {
     id: "rogue-sv",
@@ -3141,7 +3338,13 @@ const SUV_DATA = [
         label: "Nissan USA News – IIHS TSP",
         url: "https://usa.nissannews.com/en-US/releases/2026-nissan-rogue-earns-2025-iihs-top-safety-pick-with-enhanced-crash-protection"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with no terrain-mode selector or all-terrain tires on this trim.",
+      estimated: false
+    }
   },
   {
     id: "rogue-rock-creek",
@@ -3228,7 +3431,13 @@ const SUV_DATA = [
         label: "Nissan USA News – IIHS TSP",
         url: "https://usa.nissannews.com/en-US/releases/2026-nissan-rogue-earns-2025-iihs-top-safety-pick-with-enhanced-crash-protection"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "Rock Creek-exclusive all-terrain tires, hill descent control, and Intelligent Around View Monitor with Off-Road Mode on beadlock-style wheels — the most capable Rogue trim, though it lacks a locking differential or low-range gearing.",
+      estimated: false
+    }
   },
   {
     id: "rogue-sl",
@@ -3315,7 +3524,13 @@ const SUV_DATA = [
         label: "Nissan USA News – IIHS TSP",
         url: "https://usa.nissannews.com/en-US/releases/2026-nissan-rogue-earns-2025-iihs-top-safety-pick-with-enhanced-crash-protection"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with no terrain-mode selector or all-terrain tires on this trim.",
+      estimated: false
+    }
   },
   {
     id: "rogue-platinum",
@@ -3402,7 +3617,13 @@ const SUV_DATA = [
         label: "Nissan USA News – IIHS TSP",
         url: "https://usa.nissannews.com/en-US/releases/2026-nissan-rogue-earns-2025-iihs-top-safety-pick-with-enhanced-crash-protection"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with no terrain-mode selector or all-terrain tires on this trim.",
+      estimated: false
+    }
   },
   {
     id: "equinox-lt",
@@ -3485,7 +3706,13 @@ const SUV_DATA = [
         label: "J.D. Power – 2026 Equinox",
         url: "https://www.jdpower.com/cars/2026/chevrolet/equinox"
       }
-    ]
+    ],
+    offRoad: {
+      value: 15,
+      display: "Minimal",
+      detail: "Standard crossover AWD (RS/LT) with no terrain modes, all-terrain tires, or off-road styling package.",
+      estimated: false
+    }
   },
   {
     id: "equinox-rs",
@@ -3568,7 +3795,13 @@ const SUV_DATA = [
         label: "J.D. Power – 2026 Equinox",
         url: "https://www.jdpower.com/cars/2026/chevrolet/equinox"
       }
-    ]
+    ],
+    offRoad: {
+      value: 15,
+      display: "Minimal",
+      detail: "Standard crossover AWD (RS/LT) with no terrain modes, all-terrain tires, or off-road styling package.",
+      estimated: false
+    }
   },
   {
     id: "equinox-activ",
@@ -3651,7 +3884,13 @@ const SUV_DATA = [
         label: "J.D. Power – 2026 Equinox",
         url: "https://www.jdpower.com/cars/2026/chevrolet/equinox"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "All-terrain tires and rugged styling, but GM confirms no added ground clearance, no locking differential, and no skid plates — primarily an appearance package rather than added capability.",
+      estimated: false
+    }
   },
   {
     id: "pathfinder-s",
@@ -3716,7 +3955,7 @@ const SUV_DATA = [
     warrantyBasic: "3 yr / 36,000 mi",
     warrantyPowertrain: "5 yr / 60,000 mi",
     cargo: {
-      behind2nd: 45.0,
+      behind2nd: 45,
       maxCargo: 80.5
     },
     features: [
@@ -3742,7 +3981,13 @@ const SUV_DATA = [
         label: "CarEdge – Pathfinder Insurance",
         url: "https://caredge.com/nissan/pathfinder/insurance"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard 4x4/AWD with no terrain-mode selector or all-terrain tires on this trim.",
+      estimated: false
+    }
   },
   {
     id: "pathfinder-sv",
@@ -3807,7 +4052,7 @@ const SUV_DATA = [
     warrantyBasic: "3 yr / 36,000 mi",
     warrantyPowertrain: "5 yr / 60,000 mi",
     cargo: {
-      behind2nd: 45.0,
+      behind2nd: 45,
       maxCargo: 80.5
     },
     features: [
@@ -3833,7 +4078,13 @@ const SUV_DATA = [
         label: "CarEdge – Pathfinder Insurance",
         url: "https://caredge.com/nissan/pathfinder/insurance"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard 4x4/AWD with no terrain-mode selector or all-terrain tires on this trim.",
+      estimated: false
+    }
   },
   {
     id: "pathfinder-sl",
@@ -3898,7 +4149,7 @@ const SUV_DATA = [
     warrantyBasic: "3 yr / 36,000 mi",
     warrantyPowertrain: "5 yr / 60,000 mi",
     cargo: {
-      behind2nd: 45.0,
+      behind2nd: 45,
       maxCargo: 80.5
     },
     features: [
@@ -3924,7 +4175,13 @@ const SUV_DATA = [
         label: "CarEdge – Pathfinder Insurance",
         url: "https://caredge.com/nissan/pathfinder/insurance"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard 4x4/AWD with no terrain-mode selector or all-terrain tires on this trim.",
+      estimated: false
+    }
   },
   {
     id: "pathfinder-rock-creek",
@@ -3989,7 +4246,7 @@ const SUV_DATA = [
     warrantyBasic: "3 yr / 36,000 mi",
     warrantyPowertrain: "5 yr / 60,000 mi",
     cargo: {
-      behind2nd: 45.0,
+      behind2nd: 45,
       maxCargo: 80.5
     },
     features: [
@@ -4015,7 +4272,13 @@ const SUV_DATA = [
         label: "CarEdge – Pathfinder Insurance",
         url: "https://caredge.com/nissan/pathfinder/insurance"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "Rock Creek-exclusive off-road-tuned suspension, all-terrain tires, hill descent control, and 7 terrain modes (incl. Mud/Rut and Sand) with a 15.6° approach angle — the most capable Pathfinder trim, though it lacks a locking differential or low-range gearing.",
+      estimated: false
+    }
   },
   {
     id: "pathfinder-platinum",
@@ -4080,7 +4343,7 @@ const SUV_DATA = [
     warrantyBasic: "3 yr / 36,000 mi",
     warrantyPowertrain: "5 yr / 60,000 mi",
     cargo: {
-      behind2nd: 45.0,
+      behind2nd: 45,
       maxCargo: 80.5
     },
     features: [
@@ -4106,7 +4369,13 @@ const SUV_DATA = [
         label: "CarEdge – Pathfinder Insurance",
         url: "https://caredge.com/nissan/pathfinder/insurance"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard 4x4/AWD with no terrain-mode selector or all-terrain tires on this trim.",
+      estimated: false
+    }
   },
   {
     id: "4runner-gas-sr5",
@@ -4193,7 +4462,13 @@ const SUV_DATA = [
         label: "CarEdge – 4Runner Insurance",
         url: "https://caredge.com/toyota/4runner/insurance"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "4Runner's body-on-frame platform and part-time 4WD system (with low-range transfer case on 4WD models) already out-capabilities typical crossover AWD, but this trim lacks the TRD Off-Road/Pro's locking rear differential and Crawl Control.",
+      estimated: false
+    }
   },
   {
     id: "4runner-gas-trd-sport",
@@ -4280,7 +4555,13 @@ const SUV_DATA = [
         label: "CarEdge – 4Runner Insurance",
         url: "https://caredge.com/toyota/4runner/insurance"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "4Runner's body-on-frame platform and part-time 4WD system (with low-range transfer case on 4WD models) already out-capabilities typical crossover AWD, but this trim lacks the TRD Off-Road/Pro's locking rear differential and Crawl Control.",
+      estimated: false
+    }
   },
   {
     id: "4runner-gas-trd-off-road",
@@ -4367,7 +4648,13 @@ const SUV_DATA = [
         label: "CarEdge – 4Runner Insurance",
         url: "https://caredge.com/toyota/4runner/insurance"
       }
-    ]
+    ],
+    offRoad: {
+      value: 90,
+      display: "Serious",
+      detail: "Standard electronic locking rear differential, a part-time 4WD system with a genuine low-range 2-speed transfer case, Crawl Control, and Multi-Terrain Select — body-on-frame, genuinely trail-rated hardware, not just a drive-mode dial.",
+      estimated: false
+    }
   },
   {
     id: "4runner-gas-limited",
@@ -4454,7 +4741,13 @@ const SUV_DATA = [
         label: "CarEdge – 4Runner Insurance",
         url: "https://caredge.com/toyota/4runner/insurance"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "4Runner's body-on-frame platform and part-time 4WD system (with low-range transfer case on 4WD models) already out-capabilities typical crossover AWD, but this trim lacks the TRD Off-Road/Pro's locking rear differential and Crawl Control.",
+      estimated: false
+    }
   },
   {
     id: "4runner-hybrid-trd-off-road",
@@ -4537,7 +4830,13 @@ const SUV_DATA = [
         label: "Auto Reliability Index – 4Runner",
         url: "https://autoreliabilityindex.com/toyota/4runner"
       }
-    ]
+    ],
+    offRoad: {
+      value: 90,
+      display: "Serious",
+      detail: "Standard electronic locking rear differential, a part-time 4WD system with a genuine low-range 2-speed transfer case, Crawl Control, and Multi-Terrain Select — body-on-frame, genuinely trail-rated hardware, not just a drive-mode dial.",
+      estimated: false
+    }
   },
   {
     id: "4runner-hybrid-limited",
@@ -4620,7 +4919,13 @@ const SUV_DATA = [
         label: "Auto Reliability Index – 4Runner",
         url: "https://autoreliabilityindex.com/toyota/4runner"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "4Runner's body-on-frame platform and part-time 4WD system (with low-range transfer case on 4WD models) already out-capabilities typical crossover AWD, but this trim lacks the TRD Off-Road/Pro's locking rear differential and Crawl Control.",
+      estimated: false
+    }
   },
   {
     id: "4runner-hybrid-platinum",
@@ -4703,7 +5008,13 @@ const SUV_DATA = [
         label: "Auto Reliability Index – 4Runner",
         url: "https://autoreliabilityindex.com/toyota/4runner"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "4Runner's body-on-frame platform and part-time 4WD system (with low-range transfer case on 4WD models) already out-capabilities typical crossover AWD, but this trim lacks the TRD Off-Road/Pro's locking rear differential and Crawl Control.",
+      estimated: false
+    }
   },
   {
     id: "4runner-hybrid-trd-pro",
@@ -4786,7 +5097,13 @@ const SUV_DATA = [
         label: "Auto Reliability Index – 4Runner",
         url: "https://autoreliabilityindex.com/toyota/4runner"
       }
-    ]
+    ],
+    offRoad: {
+      value: 90,
+      display: "Serious",
+      detail: "Standard electronic locking rear differential, a part-time 4WD system with a genuine low-range 2-speed transfer case, Crawl Control, and Multi-Terrain Select — body-on-frame, genuinely trail-rated hardware, not just a drive-mode dial. Adds FOX performance shocks and a Stabilizer Disconnect Mechanism for extra suspension articulation.",
+      estimated: false
+    }
   },
   {
     id: "escape-active",
@@ -4873,7 +5190,13 @@ const SUV_DATA = [
         label: "Auto Reliability Index – Escape",
         url: "https://autoreliabilityindex.com/ford/escape/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with selectable drive modes (Normal/Eco/Sport/Slippery); no off-road trim, all-terrain tires, or underbody protection offered on this generation.",
+      estimated: false
+    }
   },
   {
     id: "escape-st-line-select",
@@ -4960,7 +5283,13 @@ const SUV_DATA = [
         label: "Auto Reliability Index – Escape",
         url: "https://autoreliabilityindex.com/ford/escape/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with selectable drive modes (Normal/Eco/Sport/Slippery); no off-road trim, all-terrain tires, or underbody protection offered on this generation.",
+      estimated: false
+    }
   },
   {
     id: "escape-platinum",
@@ -5047,7 +5376,13 @@ const SUV_DATA = [
         label: "Auto Reliability Index – Escape",
         url: "https://autoreliabilityindex.com/ford/escape/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with selectable drive modes (Normal/Eco/Sport/Slippery); no off-road trim, all-terrain tires, or underbody protection offered on this generation.",
+      estimated: false
+    }
   },
   {
     id: "escape-st-line-elite",
@@ -5134,7 +5469,13 @@ const SUV_DATA = [
         label: "Auto Reliability Index – Escape",
         url: "https://autoreliabilityindex.com/ford/escape/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with selectable drive modes (Normal/Eco/Sport/Slippery); no off-road trim, all-terrain tires, or underbody protection offered on this generation.",
+      estimated: false
+    }
   },
   {
     id: "cx50-25-s-select",
@@ -5221,7 +5562,13 @@ const SUV_DATA = [
         label: "IIHS – 2026 CX-50",
         url: "https://www.iihs.org/ratings/vehicle/mazda/cx-50-4-door-suv/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "Standard i-Activ AWD plus Mi-Drive with a dedicated Off-Road mode and 8.3–8.6\" ground clearance (higher than the CX-5) across the lineup — no locking differential or low-range gearing, but more off-road-oriented than most compact crossovers out of the box.",
+      estimated: false
+    }
   },
   {
     id: "cx50-hybrid-preferred",
@@ -5308,7 +5655,13 @@ const SUV_DATA = [
         label: "IIHS – 2026 CX-50",
         url: "https://www.iihs.org/ratings/vehicle/mazda/cx-50-4-door-suv/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "Standard i-Activ AWD plus Mi-Drive with a dedicated Off-Road mode and 8.3–8.6\" ground clearance (higher than the CX-5) across the lineup — no locking differential or low-range gearing, but more off-road-oriented than most compact crossovers out of the box.",
+      estimated: false
+    }
   },
   {
     id: "cx50-hybrid-premium-plus",
@@ -5395,7 +5748,13 @@ const SUV_DATA = [
         label: "IIHS – 2026 CX-50",
         url: "https://www.iihs.org/ratings/vehicle/mazda/cx-50-4-door-suv/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "Standard i-Activ AWD plus Mi-Drive with a dedicated Off-Road mode and 8.3–8.6\" ground clearance (higher than the CX-5) across the lineup — no locking differential or low-range gearing, but more off-road-oriented than most compact crossovers out of the box.",
+      estimated: false
+    }
   },
   {
     id: "cx50-25-turbo-premium-plus",
@@ -5482,7 +5841,13 @@ const SUV_DATA = [
         label: "IIHS – 2026 CX-50",
         url: "https://www.iihs.org/ratings/vehicle/mazda/cx-50-4-door-suv/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "Standard i-Activ AWD plus Mi-Drive with a dedicated Off-Road mode and 8.3–8.6\" ground clearance (higher than the CX-5) across the lineup — no locking differential or low-range gearing, but more off-road-oriented than most compact crossovers out of the box.",
+      estimated: false
+    }
   },
   {
     id: "grand-cherokee-laredo",
@@ -5569,7 +5934,13 @@ const SUV_DATA = [
         label: "J.D. Power – 2026 Grand Cherokee",
         url: "https://www.jdpower.com/cars/2026/jeep/grand-cherokee"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard Quadra-Trac I AWD — capable in snow and light trail conditions, but without the low-range transfer case or terrain-management hardware that Overland/Summit Reserve trims add.",
+      estimated: false
+    }
   },
   {
     id: "grand-cherokee-limited",
@@ -5656,7 +6027,13 @@ const SUV_DATA = [
         label: "J.D. Power – 2026 Grand Cherokee",
         url: "https://www.jdpower.com/cars/2026/jeep/grand-cherokee"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard Quadra-Trac I AWD — capable in snow and light trail conditions, but without the low-range transfer case or terrain-management hardware that Overland/Summit Reserve trims add.",
+      estimated: false
+    }
   },
   {
     id: "grand-cherokee-overland",
@@ -5743,7 +6120,13 @@ const SUV_DATA = [
         label: "J.D. Power – 2026 Grand Cherokee",
         url: "https://www.jdpower.com/cars/2026/jeep/grand-cherokee"
       }
-    ]
+    ],
+    offRoad: {
+      value: 90,
+      display: "Serious",
+      detail: "Standard Quadra-Drive II (Overland) or Quadra-Trac II/Quadra-Drive II (Summit Reserve) with a low-range transfer case, electronic rear limited-slip differential, and 5-mode Selec-Terrain system — genuine 4x4 hardware, not just a drive-mode dial.",
+      estimated: false
+    }
   },
   {
     id: "grand-cherokee-summit-reserve",
@@ -5830,7 +6213,13 @@ const SUV_DATA = [
         label: "J.D. Power – 2026 Grand Cherokee",
         url: "https://www.jdpower.com/cars/2026/jeep/grand-cherokee"
       }
-    ]
+    ],
+    offRoad: {
+      value: 90,
+      display: "Serious",
+      detail: "Standard Quadra-Drive II (Overland) or Quadra-Trac II/Quadra-Drive II (Summit Reserve) with a low-range transfer case, electronic rear limited-slip differential, and 5-mode Selec-Terrain system — genuine 4x4 hardware, not just a drive-mode dial.",
+      estimated: false
+    }
   },
   {
     id: "santa-fe-se",
@@ -5913,7 +6302,13 @@ const SUV_DATA = [
         label: "Auto Reliability Index – Santa Fe",
         url: "https://autoreliabilityindex.com/hyundai/santa-fe/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard HTRAC AWD with no terrain-mode selector or all-terrain tires on this trim.",
+      estimated: false
+    }
   },
   {
     id: "santa-fe-sel",
@@ -5996,7 +6391,13 @@ const SUV_DATA = [
         label: "Auto Reliability Index – Santa Fe",
         url: "https://autoreliabilityindex.com/hyundai/santa-fe/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard HTRAC AWD with no terrain-mode selector or all-terrain tires on this trim.",
+      estimated: false
+    }
   },
   {
     id: "santa-fe-xrt",
@@ -6079,7 +6480,13 @@ const SUV_DATA = [
         label: "Auto Reliability Index – Santa Fe",
         url: "https://autoreliabilityindex.com/hyundai/santa-fe/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "XRT-exclusive all-terrain tires and 1.3\" of extra ground clearance (8.3\" total), an AWD lock mode for low-speed traction, a Terrain mode (mud/snow/sand), and standard Downhill Brake Control — real hardware behind the rugged styling.",
+      estimated: false
+    }
   },
   {
     id: "santa-fe-calligraphy",
@@ -6162,7 +6569,13 @@ const SUV_DATA = [
         label: "Auto Reliability Index – Santa Fe",
         url: "https://autoreliabilityindex.com/hyundai/santa-fe/2026"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard HTRAC AWD with no terrain-mode selector or all-terrain tires on this trim.",
+      estimated: false
+    }
   },
   {
     id: "passport-rtl",
@@ -6245,7 +6658,13 @@ const SUV_DATA = [
         label: "Honda News – IIHS TOP SAFETY PICK+",
         url: "https://www.hondainamerica.com/2026-honda-passport-earns-top-safety-pick-rating-from-iihs/"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD (Intelligent Variable Torque Management) with no off-road suspension tuning, all-terrain tires, or underbody protection on this trim.",
+      estimated: false
+    }
   },
   {
     id: "passport-rtl-towing",
@@ -6328,7 +6747,13 @@ const SUV_DATA = [
         label: "Honda News – IIHS TOP SAFETY PICK+",
         url: "https://www.hondainamerica.com/2026-honda-passport-earns-top-safety-pick-rating-from-iihs/"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD (Intelligent Variable Torque Management) with no off-road suspension tuning, all-terrain tires, or underbody protection on this trim.",
+      estimated: false
+    }
   },
   {
     id: "passport-trailsport",
@@ -6411,7 +6836,13 @@ const SUV_DATA = [
         label: "Honda News – IIHS TOP SAFETY PICK+",
         url: "https://www.hondainamerica.com/2026-honda-passport-earns-top-safety-pick-rating-from-iihs/"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "Dedicated off-road-tuned suspension, steel skid plates protecting the oil pan and fuel tank, rated recovery hooks, and 31\" General Grabber all-terrain tires, plus Trail Torque Logic with Snow/Trail/Sand modes — the most off-road-hardware-equipped trim in this comparison without a low-range transfer case or locking differential.",
+      estimated: false
+    }
   },
   {
     id: "passport-trailsport-elite",
@@ -6494,7 +6925,13 @@ const SUV_DATA = [
         label: "Honda News – IIHS TOP SAFETY PICK+",
         url: "https://www.hondainamerica.com/2026-honda-passport-earns-top-safety-pick-rating-from-iihs/"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "Dedicated off-road-tuned suspension, steel skid plates protecting the oil pan and fuel tank, rated recovery hooks, and 31\" General Grabber all-terrain tires, plus Trail Torque Logic with Snow/Trail/Sand modes — the most off-road-hardware-equipped trim in this comparison without a low-range transfer case or locking differential.",
+      estimated: false
+    }
   },
   {
     id: "highlander-xle",
@@ -6581,7 +7018,13 @@ const SUV_DATA = [
         label: "Cars.com – How Safe Is the 2026 Highlander?",
         url: "https://www.cars.com/articles/how-safe-is-the-2026-toyota-highlander-526469/"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with Multi-Terrain Select on some trims; no raised suspension, all-terrain tires, or off-road trim offered on the Highlander.",
+      estimated: false
+    }
   },
   {
     id: "highlander-xse",
@@ -6668,7 +7111,13 @@ const SUV_DATA = [
         label: "Cars.com – How Safe Is the 2026 Highlander?",
         url: "https://www.cars.com/articles/how-safe-is-the-2026-toyota-highlander-526469/"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with Multi-Terrain Select on some trims; no raised suspension, all-terrain tires, or off-road trim offered on the Highlander.",
+      estimated: false
+    }
   },
   {
     id: "highlander-limited",
@@ -6755,7 +7204,13 @@ const SUV_DATA = [
         label: "Cars.com – How Safe Is the 2026 Highlander?",
         url: "https://www.cars.com/articles/how-safe-is-the-2026-toyota-highlander-526469/"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with Multi-Terrain Select on some trims; no raised suspension, all-terrain tires, or off-road trim offered on the Highlander.",
+      estimated: false
+    }
   },
   {
     id: "highlander-platinum",
@@ -6842,7 +7297,13 @@ const SUV_DATA = [
         label: "Cars.com – How Safe Is the 2026 Highlander?",
         url: "https://www.cars.com/articles/how-safe-is-the-2026-toyota-highlander-526469/"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with Multi-Terrain Select on some trims; no raised suspension, all-terrain tires, or off-road trim offered on the Highlander.",
+      estimated: false
+    }
   },
   {
     id: "telluride-lx",
@@ -6907,8 +7368,8 @@ const SUV_DATA = [
     warrantyBasic: "5 yr / 60,000 mi",
     warrantyPowertrain: "10 yr / 100,000 mi",
     cargo: {
-      behind2nd: 46.0,
-      maxCargo: 87.0
+      behind2nd: 46,
+      maxCargo: 87
     },
     features: [
       "Standard 3-row seating for 7 or 8",
@@ -6929,7 +7390,13 @@ const SUV_DATA = [
         label: "Kia of Lincoln – IIHS TOP SAFETY PICK+",
         url: "https://www.kiaoflincoln.com/2027-kia-telluride-earns-2026-iihs-top-safety-pick-rating/"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with no terrain-mode selector or all-terrain tires on this trim.",
+      estimated: false
+    }
   },
   {
     id: "telluride-ex",
@@ -6994,8 +7461,8 @@ const SUV_DATA = [
     warrantyBasic: "5 yr / 60,000 mi",
     warrantyPowertrain: "10 yr / 100,000 mi",
     cargo: {
-      behind2nd: 46.0,
-      maxCargo: 87.0
+      behind2nd: 46,
+      maxCargo: 87
     },
     features: [
       "Standard 3-row seating for 7 or 8",
@@ -7016,7 +7483,13 @@ const SUV_DATA = [
         label: "Kia of Lincoln – IIHS TOP SAFETY PICK+",
         url: "https://www.kiaoflincoln.com/2027-kia-telluride-earns-2026-iihs-top-safety-pick-rating/"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with no terrain-mode selector or all-terrain tires on this trim.",
+      estimated: false
+    }
   },
   {
     id: "telluride-sx",
@@ -7081,8 +7554,8 @@ const SUV_DATA = [
     warrantyBasic: "5 yr / 60,000 mi",
     warrantyPowertrain: "10 yr / 100,000 mi",
     cargo: {
-      behind2nd: 46.0,
-      maxCargo: 87.0
+      behind2nd: 46,
+      maxCargo: 87
     },
     features: [
       "Standard 3-row seating for 7 or 8",
@@ -7103,7 +7576,13 @@ const SUV_DATA = [
         label: "Kia of Lincoln – IIHS TOP SAFETY PICK+",
         url: "https://www.kiaoflincoln.com/2027-kia-telluride-earns-2026-iihs-top-safety-pick-rating/"
       }
-    ]
+    ],
+    offRoad: {
+      value: 35,
+      display: "Light",
+      detail: "Standard AWD with no terrain-mode selector or all-terrain tires on this trim.",
+      estimated: false
+    }
   },
   {
     id: "telluride-x-pro",
@@ -7168,8 +7647,8 @@ const SUV_DATA = [
     warrantyBasic: "5 yr / 60,000 mi",
     warrantyPowertrain: "10 yr / 100,000 mi",
     cargo: {
-      behind2nd: 46.0,
-      maxCargo: 87.0
+      behind2nd: 46,
+      maxCargo: 87
     },
     features: [
       "Standard 3-row seating for 7 or 8",
@@ -7190,9 +7669,16 @@ const SUV_DATA = [
         label: "Kia of Lincoln – IIHS TOP SAFETY PICK+",
         url: "https://www.kiaoflincoln.com/2027-kia-telluride-earns-2026-iihs-top-safety-pick-rating/"
       }
-    ]
+    ],
+    offRoad: {
+      value: 60,
+      display: "Moderate",
+      detail: "X-Pro-exclusive all-terrain tires, increased ground clearance, integrated recovery hooks, a dedicated Terrain drive mode, and a Ground View Monitor for low-speed obstacle spotting — no locking differential or low-range gearing, but the most trail-focused Telluride trim.",
+      estimated: false
+    }
   }
 ];
+
 const DEALERS = {
   toyota: [
     {
@@ -7200,15 +7686,15 @@ const DEALERS = {
       address: "3350 S US Highway 1, Fort Pierce, FL 34982",
       phone: "(772) 464-8440",
       distance: "~9 miles from Port St. Lucie",
-      website: "https://www.bevsmithtoyota.com/",
+      website: "https://www.bevsmithtoyota.com/"
     },
     {
       name: "Treasure Coast Toyota of Stuart",
       address: "5101 SE Federal Hwy, Stuart, FL 34997",
       phone: "(772) 283-8300",
       distance: "~15 miles from Port St. Lucie",
-      website: "https://www.treasurecoasttoyotaofstuart.com/",
-    },
+      website: "https://www.treasurecoasttoyotaofstuart.com/"
+    }
   ],
   honda: [
     {
@@ -7216,8 +7702,8 @@ const DEALERS = {
       address: "4200 SE Federal Hwy, Stuart, FL 34997",
       phone: "(844) 362-7193",
       distance: "~15 miles from Port St. Lucie",
-      website: "https://www.johnsonhondaofstuart.com/",
-    },
+      website: "https://www.johnsonhondaofstuart.com/"
+    }
   ],
   mazda: [
     {
@@ -7225,8 +7711,8 @@ const DEALERS = {
       address: "3725 SE Federal Hwy, Stuart, FL 34997",
       phone: "(772) 288-1999",
       distance: "~15 miles from Port St. Lucie",
-      website: "https://www.wallacemazdaofstuart.com/",
-    },
+      website: "https://www.wallacemazdaofstuart.com/"
+    }
   ],
   subaru: [
     {
@@ -7234,8 +7720,8 @@ const DEALERS = {
       address: "999 US Highway 1, Vero Beach, FL 32960",
       phone: "(772) 569-6060",
       distance: "~22 miles from Port St. Lucie",
-      website: "https://www.dyersubaru.com/",
-    },
+      website: "https://www.dyersubaru.com/"
+    }
   ],
   kia: [
     {
@@ -7243,8 +7729,8 @@ const DEALERS = {
       address: "3131 SE Federal Hwy, Stuart, FL 34994",
       phone: "(772) 291-9568",
       distance: "~14 miles from Port St. Lucie",
-      website: "https://www.wallacekiaofstuart.com/",
-    },
+      website: "https://www.wallacekiaofstuart.com/"
+    }
   ],
   hyundai: [
     {
@@ -7252,8 +7738,8 @@ const DEALERS = {
       address: "3801 SE Federal Hwy, Stuart, FL 34997",
       phone: "(772) 692-2277",
       distance: "~15 miles from Port St. Lucie",
-      website: "https://www.wallacehyundaiofstuart.com/",
-    },
+      website: "https://www.wallacehyundaiofstuart.com/"
+    }
   ],
   nissan: [
     {
@@ -7261,8 +7747,8 @@ const DEALERS = {
       address: "4815 S US Hwy 1, Fort Pierce, FL 34982",
       phone: "(772) 924-2667",
       distance: "~9 miles from Port St. Lucie",
-      website: "https://www.nissanoffortpierce.com/",
-    },
+      website: "https://www.nissanoffortpierce.com/"
+    }
   ],
   chevrolet: [
     {
@@ -7270,8 +7756,8 @@ const DEALERS = {
       address: "4200 S US Highway 1, Fort Pierce, FL 34982",
       phone: "(772) 242-7827",
       distance: "~9 miles from Port St. Lucie",
-      website: "https://www.dyerchevyftpierce.com/",
-    },
+      website: "https://www.dyerchevyftpierce.com/"
+    }
   ],
   ford: [
     {
@@ -7279,15 +7765,15 @@ const DEALERS = {
       address: "5435 S US Highway 1, Fort Pierce, FL 34982",
       phone: "(772) 461-6000",
       distance: "~9 miles from Port St. Lucie",
-      website: "https://www.sunrise-ford.com/",
+      website: "https://www.sunrise-ford.com/"
     },
     {
       name: "Essential Ford of Stuart",
       address: "4000 SE Federal Hwy, Stuart, FL 34997",
       phone: "(772) 287-0955",
       distance: "~15 miles from Port St. Lucie",
-      website: "https://www.essentialford.com/",
-    },
+      website: "https://www.essentialford.com/"
+    }
   ],
   jeep: [
     {
@@ -7295,14 +7781,14 @@ const DEALERS = {
       address: "5851 S US Hwy 1, Fort Pierce, FL 34982",
       phone: "(772) 242-0031",
       distance: "~9 miles from Port St. Lucie",
-      website: "https://www.arrigoftpierce.com/",
+      website: "https://www.arrigoftpierce.com/"
     },
     {
       name: "Wallace Chrysler Jeep Dodge Ram",
       address: "2755 SE Federal Hwy, Stuart, FL 34994",
       phone: "(772) 247-1686",
       distance: "~15 miles from Port St. Lucie",
-      website: "https://www.wallacecjd.com/",
-    },
-  ],
+      website: "https://www.wallacecjd.com/"
+    }
+  ]
 };

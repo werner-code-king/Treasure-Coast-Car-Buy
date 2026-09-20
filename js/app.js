@@ -52,6 +52,7 @@
     fuelTank: (v) => parseLeadingNumber(v.fuelTank),
     towing: (v) => parseLeadingNumber(v.towing),
     groundClearance: (v) => parseLeadingNumber(v.groundClearance),
+    offRoad: (v) => v.offRoad.value,
     curbWeight: (v) => parseLeadingNumber(v.curbWeight),
     wheelbase: (v) => parseLeadingNumber(v.wheelbase),
     nhtsa: (v) => v.nhtsa.stars,
@@ -107,6 +108,7 @@
         { label: "Cargo (2nd row)", detail: "Cubic feet of cargo space behind the 2nd row." },
         { label: "Max Cargo", detail: "Cubic feet with all rear seats folded flat." },
         { label: "Ground Clearance", detail: "Unladen ground clearance." },
+        { label: "Off-Road Capability", detail: "Minimal/Light/Moderate/Serious tier based on standard hardware for that trim — locking differentials and low-range transfer cases score Serious; all-terrain tires, off-road drive modes, and augmented ground clearance score Moderate. Not part of the Value Score." },
         { label: "Curb Weight", detail: "Manufacturer-published curb weight." },
         { label: "Wheelbase", detail: "Distance between front and rear axles." },
       ],
@@ -149,6 +151,7 @@
     { label: "Most Torque", dir: -1, get: (v) => parseLeadingNumber(v.torque), fmt: (v) => v.torque },
     { label: "Highest Tow Rating", dir: -1, get: (v) => parseLeadingNumber(v.towing), fmt: (v) => v.towing },
     { label: "Most Ground Clearance", dir: -1, get: (v) => parseLeadingNumber(v.groundClearance), fmt: (v) => v.groundClearance },
+    { label: "Most Off-Road Capable", dir: -1, get: (v) => v.offRoad.value, fmt: (v) => v.offRoad.display },
     { label: "Longest Basic Warranty", dir: -1, get: (v) => parseLeadingNumber(v.warrantyBasic), fmt: (v) => v.warrantyBasic },
     { label: "Longest Powertrain Warranty", dir: -1, get: (v) => parseLeadingNumber(v.warrantyPowertrain), fmt: (v) => v.warrantyPowertrain },
     { label: "Best NHTSA Rating", dir: -1, get: (v) => v.nhtsa.stars, fmt: (v) => v.nhtsa.display },
@@ -275,6 +278,7 @@
           ${statCell("Seats", v.seats + (v.thirdRow !== "No" ? " (3rd row " + v.thirdRow.toLowerCase() + ")" : ""))}
           ${statCell("0&ndash;60 mph", v.zeroToSixty)}
           ${statCell("Towing", v.towing)}
+          ${statCell("Off-Road Capability", v.offRoad.display + estBadge(v.offRoad.estimated))}
         </div>
         <div class="card-cta">View details &amp; local dealers &rarr;</div>
       </article>
@@ -312,6 +316,7 @@
         <td>${v.fuelTank}</td>
         <td>${v.towing}</td>
         <td>${v.groundClearance}</td>
+        <td>${v.offRoad.display}${estBadge(v.offRoad.estimated)}</td>
         <td>${v.curbWeight}</td>
         <td>${v.wheelbase}</td>
         <td>${v.nhtsa.display}${estBadge(v.nhtsa.estimated)}</td>
@@ -429,10 +434,12 @@
           ${specRow("Fuel Tank", v.fuelTank)}
           ${specRow("Towing", v.towing)}
           ${specRow("Ground Clearance", v.groundClearance)}
+          ${specRow("Off-Road Capability", v.offRoad.display + estBadge(v.offRoad.estimated))}
           ${specRow("Curb Weight", v.curbWeight)}
           ${specRow("Wheelbase", v.wheelbase)}
         </div>
         ${v.cargo.note ? `<p>${v.cargo.note}</p>` : ""}
+        <p>${v.offRoad.detail}</p>
       </div>
 
       <div class="detail-section">
