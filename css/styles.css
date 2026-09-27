@@ -251,6 +251,50 @@ output { font-size: 0.85rem; color: var(--text); }
   vertical-align: middle;
 }
 
+.card-section {
+  border-top: 1px dashed var(--border);
+  padding-top: 10px;
+}
+
+.card-subhead {
+  margin: 0 0 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--text-dim);
+}
+
+.link-price-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.82rem;
+}
+
+.link-price-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.link-price-list a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+.link-price-list a:hover { text-decoration: underline; }
+
+.link-price {
+  font-weight: 600;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
 .card-cta {
   margin-top: auto;
   font-size: 0.82rem;

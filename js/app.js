@@ -253,6 +253,49 @@
     return `<div><span class="spec-label">${label}</span><span class="spec-value">${valueHtml}</span></div>`;
   }
 
+  // Online Pricing / Local Dealers card sections are shared by renderCards()
+  // and openDetail() so the two stay in sync.
+  function onlinePricingSection(v) {
+    return `
+      <div class="card-section">
+        <h4 class="card-subhead">Online Pricing</h4>
+        <ul class="link-price-list">
+          ${v.onlinePricing
+            .map(
+              (o) => `
+            <li>
+              <a href="${o.url}" target="_blank" rel="noopener noreferrer">${o.seller}</a>
+              <span class="link-price">${fmtMoney(o.price)}${estBadge(o.estimated)}</span>
+            </li>
+          `
+            )
+            .join("")}
+        </ul>
+      </div>
+    `;
+  }
+
+  function dealersSection(v) {
+    const dealers = DEALERS[v.dealerBrand] || [];
+    return `
+      <div class="card-section">
+        <h4 class="card-subhead">Local Dealers</h4>
+        <ul class="link-price-list">
+          ${dealers
+            .map(
+              (d) => `
+            <li>
+              <a href="${d.website}" target="_blank" rel="noopener noreferrer">${d.name}</a>
+              <span class="link-price">${fmtMoney(v.price.low)}${estBadge(v.price.estimated)}</span>
+            </li>
+          `
+            )
+            .join("")}
+        </ul>
+      </div>
+    `;
+  }
+
   function renderCards(vehicles) {
     dom.cards.innerHTML = vehicles
       .map(
@@ -280,7 +323,9 @@
           ${statCell("Towing", v.towing)}
           ${statCell("Off-Road Capability", v.offRoad.display + estBadge(v.offRoad.estimated))}
         </div>
-        <div class="card-cta">View details &amp; local dealers &rarr;</div>
+        ${onlinePricingSection(v)}
+        ${dealersSection(v)}
+        <div class="card-cta">View full spec sheet &rarr;</div>
       </article>
     `
       )
@@ -454,13 +499,29 @@
         <ul class="feature-list">${v.features.map((f) => `<li>${f}</li>`).join("")}</ul>
       </div>
       <div class="detail-section">
+        <h3>Online Pricing</h3>
+        <ul class="dealer-list">
+          ${v.onlinePricing
+            .map(
+              (o) => `
+            <li class="dealer-item">
+              <strong>${o.seller} &mdash; ${fmtMoney(o.price)}${estBadge(o.estimated)}</strong>
+              ${o.detail}<br/>
+              <a href="${o.url}" target="_blank" rel="noopener noreferrer">${o.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}</a>
+            </li>
+          `
+            )
+            .join("")}
+        </ul>
+      </div>
+      <div class="detail-section">
         <h3>${v.make} Dealers near Port St. Lucie, FL</h3>
         <ul class="dealer-list">
           ${dealers
             .map(
               (d) => `
             <li class="dealer-item">
-              <strong>${d.name}</strong>
+              <strong>${d.name} &mdash; ${fmtMoney(v.price.low)}${estBadge(v.price.estimated)} MSRP</strong>
               ${d.address}<br/>
               ${d.phone} &middot; ${d.distance}<br/>
               <a href="${d.website}" target="_blank" rel="noopener noreferrer">${d.website.replace(/^https?:\/\//, "").replace(/\/$/, "")}</a>
@@ -605,6 +666,7 @@
     // Event delegation: one listener per container instead of re-binding a
     // click/keydown handler on every card/row after each re-render.
     dom.cards.addEventListener("click", (e) => {
+      if (e.target.closest("a")) return;
       const card = e.target.closest(".card");
       if (card) openDetail(card.dataset.id);
     });

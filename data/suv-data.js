@@ -11,6 +11,14 @@
  * trim/pricing and off-road-specific pages, and dealership sites. See each
  * vehicle's `sources` array and the "Criteria & Rankings" tab for details.
  *
+ * `onlinePricing` lists the 3 best estimated online prices (TrueCar,
+ * CarsDirect, Edmunds), ranked lowest first, derived by applying each
+ * service's typical below-MSRP discount range to that trim's MSRP -- see
+ * each entry's `detail` for the sourcing/estimate basis. These are NOT
+ * live quotes; actual pricing depends on real-time inventory and region,
+ * so every entry is flagged `estimated: true` and links to the service to
+ * check current pricing.
+ *
  * `offRoad` is a qualitative Minimal/Light/Moderate/Serious tier (also
  * scored 0-100 for sorting) based on standard hardware for that specific
  * trim: locking differentials and low-range transfer cases score
@@ -121,7 +129,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with a basic drive-mode selector; no all-terrain tires, augmented ground clearance, or underbody protection on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 31515,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 32015,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 32350,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "rav4-hybrid-se",
@@ -214,7 +245,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with a basic drive-mode selector; no all-terrain tires, augmented ground clearance, or underbody protection on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 34160,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 34705,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 35065,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "rav4-hybrid-xle-premium",
@@ -307,7 +361,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with a basic drive-mode selector; no all-terrain tires, augmented ground clearance, or underbody protection on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 35485,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 36050,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 36425,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "rav4-hybrid-woodland",
@@ -400,7 +477,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "Woodland-exclusive all-terrain tires, TRD-tuned suspension, 8.5\" ground clearance, standard tow hitch, and underbody skid protection — the most trail-ready RAV4 trim, though it lacks a locking differential or low-range transfer case.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 39075,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 39695,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 40110,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "rav4-hybrid-limited",
@@ -493,7 +593,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with a basic drive-mode selector; no all-terrain tires, augmented ground clearance, or underbody protection on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 42290,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 42960,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 43410,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "rav4-phev-se",
@@ -582,7 +705,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with a basic drive-mode selector; no all-terrain tires, augmented ground clearance, or underbody protection on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 40590,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 41230,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 41660,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "rav4-phev-woodland",
@@ -671,7 +817,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "Woodland-exclusive all-terrain tires, TRD-tuned suspension, 8.5\" ground clearance, standard tow hitch, and underbody skid protection — the most trail-ready RAV4 trim, though it lacks a locking differential or low-range transfer case.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 44180,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 44880,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 45350,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "rav4-phev-xse",
@@ -760,7 +929,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with a basic drive-mode selector; no all-terrain tires, augmented ground clearance, or underbody protection on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 45975,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 46705,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 47190,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "rav4-phev-gr-sport",
@@ -849,7 +1041,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with a basic drive-mode selector; no all-terrain tires, augmented ground clearance, or underbody protection on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 47205,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 47950,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 48450,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "crv-lx",
@@ -942,7 +1157,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD (Real Time AWD with Intelligent Control on applicable trims); no off-road-specific trim, all-terrain tires, or underbody protection offered on the CR-V.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 29220,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 29685,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 29990,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "crv-ex",
@@ -1035,7 +1273,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD (Real Time AWD with Intelligent Control on applicable trims); no off-road-specific trim, all-terrain tires, or underbody protection offered on the CR-V.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 32035,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 32545,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 32885,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "crv-ex-l",
@@ -1128,7 +1389,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD (Real Time AWD with Intelligent Control on applicable trims); no off-road-specific trim, all-terrain tires, or underbody protection offered on the CR-V.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 34825,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 35375,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 35745,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "crv-sport-touring-hybrid",
@@ -1221,7 +1505,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD (Real Time AWD with Intelligent Control on applicable trims); no off-road-specific trim, all-terrain tires, or underbody protection offered on the CR-V.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 39925,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 40560,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 40980,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "cx5-25-s",
@@ -1314,7 +1621,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard i-Activ AWD; CX-5 does not offer the CX-50's Mi-Drive Off-Road mode, all-terrain tires, or raised suspension.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 28340,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 28790,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 29090,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "cx5-25-s-select",
@@ -1407,7 +1737,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard i-Activ AWD; CX-5 does not offer the CX-50's Mi-Drive Off-Road mode, all-terrain tires, or raised suspension.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 30230,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 30710,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 31030,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "cx5-25-s-preferred",
@@ -1500,7 +1853,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard i-Activ AWD; CX-5 does not offer the CX-50's Mi-Drive Off-Road mode, all-terrain tires, or raised suspension.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 32365,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 32880,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 33220,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "cx5-25-s-premium",
@@ -1593,7 +1969,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard i-Activ AWD; CX-5 does not offer the CX-50's Mi-Drive Off-Road mode, all-terrain tires, or raised suspension.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 34870,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 35425,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 35795,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "cx5-25-s-premium-plus",
@@ -1686,7 +2085,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard i-Activ AWD; CX-5 does not offer the CX-50's Mi-Drive Off-Road mode, all-terrain tires, or raised suspension.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 36845,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 37430,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 37820,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "forester-gas-base",
@@ -1779,7 +2201,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "Standard Symmetrical AWD with X-MODE and automatic Hill Descent Control, plus 8.7\" ground clearance — genuinely more capable than typical crossover AWD, though this lineup doesn't include the Wilderness trim's 9.3\" clearance, skid plate, and dual-function X-MODE.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 28345,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 28795,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 29095,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "forester-gas-premium",
@@ -1872,7 +2317,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "Standard Symmetrical AWD with X-MODE and automatic Hill Descent Control, plus 8.7\" ground clearance — genuinely more capable than typical crossover AWD, though this lineup doesn't include the Wilderness trim's 9.3\" clearance, skid plate, and dual-function X-MODE.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 31605,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 32105,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 32440,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "forester-gas-limited",
@@ -1965,7 +2433,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "Standard Symmetrical AWD with X-MODE and automatic Hill Descent Control, plus 8.7\" ground clearance — genuinely more capable than typical crossover AWD, though this lineup doesn't include the Wilderness trim's 9.3\" clearance, skid plate, and dual-function X-MODE.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 35620,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 36185,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 36565,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "forester-gas-touring",
@@ -2058,7 +2549,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "Standard Symmetrical AWD with X-MODE and automatic Hill Descent Control, plus 8.7\" ground clearance — genuinely more capable than typical crossover AWD, though this lineup doesn't include the Wilderness trim's 9.3\" clearance, skid plate, and dual-function X-MODE.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 39305,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 39930,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 40345,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "forester-hybrid-premium",
@@ -2147,7 +2661,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "Standard Symmetrical AWD with X-MODE and automatic Hill Descent Control, plus 8.7\" ground clearance — genuinely more capable than typical crossover AWD, though this lineup doesn't include the Wilderness trim's 9.3\" clearance, skid plate, and dual-function X-MODE.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 32820,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 33340,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 33690,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "forester-hybrid-sport",
@@ -2236,7 +2773,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "Standard Symmetrical AWD with X-MODE and automatic Hill Descent Control, plus 8.7\" ground clearance — genuinely more capable than typical crossover AWD, though this lineup doesn't include the Wilderness trim's 9.3\" clearance, skid plate, and dual-function X-MODE.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 34490,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 35035,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 35400,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "forester-hybrid-limited",
@@ -2325,7 +2885,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "Standard Symmetrical AWD with X-MODE and automatic Hill Descent Control, plus 8.7\" ground clearance — genuinely more capable than typical crossover AWD, though this lineup doesn't include the Wilderness trim's 9.3\" clearance, skid plate, and dual-function X-MODE.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 36850,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 37435,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 37825,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "forester-hybrid-touring",
@@ -2414,7 +2997,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "Standard Symmetrical AWD with X-MODE and automatic Hill Descent Control, plus 8.7\" ground clearance — genuinely more capable than typical crossover AWD, though this lineup doesn't include the Wilderness trim's 9.3\" clearance, skid plate, and dual-function X-MODE.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 39260,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 39885,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 40300,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "sportage-lx",
@@ -2507,7 +3113,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD (HTRAC on AWD trims) with a Terrain mode on upper trims; Sportage's off-road-focused X-Line/X-Pro trims aren't part of this lineup.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 28480,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 28930,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 29230,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "sportage-ex",
@@ -2600,7 +3229,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD (HTRAC on AWD trims) with a Terrain mode on upper trims; Sportage's off-road-focused X-Line/X-Pro trims aren't part of this lineup.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 30180,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 30660,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 30975,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "sportage-sx",
@@ -2693,7 +3345,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD (HTRAC on AWD trims) with a Terrain mode on upper trims; Sportage's off-road-focused X-Line/X-Pro trims aren't part of this lineup.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 34020,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 34560,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 34920,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "sportage-sx-prestige-hybrid",
@@ -2786,7 +3461,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD (HTRAC on AWD trims) with a Terrain mode on upper trims; Sportage's off-road-focused X-Line/X-Pro trims aren't part of this lineup.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 39535,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 40160,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 40580,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "tucson-se",
@@ -2879,7 +3577,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with no terrain-mode selector or off-road hardware on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 29340,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 29810,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 30120,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "tucson-xrt",
@@ -2972,7 +3693,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "XRT-exclusive all-terrain tires and 8.3\" ground clearance (vs. standard Tucson) plus a Terrain mode with mud/snow/sand settings — rugged styling backed by real hardware, though Hyundai markets it more for looks than serious trail use.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 32910,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 33430,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 33780,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "tucson-sel-premium",
@@ -3065,7 +3809,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with no terrain-mode selector or off-road hardware on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 33215,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 33745,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 34095,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "tucson-limited",
@@ -3158,7 +3925,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with no terrain-mode selector or off-road hardware on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 36380,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 36960,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 37345,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "rogue-s",
@@ -3251,7 +4041,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with no terrain-mode selector or all-terrain tires on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 28520,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 28975,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 29275,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "rogue-sv",
@@ -3344,7 +4157,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with no terrain-mode selector or all-terrain tires on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 29465,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 29935,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 30245,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "rogue-rock-creek",
@@ -3437,7 +4273,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "Rock Creek-exclusive all-terrain tires, hill descent control, and Intelligent Around View Monitor with Off-Road Mode on beadlock-style wheels — the most capable Rogue trim, though it lacks a locking differential or low-range gearing.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 33150,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 33675,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 34030,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "rogue-sl",
@@ -3530,7 +4389,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with no terrain-mode selector or all-terrain tires on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 34665,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 35215,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 35580,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "rogue-platinum",
@@ -3623,7 +4505,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with no terrain-mode selector or all-terrain tires on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 38160,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 38765,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 39170,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "equinox-lt",
@@ -3712,7 +4617,30 @@ const SUV_DATA = [
       display: "Minimal",
       detail: "Standard crossover AWD (RS/LT) with no terrain modes, all-terrain tires, or off-road styling package.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 27025,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 27455,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 27740,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "equinox-rs",
@@ -3801,7 +4729,30 @@ const SUV_DATA = [
       display: "Minimal",
       detail: "Standard crossover AWD (RS/LT) with no terrain modes, all-terrain tires, or off-road styling package.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 31750,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 32255,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 32590,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "equinox-activ",
@@ -3890,7 +4841,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "All-terrain tires and rugged styling, but GM confirms no added ground clearance, no locking differential, and no skid plates — primarily an appearance package rather than added capability.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 33640,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 34175,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 34530,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "pathfinder-s",
@@ -3987,7 +4961,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard 4x4/AWD with no terrain-mode selector or all-terrain tires on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 37790,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 38390,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 38790,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "pathfinder-sv",
@@ -4084,7 +5081,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard 4x4/AWD with no terrain-mode selector or all-terrain tires on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 39680,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 40310,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 40730,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "pathfinder-sl",
@@ -4181,7 +5201,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard 4x4/AWD with no terrain-mode selector or all-terrain tires on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 42140,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 42805,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 43250,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "pathfinder-rock-creek",
@@ -4278,7 +5321,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "Rock Creek-exclusive off-road-tuned suspension, all-terrain tires, hill descent control, and 7 terrain modes (incl. Mud/Rut and Sand) with a 15.6° approach angle — the most capable Pathfinder trim, though it lacks a locking differential or low-range gearing.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 42610,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 43285,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 43735,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "pathfinder-platinum",
@@ -4375,7 +5441,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard 4x4/AWD with no terrain-mode selector or all-terrain tires on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 48940,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 49720,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 50235,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "4runner-gas-sr5",
@@ -4468,7 +5557,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "4Runner's body-on-frame platform and part-time 4WD system (with low-range transfer case on 4WD models) already out-capabilities typical crossover AWD, but this trim lacks the TRD Off-Road/Pro's locking rear differential and Crawl Control.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 39565,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 40195,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 40615,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "4runner-gas-trd-sport",
@@ -4561,7 +5673,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "4Runner's body-on-frame platform and part-time 4WD system (with low-range transfer case on 4WD models) already out-capabilities typical crossover AWD, but this trim lacks the TRD Off-Road/Pro's locking rear differential and Crawl Control.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 42120,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 42785,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 43235,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "4runner-gas-trd-off-road",
@@ -4654,7 +5789,30 @@ const SUV_DATA = [
       display: "Serious",
       detail: "Standard electronic locking rear differential, a part-time 4WD system with a genuine low-range 2-speed transfer case, Crawl Control, and Multi-Terrain Select — body-on-frame, genuinely trail-rated hardware, not just a drive-mode dial.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 47240,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 47990,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 48490,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "4runner-gas-limited",
@@ -4747,7 +5905,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "4Runner's body-on-frame platform and part-time 4WD system (with low-range transfer case on 4WD models) already out-capabilities typical crossover AWD, but this trim lacks the TRD Off-Road/Pro's locking rear differential and Crawl Control.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 55000,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 55870,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 56455,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "4runner-hybrid-trd-off-road",
@@ -4836,7 +6017,30 @@ const SUV_DATA = [
       display: "Serious",
       detail: "Standard electronic locking rear differential, a part-time 4WD system with a genuine low-range 2-speed transfer case, Crawl Control, and Multi-Terrain Select — body-on-frame, genuinely trail-rated hardware, not just a drive-mode dial.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 49885,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 50680,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 51205,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "4runner-hybrid-limited",
@@ -4925,7 +6129,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "4Runner's body-on-frame platform and part-time 4WD system (with low-range transfer case on 4WD models) already out-capabilities typical crossover AWD, but this trim lacks the TRD Off-Road/Pro's locking rear differential and Crawl Control.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 57645,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 58560,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 59170,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "4runner-hybrid-platinum",
@@ -5014,7 +6241,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "4Runner's body-on-frame platform and part-time 4WD system (with low-range transfer case on 4WD models) already out-capabilities typical crossover AWD, but this trim lacks the TRD Off-Road/Pro's locking rear differential and Crawl Control.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 60160,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 61115,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 61750,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "4runner-hybrid-trd-pro",
@@ -5103,7 +6353,30 @@ const SUV_DATA = [
       display: "Serious",
       detail: "Standard electronic locking rear differential, a part-time 4WD system with a genuine low-range 2-speed transfer case, Crawl Control, and Multi-Terrain Select — body-on-frame, genuinely trail-rated hardware, not just a drive-mode dial. Adds FOX performance shocks and a Stabilizer Disconnect Mechanism for extra suspension articulation.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 64450,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 65470,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 66155,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "escape-active",
@@ -5196,7 +6469,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with selectable drive modes (Normal/Eco/Sport/Slippery); no off-road trim, all-terrain tires, or underbody protection offered on this generation.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 28680,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 29135,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 29440,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "escape-st-line-select",
@@ -5289,7 +6585,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with selectable drive modes (Normal/Eco/Sport/Slippery); no off-road trim, all-terrain tires, or underbody protection offered on this generation.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 32025,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 32535,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 32875,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "escape-platinum",
@@ -5382,7 +6701,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with selectable drive modes (Normal/Eco/Sport/Slippery); no off-road trim, all-terrain tires, or underbody protection offered on this generation.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 34225,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 34765,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 35130,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "escape-st-line-elite",
@@ -5475,7 +6817,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with selectable drive modes (Normal/Eco/Sport/Slippery); no off-road trim, all-terrain tires, or underbody protection offered on this generation.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 35165,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 35720,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 36095,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "cx50-25-s-select",
@@ -5568,7 +6933,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "Standard i-Activ AWD plus Mi-Drive with a dedicated Off-Road mode and 8.3–8.6\" ground clearance (higher than the CX-5) across the lineup — no locking differential or low-range gearing, but more off-road-oriented than most compact crossovers out of the box.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 28255,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 28705,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 29005,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "cx50-hybrid-preferred",
@@ -5661,7 +7049,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "Standard i-Activ AWD plus Mi-Drive with a dedicated Off-Road mode and 8.3–8.6\" ground clearance (higher than the CX-5) across the lineup — no locking differential or low-range gearing, but more off-road-oriented than most compact crossovers out of the box.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 32840,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 33360,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 33710,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "cx50-hybrid-premium-plus",
@@ -5754,7 +7165,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "Standard i-Activ AWD plus Mi-Drive with a dedicated Off-Road mode and 8.3–8.6\" ground clearance (higher than the CX-5) across the lineup — no locking differential or low-range gearing, but more off-road-oriented than most compact crossovers out of the box.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 38225,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 38830,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 39235,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "cx50-25-turbo-premium-plus",
@@ -5847,7 +7281,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "Standard i-Activ AWD plus Mi-Drive with a dedicated Off-Road mode and 8.3–8.6\" ground clearance (higher than the CX-5) across the lineup — no locking differential or low-range gearing, but more off-road-oriented than most compact crossovers out of the box.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 40540,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 41185,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 41615,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "grand-cherokee-laredo",
@@ -5940,7 +7397,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard Quadra-Trac I AWD — capable in snow and light trail conditions, but without the low-range transfer case or terrain-management hardware that Overland/Summit Reserve trims add.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 37790,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 38390,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 38790,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "grand-cherokee-limited",
@@ -6033,7 +7513,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard Quadra-Trac I AWD — capable in snow and light trail conditions, but without the low-range transfer case or terrain-management hardware that Overland/Summit Reserve trims add.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 43650,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 44340,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 44805,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "grand-cherokee-overland",
@@ -6126,7 +7629,30 @@ const SUV_DATA = [
       display: "Serious",
       detail: "Standard Quadra-Drive II (Overland) or Quadra-Trac II/Quadra-Drive II (Summit Reserve) with a low-range transfer case, electronic rear limited-slip differential, and 5-mode Selec-Terrain system — genuine 4x4 hardware, not just a drive-mode dial.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 49700,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 50485,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 51010,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "grand-cherokee-summit-reserve",
@@ -6219,7 +7745,30 @@ const SUV_DATA = [
       display: "Serious",
       detail: "Standard Quadra-Drive II (Overland) or Quadra-Trac II/Quadra-Drive II (Summit Reserve) with a low-range transfer case, electronic rear limited-slip differential, and 5-mode Selec-Terrain system — genuine 4x4 hardware, not just a drive-mode dial.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 55745,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 56630,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 57220,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "santa-fe-se",
@@ -6308,7 +7857,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard HTRAC AWD with no terrain-mode selector or all-terrain tires on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 34300,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 34845,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 35205,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "santa-fe-sel",
@@ -6397,7 +7969,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard HTRAC AWD with no terrain-mode selector or all-terrain tires on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 36700,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 37280,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 37670,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "santa-fe-xrt",
@@ -6486,7 +8081,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "XRT-exclusive all-terrain tires and 1.3\" of extra ground clearance (8.3\" total), an AWD lock mode for low-speed traction, a Terrain mode (mud/snow/sand), and standard Downhill Brake Control — real hardware behind the rugged styling.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 39490,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 40120,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 40535,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "santa-fe-calligraphy",
@@ -6575,7 +8193,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard HTRAC AWD with no terrain-mode selector or all-terrain tires on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 46160,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 46890,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 47380,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "passport-rtl",
@@ -6664,7 +8305,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD (Intelligent Variable Torque Management) with no off-road suspension tuning, all-terrain tires, or underbody protection on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 42480,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 43150,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 43600,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "passport-rtl-towing",
@@ -6753,7 +8417,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD (Intelligent Variable Torque Management) with no off-road suspension tuning, all-terrain tires, or underbody protection on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 43140,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 43825,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 44280,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "passport-trailsport",
@@ -6842,7 +8529,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "Dedicated off-road-tuned suspension, steel skid plates protecting the oil pan and fuel tank, rated recovery hooks, and 31\" General Grabber all-terrain tires, plus Trail Torque Logic with Snow/Trail/Sand modes — the most off-road-hardware-equipped trim in this comparison without a low-range transfer case or locking differential.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 45975,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 46705,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 47190,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "passport-trailsport-elite",
@@ -6931,7 +8641,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "Dedicated off-road-tuned suspension, steel skid plates protecting the oil pan and fuel tank, rated recovery hooks, and 31\" General Grabber all-terrain tires, plus Trail Torque Logic with Snow/Trail/Sand modes — the most off-road-hardware-equipped trim in this comparison without a low-range transfer case or locking differential.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 49755,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 50545,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 51070,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "highlander-xle",
@@ -7024,7 +8757,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with Multi-Terrain Select on some trims; no raised suspension, all-terrain tires, or off-road trim offered on the Highlander.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 43065,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 43745,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 44205,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "highlander-xse",
@@ -7117,7 +8873,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with Multi-Terrain Select on some trims; no raised suspension, all-terrain tires, or off-road trim offered on the Highlander.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 45830,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 46560,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 47045,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "highlander-limited",
@@ -7210,7 +8989,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with Multi-Terrain Select on some trims; no raised suspension, all-terrain tires, or off-road trim offered on the Highlander.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 48100,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 48865,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 49375,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "highlander-platinum",
@@ -7303,7 +9105,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with Multi-Terrain Select on some trims; no raised suspension, all-terrain tires, or off-road trim offered on the Highlander.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 50300,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 51095,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 51630,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "telluride-lx",
@@ -7396,7 +9221,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with no terrain-mode selector or all-terrain tires on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 34775,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 35330,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 35695,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "telluride-ex",
@@ -7489,7 +9337,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with no terrain-mode selector or all-terrain tires on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 40160,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 40800,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 41225,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "telluride-sx",
@@ -7582,7 +9453,30 @@ const SUV_DATA = [
       display: "Light",
       detail: "Standard AWD with no terrain-mode selector or all-terrain tires on this trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 45265,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 45985,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 46465,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   },
   {
     id: "telluride-x-pro",
@@ -7675,7 +9569,30 @@ const SUV_DATA = [
       display: "Moderate",
       detail: "X-Pro-exclusive all-terrain tires, increased ground clearance, integrated recovery hooks, a dedicated Terrain drive mode, and a Ground View Monitor for low-speed obstacle spotting — no locking differential or low-range gearing, but the most trail-focused Telluride trim.",
       estimated: false
-    }
+    },
+    onlinePricing: [
+      {
+        seller: "TrueCar",
+        url: "https://www.truecar.com/",
+        price: 49610,
+        detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
+        estimated: true
+      },
+      {
+        seller: "CarsDirect",
+        url: "https://www.carsdirect.com/",
+        price: 50400,
+        detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
+        estimated: true
+      },
+      {
+        seller: "Edmunds",
+        url: "https://www.edmunds.com/",
+        price: 50925,
+        detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
+        estimated: true
+      }
+    ]
   }
 ];
 
