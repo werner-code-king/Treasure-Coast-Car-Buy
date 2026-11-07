@@ -1190,8 +1190,8 @@ const SUV_DATA = [
     className: "Compact SUV",
     drivetrain: "FWD standard / AWD avail.",
     price: {
-      low: 33900,
-      estimated: true
+      low: 33150,
+      estimated: false
     },
     engine: "1.5L Turbo I4 (Hybrid trims: 2.0L I4 + electric motors)",
     hp: "190 hp (Hybrid: up to 204 hp)",
@@ -1260,6 +1260,10 @@ const SUV_DATA = [
         url: "https://www.edmunds.com/honda/cr-v/2026/msrp/"
       },
       {
+        label: "Honda – 2026 CR-V Build & Price",
+        url: "https://automobiles.honda.com/tools/build-and-price-trimwalk?modelseries=cr-v&modelyear=2026"
+      },
+      {
         label: "KBB – CR-V Cost to Own",
         url: "https://www.kbb.com/honda/cr-v/2026/cost-to-own"
       },
@@ -1278,21 +1282,21 @@ const SUV_DATA = [
       {
         seller: "TrueCar",
         url: "https://www.truecar.com/",
-        price: 32035,
+        price: 31325,
         detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
         estimated: true
       },
       {
         seller: "CarsDirect",
         url: "https://www.carsdirect.com/",
-        price: 32545,
+        price: 31825,
         detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
         estimated: true
       },
       {
         seller: "Edmunds",
         url: "https://www.edmunds.com/",
-        price: 32885,
+        price: 32155,
         detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
         estimated: true
       }
