@@ -2354,7 +2354,7 @@ const SUV_DATA = [
     className: "Compact SUV",
     drivetrain: "AWD standard",
     price: {
-      low: 37695,
+      low: 35995,
       estimated: false
     },
     engine: "2.5L naturally aspirated Boxer H4",
@@ -2430,6 +2430,10 @@ const SUV_DATA = [
       {
         label: "IIHS – 2026 Forester",
         url: "https://www.iihs.org/ratings/vehicle/subaru/forester-4-door-suv/2026"
+      },
+      {
+        label: "Autoblog – 2026 Subaru Forester Price Cut",
+        url: "https://www.autoblog.com/"
       }
     ],
     offRoad: {
@@ -2442,21 +2446,21 @@ const SUV_DATA = [
       {
         seller: "TrueCar",
         url: "https://www.truecar.com/",
-        price: 35620,
+        price: 34015,
         detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
         estimated: true
       },
       {
         seller: "CarsDirect",
         url: "https://www.carsdirect.com/",
-        price: 36185,
+        price: 34555,
         detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
         estimated: true
       },
       {
         seller: "Edmunds",
         url: "https://www.edmunds.com/",
-        price: 36565,
+        price: 34915,
         detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
         estimated: true
       }
@@ -2470,7 +2474,7 @@ const SUV_DATA = [
     className: "Compact SUV",
     drivetrain: "AWD standard",
     price: {
-      low: 41595,
+      low: 39995,
       estimated: false
     },
     engine: "2.5L naturally aspirated Boxer H4",
@@ -2546,6 +2550,10 @@ const SUV_DATA = [
       {
         label: "IIHS – 2026 Forester",
         url: "https://www.iihs.org/ratings/vehicle/subaru/forester-4-door-suv/2026"
+      },
+      {
+        label: "Autoblog – 2026 Subaru Forester Price Cut",
+        url: "https://www.autoblog.com/"
       }
     ],
     offRoad: {
@@ -2558,21 +2566,21 @@ const SUV_DATA = [
       {
         seller: "TrueCar",
         url: "https://www.truecar.com/",
-        price: 39305,
+        price: 37795,
         detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
         estimated: true
       },
       {
         seller: "CarsDirect",
         url: "https://www.carsdirect.com/",
-        price: 39930,
+        price: 38395,
         detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
         estimated: true
       },
       {
         seller: "Edmunds",
         url: "https://www.edmunds.com/",
-        price: 40345,
+        price: 38795,
         detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
         estimated: true
       }
@@ -4542,7 +4550,7 @@ const SUV_DATA = [
     className: "Compact SUV",
     drivetrain: "FWD standard / AWD avail. (standard on Activ)",
     price: {
-      low: 28600,
+      low: 30795,
       estimated: false
     },
     engine: "1.5L Turbo I4",
@@ -4614,6 +4622,10 @@ const SUV_DATA = [
       {
         label: "J.D. Power – 2026 Equinox",
         url: "https://www.jdpower.com/cars/2026/chevrolet/equinox"
+      },
+      {
+        label: "GM Authority – 2026 Chevy Equinox Gets Second Price Increase",
+        url: "https://gmauthority.com/blog/"
       }
     ],
     offRoad: {
@@ -4626,21 +4638,21 @@ const SUV_DATA = [
       {
         seller: "TrueCar",
         url: "https://www.truecar.com/",
-        price: 27025,
+        price: 29080,
         detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
         estimated: true
       },
       {
         seller: "CarsDirect",
         url: "https://www.carsdirect.com/",
-        price: 27455,
+        price: 29565,
         detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
         estimated: true
       },
       {
         seller: "Edmunds",
         url: "https://www.edmunds.com/",
-        price: 27740,
+        price: 29870,
         detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
         estimated: true
       }
@@ -4654,7 +4666,7 @@ const SUV_DATA = [
     className: "Compact SUV",
     drivetrain: "FWD standard / AWD avail. (standard on Activ)",
     price: {
-      low: 33600,
+      low: 35595,
       estimated: false
     },
     engine: "1.5L Turbo I4",
@@ -4726,6 +4738,10 @@ const SUV_DATA = [
       {
         label: "J.D. Power – 2026 Equinox",
         url: "https://www.jdpower.com/cars/2026/chevrolet/equinox"
+      },
+      {
+        label: "GM Authority – 2026 Chevy Equinox Gets Second Price Increase",
+        url: "https://gmauthority.com/blog/"
       }
     ],
     offRoad: {
@@ -4738,21 +4754,21 @@ const SUV_DATA = [
       {
         seller: "TrueCar",
         url: "https://www.truecar.com/",
-        price: 31750,
+        price: 33635,
         detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
         estimated: true
       },
       {
         seller: "CarsDirect",
         url: "https://www.carsdirect.com/",
-        price: 32255,
+        price: 34170,
         detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
         estimated: true
       },
       {
         seller: "Edmunds",
         url: "https://www.edmunds.com/",
-        price: 32590,
+        price: 34525,
         detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
         estimated: true
       }
@@ -4766,8 +4782,8 @@ const SUV_DATA = [
     className: "Compact SUV",
     drivetrain: "FWD standard / AWD avail. (standard on Activ)",
     price: {
-      low: 35600,
-      estimated: true
+      low: 35595,
+      estimated: false
     },
     engine: "1.5L Turbo I4",
     hp: "175 hp (FWD)",
@@ -4838,6 +4854,10 @@ const SUV_DATA = [
       {
         label: "J.D. Power – 2026 Equinox",
         url: "https://www.jdpower.com/cars/2026/chevrolet/equinox"
+      },
+      {
+        label: "KBB – 2026 Chevrolet Equinox Pricing",
+        url: "https://www.kbb.com/chevrolet/equinox/2026/"
       }
     ],
     offRoad: {
@@ -4850,21 +4870,21 @@ const SUV_DATA = [
       {
         seller: "TrueCar",
         url: "https://www.truecar.com/",
-        price: 33640,
+        price: 33635,
         detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
         estimated: true
       },
       {
         seller: "CarsDirect",
         url: "https://www.carsdirect.com/",
-        price: 34175,
+        price: 34170,
         detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
         estimated: true
       },
       {
         seller: "Edmunds",
         url: "https://www.edmunds.com/",
-        price: 34530,
+        price: 34525,
         detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
         estimated: true
       }
