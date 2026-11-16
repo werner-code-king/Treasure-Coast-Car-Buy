@@ -3854,8 +3854,8 @@ const SUV_DATA = [
     className: "Compact SUV",
     drivetrain: "FWD standard / AWD avail.",
     price: {
-      low: 38500,
-      estimated: true
+      low: 40775,
+      estimated: false
     },
     engine: "2.5L I4",
     hp: "187 hp",
@@ -3930,6 +3930,10 @@ const SUV_DATA = [
       {
         label: "IIHS – 2026 Tucson",
         url: "https://www.informedforlife.com/cars/hyundai_tucson-4-door-suv_2026"
+      },
+      {
+        label: "Cars.com – 2026 Hyundai Tucson Limited Pricing",
+        url: "https://cars.com/articles/how-much-is-the-2026-hyundai-tucson-516995/"
       }
     ],
     offRoad: {
@@ -3942,21 +3946,21 @@ const SUV_DATA = [
       {
         seller: "TrueCar",
         url: "https://www.truecar.com/",
-        price: 36380,
+        price: 38530,
         detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
         estimated: true
       },
       {
         seller: "CarsDirect",
         url: "https://www.carsdirect.com/",
-        price: 36960,
+        price: 39145,
         detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
         estimated: true
       },
       {
         seller: "Edmunds",
         url: "https://www.edmunds.com/",
-        price: 37345,
+        price: 39550,
         detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
         estimated: true
       }
@@ -5614,8 +5618,8 @@ const SUV_DATA = [
     className: "Midsize SUV (3-Row)",
     drivetrain: "RWD standard / 4WD avail.",
     price: {
-      low: 44570,
-      estimated: true
+      low: 48050,
+      estimated: false
     },
     engine: "2.4L Turbo I4",
     hp: "278 hp",
@@ -5690,6 +5694,10 @@ const SUV_DATA = [
       {
         label: "CarEdge – 4Runner Insurance",
         url: "https://caredge.com/toyota/4runner/insurance"
+      },
+      {
+        label: "Carscoops – 2026 4Runner Pricing Table",
+        url: "https://www.carscoops.com/2025/11/2026-toyota-4runner-gets-more-expensive-despite-not-gaining-much/"
       }
     ],
     offRoad: {
@@ -5702,21 +5710,21 @@ const SUV_DATA = [
       {
         seller: "TrueCar",
         url: "https://www.truecar.com/",
-        price: 42120,
+        price: 45405,
         detail: "TrueCar's Build & Buy Car Buying Service reported average savings of about 5.5% below MSRP in its most recent published transaction data — typically the most aggressive of the three.",
         estimated: true
       },
       {
         seller: "CarsDirect",
         url: "https://www.carsdirect.com/",
-        price: 42785,
+        price: 46130,
         detail: "CarsDirect doesn't publish a fixed average; this reflects the 3-5% below MSRP typically associated with its guaranteed-savings certificates.",
         estimated: true
       },
       {
         seller: "Edmunds",
         url: "https://www.edmunds.com/",
-        price: 43235,
+        price: 46610,
         detail: "Edmunds' Suggested Price / True Market Value tends to track closer to MSRP than negotiated marketplace services, so this uses a more conservative estimate.",
         estimated: true
       }
@@ -5731,7 +5739,7 @@ const SUV_DATA = [
     drivetrain: "RWD standard / 4WD avail.",
     price: {
       low: 49990,
-      estimated: true
+      estimated: false
     },
     engine: "2.4L Turbo I4",
     hp: "278 hp",
@@ -5806,6 +5814,10 @@ const SUV_DATA = [
       {
         label: "CarEdge – 4Runner Insurance",
         url: "https://caredge.com/toyota/4runner/insurance"
+      },
+      {
+        label: "Carscoops – 2026 4Runner Pricing Table",
+        url: "https://www.carscoops.com/2025/11/2026-toyota-4runner-gets-more-expensive-despite-not-gaining-much/"
       }
     ],
     offRoad: {
@@ -5847,7 +5859,7 @@ const SUV_DATA = [
     drivetrain: "RWD standard / 4WD avail.",
     price: {
       low: 58200,
-      estimated: true
+      estimated: false
     },
     engine: "2.4L Turbo I4",
     hp: "278 hp",
@@ -5922,6 +5934,10 @@ const SUV_DATA = [
       {
         label: "CarEdge – 4Runner Insurance",
         url: "https://caredge.com/toyota/4runner/insurance"
+      },
+      {
+        label: "Carscoops – 2026 4Runner Pricing Table",
+        url: "https://www.carscoops.com/2025/11/2026-toyota-4runner-gets-more-expensive-despite-not-gaining-much/"
       }
     ],
     offRoad: {
